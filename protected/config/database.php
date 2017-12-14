@@ -1,14 +1,25 @@
 <?php
 
 // This is the database connection configuration.
-return array(
-	'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-	// uncomment the following lines to use a MySQL database
-	/*
-	'connectionString' => 'mysql:host=localhost;dbname=testdrive',
-	'emulatePrepare' => true,
-	'username' => 'root',
-	'password' => '',
-	'charset' => 'utf8',
-	*/
-);
+ return array(
+ 	'connectionString'=>'mysql:host=localhost;dbname=virtual_open_days',//override my_database for you actual db
+ //	 uncomment the following lines to use a MySQL database
+ 	'emulatePrepare' => true,
+ 	'username' => 'root',
+ 	'password' => '',
+ 	'charset' => 'utf8',
+ );
+// 
+// return array(
+//
+//'components'=>array(
+//
+//  'db'=>array(
+//        'connectionString'=>'mysql:host=localhost;dbname=my_database',//override my_database for you actual db
+//        'username'=>'root',
+//        'password'=>''
+//  ),
+//
+//),
+//
+//);
