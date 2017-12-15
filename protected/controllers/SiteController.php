@@ -97,6 +97,50 @@ class SiteController extends Controller
 		// display the login form
 		$this->render('login',array('model'=>$model));
 	}
+        
+         /**
+         * Displays the register page
+         */
+        public function actionRegister()
+        {
+                $model=new RegisterForm;
+                $newUser = new User;
+                
+                // if it is ajax validation request
+                if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
+                {
+                        echo CActiveForm::validate($model);
+                        Yii::app()->end();
+                }
+
+                // collect user input data
+                if(isset($_POST['RegisterForm']))
+                {
+                        $model->attributes=$_POST['RegisterForm'];
+                        $newUser->username = $model->username;
+                        $newUser->password = $model->password;
+                        $newUser->firstName = $model->firstName;
+                        $newUser->lastName = $model->lastName;
+                        $newUser->email = $model->email;
+                        $newUser->phone = $model->phone;
+                        $newUser->country = $model->country;
+                        $newUser->city = $model->city;
+                        $newUser->position = $model->position;
+                        $newUser->birthday = $model->birthday;
+                        $newUser->joinDate = date('Y-m-d');
+                                
+                        if($newUser->save()) {
+                                $identity=new UserIdentity($newUser->username,$model->password);
+                                $identity->authenticate();
+                                Yii::app()->user->login($identity,0);
+                                //redirect the user to page he/she came from
+                                $this->redirect(Yii::app()->user->returnUrl);
+                        }
+                                
+                }
+                // display the register form
+                $this->render('register',array('model'=>$model));
+        }
 
 	/**
 	 * Logs out the current user and redirect to homepage.

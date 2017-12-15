@@ -16,7 +16,7 @@
  * @property string $city
  * @property string $position
  * @property string $birthday
- * @property string $rememberMe
+ * @property string $joinDate
  */
 class User extends CActiveRecord
 {
@@ -36,11 +36,13 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, firstName, lastName, email, phone, country, city, position, birthday, rememberMe', 'required'),
-			array('username, password, salt, firstName, lastName, email, phone, country, city, position, birthday, rememberMe', 'length', 'max'=>128),
+			array('username, password, firstName, lastName, email, country, birthday', 'required'),
+			array('username, password, firstName, lastName, email, phone, country, city, position, birthday', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('username, firstName, lastName, email, country, city, position, birthday', 'safe', 'on'=>'search'),
+                    
+                        array('username, email', 'unique'),
                         
 //                        array('phone',
 //				'ext.validators.UserPhoneValidator', 'userId'=>$this->userId),
@@ -72,15 +74,15 @@ class User extends CActiveRecord
 			'username' => 'Username',
 			'password' => 'Password',
 			'salt' => 'Salt',
-			'firstName' => 'First Name',
-			'lastName' => 'Last Name',
+			'firstName' => 'First name',
+			'lastName' => 'Last name',
 			'email' => 'Email',
 			'phone' => 'Phone',
 			'country' => 'Country',
 			'city' => 'City',
 			'position' => 'Position',
 			'birthday' => 'Birthday',
-			'rememberMe' => 'Remember Me',
+                        'joinDate' => 'Join date',
 		);
 	}
 
@@ -114,7 +116,6 @@ class User extends CActiveRecord
 		$criteria->compare('city',$this->city,true);
 		$criteria->compare('position',$this->position,true);
 		$criteria->compare('birthday',$this->birthday,true);
-		$criteria->compare('rememberMe',$this->rememberMe,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
