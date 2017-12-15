@@ -36,7 +36,7 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, salt, firstName, lastName, email, phone, country, city, position, birthday, rememberMe', 'required'),
+			array('username, password, firstName, lastName, email, phone, country, city, position, birthday, rememberMe', 'required'),
 			array('username, password, salt, firstName, lastName, email, phone, country, city, position, birthday, rememberMe', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -120,6 +120,36 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        // hash password
+        public function hashPassword($password, $salt)
+        {
+            return md5($salt.$password);
+        }
+
+        // password validation
+        public function validatePassword($password)
+        {
+            return $this->hashPassword($password,$this->salt)===$this->password;
+        }
+
+        //generate salt
+        public function generateSalt()
+        {
+            return uniqid('',true);
+        }
+
+        public function beforeValidate()
+        {
+            $this->salt = $this->generateSalt();
+            return parent::beforeValidate();
+        }
+
+        public function beforeSave()
+        {
+            $this->password = $this->hashPassword($this->password, $this->salt);
+            return parent::beforeSave();
+        }
 
 	/**
 	 * Returns the static model of the specified AR class.

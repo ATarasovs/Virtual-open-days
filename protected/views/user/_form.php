@@ -32,12 +32,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'salt'); ?>
-		<?php echo $form->textField($model,'salt',array('size'=>60,'maxlength'=>128)); ?>
-		<?php echo $form->error($model,'salt'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'firstName'); ?>
 		<?php echo $form->textField($model,'firstName',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'firstName'); ?>
