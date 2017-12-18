@@ -27,9 +27,12 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+            // choose layout login
+                $this->layout = '//layouts/login';
+                
+            // renders the view file 'protected/views/site/index.php'
+            // using the default layout 'protected/views/layouts/main.php'
+            $this->render('index');
 	}
 
 	/**
@@ -44,32 +47,6 @@ class SiteController extends Controller
 			else
 				$this->render('error', $error);
 		}
-	}
-
-	/**
-	 * Displays the contact page
-	 */
-	public function actionContact()
-	{
-		$model=new ContactForm;
-		if(isset($_POST['ContactForm']))
-		{
-			$model->attributes=$_POST['ContactForm'];
-			if($model->validate())
-			{
-				$name='=?UTF-8?B?'.base64_encode($model->name).'?=';
-				$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
-				$headers="From: $name <{$model->email}>\r\n".
-					"Reply-To: {$model->email}\r\n".
-					"MIME-Version: 1.0\r\n".
-					"Content-Type: text/plain; charset=UTF-8";
-
-				mail(Yii::app()->params['adminEmail'],$subject,$model->body,$headers);
-				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
-				$this->refresh();
-			}
-		}
-		$this->render('contact',array('model'=>$model));
 	}
 
 	/**
@@ -94,7 +71,11 @@ class SiteController extends Controller
 			if($model->validate() && $model->login())
 				$this->redirect(Yii::app()->user->returnUrl);
 		}
-		// display the login form
+                
+		// choose layout login
+                $this->layout = '//layouts/login';
+                
+                // display the login form
 		$this->render('login',array('model'=>$model));
 	}
         
@@ -103,15 +84,11 @@ class SiteController extends Controller
          */
         public function actionRegister()
         {
-                $model=new RegisterForm;
+                $model= new RegisterForm;
                 $newUser = new User;
                 
-                // if it is ajax validation request
-                if(isset($_POST['ajax']) && $_POST['ajax']==='register-form')
-                {
-                        echo CActiveForm::validate($model);
-                        Yii::app()->end();
-                }
+                
+                $this->performAjaxValidation($model);
 
                 // collect user input data
                 if(isset($_POST['RegisterForm']))
@@ -130,14 +107,18 @@ class SiteController extends Controller
                         $newUser->joinDate = date('Y-m-d');
                                 
                         if($newUser->save()) {
-                                $identity=new UserIdentity($newUser->username,$model->password);
-                                $identity->authenticate();
-                                Yii::app()->user->login($identity,0);
-                                //redirect the user to page he/she came from
-                                $this->redirect(Yii::app()->user->returnUrl);
+                            $identity=new UserIdentity($newUser->username,$model->password);
+                            $identity->authenticate();
+                            Yii::app()->user->login($identity,0);
+                            //redirect the user to page he/she came from
+                            $this->redirect(Yii::app()->user->returnUrl);
                         }
                                 
                 }
+                
+                // choose layout login
+                $this->layout = '//layouts/login';
+                
                 // display the register form
                 $this->render('register',array('model'=>$model));
         }
@@ -149,5 +130,18 @@ class SiteController extends Controller
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+        
+        /**
+	 * Performs the AJAX validation.
+	 * @param User $model the model to be validated
+	 */
+	protected function performAjaxValidation($model){
+		if(isset($_POST['ajax']) && $_POST['ajax']==='register-form'){
+			$errors = CActiveForm::validate($model);
+			echo $errors;
+			Yii::app()->end();
+	
+		}
 	}
 }

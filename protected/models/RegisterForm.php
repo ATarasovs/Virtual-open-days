@@ -31,9 +31,9 @@ class RegisterForm extends CFormModel
                 return array(
                         // username and password are required
                         array('username, password, firstName, lastName, email, country, birthday', 'required'),
-                        array('username, password, salt, firstName, lastName, email, phone, country, city, position, birthday', 'length', 'max'=>128),
+                        array('username, password, firstName, lastName, email, phone, country, city, position, birthday', 'length', 'max'=>128),
                         // make sure username and email are unique
-                        array('username, email', 'unique'),
+//                        array('username, email', 'unique'),
                 );
         }
 
