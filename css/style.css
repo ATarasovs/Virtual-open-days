@@ -1,0 +1,94 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 18, 2017, 9:09:01 PM
+    Author     : Aleksandr
+*/
+
+.top5 {
+    margin-top: 5px;
+}
+
+.top7 {
+    margin-top: 7px;
+}
+
+.top10 {
+    margin-top: 10px;
+}
+
+.top15 {
+    margin-top: 15px;
+}
+
+.top17 {
+    margin-top: 17px;
+}
+
+.top30 {
+    margin-top: 30px;
+}
+
+body {
+    background-image: url("/vod/images/index-bg.jpg");
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    text-align:center;
+    color: white;
+    font-size: 70px;
+    margin-top: 10vw;
+}
+
+.btnGroup {
+    margin-top: 10vw;
+}
+
+.btn-huge{
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+@media only screen and (max-width: 1004px) {
+    h1 {
+        text-align:center;
+        color: white;
+        font-size: 35px;
+        margin-top: 10vw;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    h1 {
+        text-align:center;
+        color: white;
+        font-size: 35px;
+        margin-top: 10vw;
+    }
+    
+    .buttonDiv {
+        margin-top: 7px;
+    }
+    
+    .btn-huge{
+        padding-top:7px;
+        padding-bottom:7px;
+    }
+}
+
+@media only screen and (max-width: 512px) {
+    h1 {
+        text-align:center;
+        color: white;
+        font-size: 25px;
+        margin-top: 10vw;
+    }
+}
+
+
+

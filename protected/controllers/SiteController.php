@@ -28,7 +28,7 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
             // choose layout login
-                $this->layout = '//layouts/login';
+                $this->layout = '//layouts/index';
                 
             // renders the view file 'protected/views/site/index.php'
             // using the default layout 'protected/views/layouts/main.php'
