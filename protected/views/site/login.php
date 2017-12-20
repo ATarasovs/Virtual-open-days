@@ -1,44 +1,40 @@
-<?php
-/* @var $this SiteController */
-/* @var $model LoginForm */
-/* @var $form CActiveForm  */
+<div class="form-horizontal">
+    <?php $form=$this->beginWidget('CActiveForm', array(
+        'id'=>'login-form',
+        'enableClientValidation'=>true,
+        'clientOptions'=>array(
+        'validateOnSubmit'=>true,
+        ),
+    )); ?>
 
-$this->pageTitle=Yii::app()->name . ' - Login';
-$this->breadcrumbs=array(
-	'Login',
-);
-?>
-
-<div class="container">
-    <h1>Login</h1>
-
-    <p>Please fill out the following form with your login credentials:</p>
-
-    <div class="form">
-        <?php $form=$this->beginWidget('CActiveForm', array(
-            'id'=>'login-form',
-            'enableClientValidation'=>true,
-            'clientOptions'=>array(
-            'validateOnSubmit'=>true,
-            ),
-        )); ?>
-
-        <p class="note">Fields with <span class="required">*</span> are required.</p>
-
-        <div class="row">
-            <?php echo $form->labelEx($model,'username'); ?>
-            <?php echo $form->textField($model,'username'); ?>
-            <?php echo $form->error($model,'username'); ?>
-        </div>
-
-        <div class="row">
-            <?php echo $form->labelEx($model,'password'); ?>
-            <?php echo $form->passwordField($model,'password'); ?>
-            <?php echo $form->error($model,'password'); ?>
-            <div class="row buttons">
-                    <?php echo CHtml::submitButton('Login'); ?>
+    
+    <div class="form-group">
+        <label for="name" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'username'); ?></label>
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <?php echo $form->textField($model,'username',array('class'=>'form-control',)); ?>
             </div>
-        </div><!-- form -->
-        <?php $this->endWidget(); ?>
+        </div>
     </div>
+
+    <div class="form-group">
+        <label for="name" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'password'); ?></label>
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <?php echo $form->passwordField($model,'password',array('class'=>'form-control',)); ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="row buttons">
+        <?php echo CHtml::submitButton('Login',array('class'=>'btn btn-primary btn-lg btn-block login-button',)); ?>
+    </div>
+    
+    <div class="login-register">
+        <?php echo CHtml::link('Register',array('/site/register')); ?>
+    </div>
+    <?php $this->endWidget(); ?>
 </div>
+
