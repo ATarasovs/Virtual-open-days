@@ -34,6 +34,14 @@ class SiteController extends Controller
             // using the default layout 'protected/views/layouts/main.php'
             $this->render('index');
 	}
+        
+        public function actionHome()
+    {
+        $this->layout = '//layouts/menu';
+            
+        $this->render('home',array(
+        ));
+    }
 
 	/**
 	 * This is the action to handle external exceptions.
@@ -69,7 +77,7 @@ class SiteController extends Controller
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
+				$this->redirect('home');
 		}
                 
 		// choose layout login
@@ -110,8 +118,7 @@ class SiteController extends Controller
                             $identity=new UserIdentity($newUser->username,$model->password);
                             $identity->authenticate();
                             Yii::app()->user->login($identity,0);
-                            //redirect the user to page he/she came from
-                            $this->redirect(Yii::app()->user->returnUrl);
+                           $this->redirect('home');
                         }
                                 
                 }
