@@ -7,10 +7,14 @@
  */
 
 body, html{
-     height: 100%;
- 	background-repeat: no-repeat;
- 	background-image: url("/vod/images/index-bg.jpg");
- 	font-family: 'Oxygen', sans-serif;
+     /*height: 100%;*/
+    /*background-repeat: no-repeat;*/
+    background: url("/vod/images/index-bg.jpg") no-repeat center center fixed;
+    font-family: 'Oxygen', sans-serif;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .main{
@@ -36,7 +40,7 @@ input::-webkit-input-placeholder {
 }
 
 .main-login{
- 	background-color: #fff;
+    background-color: #fff;
     /* shadows and rounded borders */
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -50,12 +54,16 @@ input::-webkit-input-placeholder {
 .main-center{
  	margin-top: 30px;
  	margin: 0 auto;
- 	max-width: 330px;
-    padding: 40px 40px;
+ 	max-width: 450px;
+        padding: 40px 40px;
 
 }
 
 .login-button{
+	margin-top: 5px;
+}
+
+.register-button{
 	margin-top: 5px;
 }
 
@@ -64,3 +72,21 @@ input::-webkit-input-placeholder {
 	font-size: 12px;
 	text-align: center;
 }
+
+@media only screen and (max-width: 1004px) {
+
+}
+
+@media only screen and (max-width: 768px) {
+    .main-center{
+ 	max-width: 350px;
+
+
+    }
+}
+
+@media only screen and (max-width: 512px) {
+    .main-center{
+        max-width: 250px;
+    }
+}   

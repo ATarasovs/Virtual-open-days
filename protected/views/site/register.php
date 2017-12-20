@@ -1,29 +1,4 @@
-<?php
-
-    $p = new CHtmlPurifier();
-    $p->options = array('URI.AllowedSchemes'=>array(
-        'http' => true,
-        'https' => true,
-    ));
-
-    $this->pageTitle=Yii::app()->name . ' - Register';
-    $this->breadcrumbs=array(
-            'Register',
-    );
-?>
-
-<h1>Register</h1>
-
-<div id="infoMessage">
-    <?php
-        foreach(Yii::app()->user->getFlashes() as $key => $message) {
-            echo '<div class="alert alert-' . $p->purify($key) . ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            ' . $p->purify($message) . "</div>\n";
-        }
-    ?>
-</div>
-
-<div class="form">
+<div class="form-horizontal">
     <?php $form = $this->beginWidget('CActiveForm', array(
             'id'=>'register-form',
         'enableAjaxValidation'=>true,
@@ -45,145 +20,115 @@
         ),
     )); ?>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="widget-box">
-                <div class="widget-header">
-                    <h4 class="widget-title"><?php print Yii::t('products', 'Register'); ?></h4>
-                    <div class="widget-toolbar">
-                        <a href="#" data-action="collapse">
-                            <i class="ace-icon fa fa-chevron-up"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="widget-body">
-                    <div class="widget-main">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'username'); ?>
-                                    <?php echo $form->textField($model,'username'); ?>
-                                    <?php echo $form->error($model,'username'); ?>
-                                </div>
-                            </div>
-                            <!--<div class="col-xs-3">-->
-                                <!--<div class="form-group">-->
-                                    <?php // echo $form->labelEx($model,'username'); ?>
-                                    <?php // echo $form->textField($model,'username'); ?>
-                                    <div style="display: none">
-                                        <?php echo $form->error($model, 'username'); ?>
-                                    </div>
-                                <!--</div>-->
-                            <!--</div>-->
-
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'password'); ?>
-                                    <?php echo $form->passwordField($model,'password'); ?>
-                                    <?php echo $form->error($model,'password'); ?>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'firstName'); ?>
-                                    <?php echo $form->textField($model,'firstName'); ?>
-                                    <?php echo $form->error($model,'firstName'); ?>
-                                </div>  
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'lastName'); ?>
-                                    <?php echo $form->textField($model,'lastName'); ?>
-                                    <?php echo $form->error($model,'lastName'); ?>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'email'); ?>
-                                    <?php echo $form->textField($model,'email'); ?>
-                                    <?php echo $form->error($model,'email'); ?>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'phone'); ?>
-                                    <?php echo $form->textField($model,'phone'); ?>
-                                    <?php echo $form->error($model,'phone'); ?>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'country'); ?>
-                                    <?php echo $form->textField($model,'country'); ?>
-                                    <?php echo $form->error($model,'country'); ?>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'city'); ?>
-                                    <?php echo $form->textField($model,'city'); ?>
-                                    <?php echo $form->error($model,'city'); ?>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'position'); ?>
-                                    <?php echo $form->textField($model,'position'); ?>
-                                    <?php echo $form->error($model,'position'); ?>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <?php echo $form->labelEx($model,'birthday'); ?>
-                                    <?php echo $form->textField($model,'birthday'); ?>
-                                    <?php echo $form->error($model,'birthday'); ?>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row buttons">
-                            <?php echo CHtml::submitButton('Register'); ?>
-                        </div>
-                    </div>  
-                </div>  
+    
+    <div class="form-group">
+        <label for="username" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'username'); ?></label>
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <?php echo $form->textField($model,'username',array('class'=>'form-control',)); ?>
             </div>
         </div>
     </div>
     
-    <div class="space-6"></div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <?php
-                echo CHtml::htmlButton('<i class="ace-icon fa fa-check"></i> ' . Yii::t('common', 'Register'), array(
-                        'class' => 'btn btn-success btn-sm operationBtn',
-                        'encode' => false,
-                        'type' => 'submit',
-                        'id' => 'sendBtn')
-                );
-            ?>
-
-            <a class="btn btn-sm" id="backBtn">
-                    <i class="fa fa-list-alt bigger-125"></i> <?php print Yii::t('common', 'Back to list'); ?>
-            </a>
+    <div class="form-group">
+        <label for="password" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'password'); ?></label>
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
+                <?php echo $form->passwordField($model,'password',array('class'=>'form-control',)); ?>
+            </div>
         </div>
     </div>
+    
+    <div class="form-group">
+        <label for="firstName" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'firstName'); ?></label>
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <?php echo $form->textField($model,'firstName',array('class'=>'form-control',)); ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="lastName" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'lastName'); ?></label>
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <?php echo $form->textField($model,'lastName',array('class'=>'form-control',)); ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="email" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'email'); ?></label>
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <?php echo $form->textField($model,'email',array('class'=>'form-control',)); ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="phone" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'phone'); ?></label>
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <?php echo $form->textField($model,'phone',array('class'=>'form-control',)); ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="country" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'country'); ?></label>
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <?php echo $form->textField($model,'country',array('class'=>'form-control',)); ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="city" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'city'); ?></label>
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <?php echo $form->textField($model,'city',array('class'=>'form-control',)); ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="position" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'position'); ?></label>
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <?php echo $form->textField($model,'position',array('class'=>'form-control',)); ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="birthday" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'birthday'); ?></label>
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <?php echo $form->textField($model,'birthday',array('class'=>'form-control',)); ?>
+            </div>
+        </div>
+    </div>
+    
 
+    <div class="row buttons">
+        <?php echo CHtml::submitButton('Register',array('class'=>'btn btn-primary btn-lg btn-block register-button',)); ?>
+    </div>
+    
+    <div class="login-register">
+        <?php echo CHtml::link('Login',array('/site/login')); ?>
+    </div>
 <?php $this->endWidget(); ?>
 </div><!-- form -->
 
