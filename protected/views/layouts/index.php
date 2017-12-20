@@ -14,7 +14,7 @@
 
             <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/lib/fontawesome/css/font-awesome.min.css">
 
-            <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css">
+            <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/index.css">
             <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     </head>
 
@@ -28,25 +28,25 @@
                 <?php if(Yii::app()->user->isGuest){ ?>
 
                     <div class="col-md-4 col-sm-4 col-xs-12 text-center buttonDiv">
-                        <button id="loginBtn" type="button" class="btn btn-success btn-lg btn-block btn-huge"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</button>
+                        <button id="loginBtn" type="button" class="btn btn-primary btn-lg btn-block btn-huge"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</button>
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12 text-center buttonDiv">
-                        <button id="registerBtn" type="button" class="btn btn-success btn-lg btn-block btn-huge"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</button>
+                        <button id="registerBtn" type="button" class="btn btn-primary btn-lg btn-block btn-huge"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</button>
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12 text-center buttonDiv">
-                        <button id="homeBtn" type="button" class="btn btn-success btn-lg btn-block btn-huge"><i class="fa fa-home" aria-hidden="true"></i> Go to the start page</button>
+                        <button id="homeBtn" type="button" class="btn btn-primary btn-lg btn-block btn-huge"><i class="fa fa-home" aria-hidden="true"></i> Go to the start page</button>
                     </div>
 
                 <?php } else { ?>
 
                     <div class="col-md-4 col-sm-4 col-xs-12 text-center buttonDiv">
-                        <button id="homeBtn" type="button" class="btn btn-success btn-lg btn-block btn-huge"><i class="fa fa-home" aria-hidden="true"></i> Go to the start page</button>
+                        <button id="homeBtn" type="button" class="btn btn-primary btn-lg btn-block btn-huge"><i class="fa fa-home" aria-hidden="true"></i> Go to the start page</button>
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12 text-center buttonDiv">
-                        <button id="logoutBtn" type="button" class="btn btn-success btn-lg btn-block btn-huge"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
+                        <button id="logoutBtn" type="button" class="btn btn-primary btn-lg btn-block btn-huge"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
                     </div>
                 <?php } ?>
             </div>
