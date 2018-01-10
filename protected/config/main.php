@@ -18,6 +18,8 @@ return array(
 		'application.components.*',
                 'application.modules.users.models.*',
                 'application.modules.users.components.*',
+                'application.modules.locations.models.*',
+                'application.modules.locations.components.*',
 	),
 
 	'modules'=>array(
@@ -29,6 +31,7 @@ return array(
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
                 'users',
+                'locations',
 	),
 
 	// application components

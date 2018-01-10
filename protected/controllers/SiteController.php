@@ -37,9 +37,13 @@ class SiteController extends Controller
         
         public function actionHome()
     {
+            
+        $locations = Location::model()->findAll();
+            
         $this->layout = '//layouts/menu';
             
         $this->render('home',array(
+            'locations' => $locations
         ));
     }
 
