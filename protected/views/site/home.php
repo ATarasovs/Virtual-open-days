@@ -1,3 +1,7 @@
+<?php 
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.views.site.assets.js').'\home.js'), CClientScript::POS_HEAD);
+?>
+
 <div class="row">
     <div class="col-xs-8">
         <div id="map"></div>    
@@ -6,7 +10,14 @@
         <h2>List of locations</h2>
         <ul class="list-group">
             <?php foreach($locations as $location) { ?>
-            <a href="#" class="list-group-item //active"><?php echo $location->locationName; ?> <span class="badge"><?php echo $location->locationNumberOfEvents; ?></span></a>
+            <a href="#" class="list-group-item location" id="<?php echo $location->locationId ?>"><?php echo $location->locationName; ?> <span class="badge"><?php echo $location->locationNumberOfEvents; ?></span></a>
+            <?php } ?>
+        </ul>
+        
+        <h2>List of events</h2>
+        <ul class="list-group">
+            <?php foreach($events as $event) { ?>
+            <a href="#" class="list-group-item" id="<?php echo $event->eventId ?>"><?php echo $event->eventName; ?></a>
             <?php } ?>
         </ul>
     </div>
@@ -14,6 +25,9 @@
 
 
 <script>
+    var homeReqUrl = '<?php print Yii::app()->createUrl('site/home') ?>';
+    
+    
     function initMap() {
         console.log("initMap()");
         

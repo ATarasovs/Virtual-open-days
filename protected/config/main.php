@@ -20,6 +20,8 @@ return array(
                 'application.modules.users.components.*',
                 'application.modules.locations.models.*',
                 'application.modules.locations.components.*',
+                'application.modules.events.models.*',
+                'application.modules.events.components.*',
 	),
 
 	'modules'=>array(
@@ -32,6 +34,7 @@ return array(
 		),
                 'users',
                 'locations',
+                'events',
 	),
 
 	// application components

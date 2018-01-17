@@ -25,41 +25,50 @@ class SiteController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex()
-	{
-            // choose layout login
-                $this->layout = '//layouts/index';
-                
-            // renders the view file 'protected/views/site/index.php'
-            // using the default layout 'protected/views/layouts/main.php'
-            $this->render('index');
-	}
+    public function actionIndex()
+    {
+        // choose layout login
+        $this->layout = '//layouts/index';
+
+        // renders the view file 'protected/views/site/index.php'
+        // using the default layout 'protected/views/layouts/main.php'
+        $this->render('index');
+    }
         
         public function actionHome()
     {
-            
+        $criteria = new CDbCriteria();
+        
+        $selectedLocation = Yii::app()->request->getParam('selectedlocation');
+        
+        if ($selectedLocation != "") {
+            $criteria->addCondition("locationId = '$selectedLocation'");
+        }
+        
         $locations = Location::model()->findAll();
+        $events = Event::model()->findAll($criteria);
             
         $this->layout = '//layouts/menu';
             
         $this->render('home',array(
-            'locations' => $locations
+            'locations' => $locations,
+            'events' => $events
         ));
     }
 
 	/**
 	 * This is the action to handle external exceptions.
 	 */
-	public function actionError()
-	{
-		if($error=Yii::app()->errorHandler->error)
-		{
-			if(Yii::app()->request->isAjaxRequest)
-				echo $error['message'];
-			else
-				$this->render('error', $error);
-		}
-	}
+    public function actionError()
+    {
+        if($error=Yii::app()->errorHandler->error)
+        {
+            if(Yii::app()->request->isAjaxRequest)
+                echo $error['message'];
+            else
+                $this->render('error', $error);
+        }
+    }
 
 	/**
 	 * Displays the login page
