@@ -68,14 +68,6 @@
                         </a>
                     </li>
                 </ul>
-                <div id="toggleSidebar">
-                    <div id="hideMenu">
-                        <center><h4><i id="sidebar-toggle-icon" class="ace-save-state ace-icon fa fa-angle-double-left"></i></h4></center>
-                    </div>
-                    <div id="showMenu">
-                        <center><h4><i id="sidebar-toggle-icon" class="ace-save-state ace-icon fa fa-angle-double-right"></i></h4></center>
-                    </div>
-                </div>
             </nav>
 
             <!-- Page Content Holder -->
@@ -83,15 +75,14 @@
 
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
-
-                        <div class="navbar-header">
-                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-                                <i class="glyphicon glyphicon-align-left"></i>
-                                <span>Toggle Sidebar</span>
-                            </button>
-                        </div>
-
+                        
+                        <!--<img src="img_girl.jpg" alt="Girl in a jacket" style="width:500px;height:600px;">-->
+                        <!--<img src="<?php // echo Yii::app()->request->baseUrl; ?>/images/logo.png" alt="Dundee University Virtual Open Days">-->
+                        
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <a href="<?php print Yii::app()->createUrl('site/home'); ?>">
+                                <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo.png" alt="Dundee University Virtual Open Days" style="width:247px;height:43px;">
+                            </a>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#">Home</a></li>
                                 <li><a href="#">Profile</a></li>
