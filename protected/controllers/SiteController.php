@@ -37,6 +37,7 @@ class SiteController extends Controller
         
         public function actionHome()
     {
+        $error = false;
         $criteria = new CDbCriteria();
         
         $selectedLocation = Yii::app()->request->getParam('selectedlocation');
@@ -45,14 +46,31 @@ class SiteController extends Controller
             $criteria->addCondition("locationId = '$selectedLocation'");
         }
         
-        $locations = Location::model()->findAll();
-        $events = Event::model()->findAll($criteria);
+        
+        try {
+            $locations = Location::model()->findAll();
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            $error = $ex->getMessage();
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        try {
+            $events = Event::model()->findAll($criteria);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            $error = $ex->getMessage();
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
             
         $this->layout = '//layouts/menu';
             
         $this->render('home',array(
             'locations' => $locations,
-            'events' => $events
+            'events' => $events,
+            'error' => $error
         ));
     }
 
