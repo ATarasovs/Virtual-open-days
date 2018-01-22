@@ -1,10 +1,10 @@
 <div class="form-horizontal">
     <?php $form = $this->beginWidget('CActiveForm', array(
-            'id'=>'register-form',
+        'id'=>'register-form',
         'enableAjaxValidation'=>true,
         'enableClientValidation'=>false,
         'clientOptions'=>array(
-            'validateOnSubmit'=>true,
+            'validateOnSubmit'=>false,
             'beforeValidate'=>'js:function(){
 
             }',
@@ -22,104 +22,95 @@
 
     
     <div class="form-group">
-        <label for="username" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'username'); ?></label>
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'username',array('class'=>'form-control',)); ?>
+                <?php echo $form->textField($model,'username',array('name' => 'username', 'class'=>'form-control', 'placeholder' => 'Login', 'autofocus' => 'autofocus', 'data-validation' => 'length alphanumeric', 'data-validation-length' => '3-12', 'data-validation-error-msg' => 'The username must be an alphanumeric value (3-12 chars)')); ?>
             </div>
         </div>
     </div>
     
     <div class="form-group">
-        <label for="password" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'password'); ?></label>
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
-                <?php echo $form->passwordField($model,'password',array('class'=>'form-control',)); ?>
+                <?php echo $form->passwordField($model,'password',array('name' => 'pass_confirmation', 'class'=>'form-control', 'placeholder' => 'Password', 'data-validation' => 'length', 'data-validation-length' => '7-20', 'data-validation-error-msg' => 'The password must be  between 7-20 characters')); ?>
             </div>
         </div>
     </div>
     
     <div class="form-group">
-        <label for="firstName" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'firstName'); ?></label>
         <div class="cols-sm-10">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'firstName',array('class'=>'form-control',)); ?>
+                <span class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
+                <input class="form-control" placeholder="Confirm password" type="password" name="pass" data-validation="confirmation" data-validation-error-msg = "Your password and password confiramtion must be same">
             </div>
         </div>
     </div>
     
     <div class="form-group">
-        <label for="lastName" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'lastName'); ?></label>
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'lastName',array('class'=>'form-control',)); ?>
+                <?php echo $form->textField($model,'firstName',array('class'=>'form-control', 'placeholder' => 'First name', 'data-validation' => 'required', 'data-validation-error-msg' => 'The first name must not be empty')); ?>
             </div>
         </div>
     </div>
     
     <div class="form-group">
-        <label for="email" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'email'); ?></label>
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'email',array('class'=>'form-control',)); ?>
+                <?php echo $form->textField($model,'lastName',array('class'=>'form-control', 'placeholder' => 'Last name', 'data-validation' => 'required', 'data-validation-error-msg' => 'The last name must not be empty')); ?>
             </div>
         </div>
     </div>
     
     <div class="form-group">
-        <label for="phone" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'phone'); ?></label>
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'phone',array('class'=>'form-control',)); ?>
+                <?php echo $form->textField($model,'email',array('class'=>'form-control', 'placeholder' => 'Email', 'data-validation' => 'email')); ?>
             </div>
         </div>
     </div>
     
     <div class="form-group">
-        <label for="country" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'country'); ?></label>
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'country',array('class'=>'form-control',)); ?>
+                <?php echo $form->textField($model,'phone',array('class'=>'form-control', 'placeholder' => 'Phone number', 'data-validation' => 'number')); ?>
             </div>
         </div>
     </div>
     
     <div class="form-group">
-        <label for="city" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'city'); ?></label>
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'city',array('class'=>'form-control',)); ?>
+                <?php echo $form->textField($model,'country',array('id' => 'country', 'class'=>'form-control', 'placeholder' => 'Country', 'data-validation' => 'country', 'data-validation-error-msg' => 'The country is incorrect')); ?>
             </div>
         </div>
     </div>
     
     <div class="form-group">
-        <label for="position" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'position'); ?></label>
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'position',array('class'=>'form-control',)); ?>
+                <?php echo $form->textField($model,'position',array('class'=>'form-control', 'placeholder' => 'Position')); ?>
             </div>
         </div>
     </div>
     
     <div class="form-group">
-        <label for="birthday" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'birthday'); ?></label>
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'birthday',array('class'=>'form-control',)); ?>
+                <?php echo $form->textField($model,'birthday',array('class'=>'form-control', 'placeholder' => 'Birthday', 'data-validation' => 'date', 'data-validation-format' => 'dd/mm/yyyy', 'data-validation-error-msg' => 'The date must be in the format  - dd/mm/yyyy')); ?>
             </div>
         </div>
     </div>
+
     
 
     <div class="row buttons">
@@ -133,50 +124,18 @@
 </div><!-- form -->
 
 <script>
-    function showValidationErrors(errorsObject){
-        // has-error
-        showErrorNotification(validationErrorsText, shownInRedText);
+    $( ".register-button" ).click(function() {
+        $.validate({
+            modules : 'security, date, location',
 
-        for(var name in errorsObject) {
-            if (errorsObject.hasOwnProperty(name)) {
-                $('#' + name).closest('.form-group').addClass('has-error');
-                $('#' + name).addClass('has-error-flag');
-
-                $('#' + name).tooltip('enable');
-                $('#' + name).attr('data-original-title', errorsObject[name]).tooltip('fixTitle');
-
-                $('label[for="' + name + '"]').tooltip('enable');
-                $('label[for="' + name + '"]').attr('data-original-title', errorsObject[name]).tooltip('fixTitle');
+            onModulesLoaded : function() {
+                $('#country').suggestCountry();
             }
-        }
-    }
-
-    function removeValidationErrors(){
-        $('.has-error-flag').each(function(){
-            $(this).closest('.form-group').removeClass('has-error');
-            $(this).removeClass('has-error-flag');
-            $(this).tooltip('disable');
-            $('label[for="' + $(this).attr('id') + '"]').tooltip('disable');
         });
-    }
+    });
+</script>
 
-    function addValidationPopover(elementSelector, content){
-        $(elementSelector).popover({
-            trigger: 'hover',
-            html: true,
-            placement: 'right',
-            content: content
-        });
-    }
-
-    function showErrorNotification(title, text){
-        $.gritter.add({
-            title: title,
-            text: text,
-            class_name: 'gritter-error gritter-light gritter-center'
-        });
-    }
-
+<script>
     //dictionary
     var deleteText = '<?php print Yii::t('common', 'Delete'); ?>';
 
