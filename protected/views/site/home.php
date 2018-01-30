@@ -2,6 +2,24 @@
     Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.views.site.assets.js').'\home.js'), CClientScript::POS_HEAD);
 ?>
 
+<!--*************************************************************-->
+<div class="row">
+    <div class="col-xs-12">
+        <div id="infoMessage">
+            <?php
+                foreach (Yii::app()->user->getFlashes() as $key => $message) {
+                    if ($key == 'notice') {
+                        $key = 'warning';
+                    }
+                    echo '<div class="alert alert-' . $key . ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    ' . $message . "</div>\n";
+                }
+            ?>
+        </div>
+    </div>
+</div>
+<!--*************************************************************-->
+
 <div class="row">
     <div class="col-xs-8">
         <div id="map"></div>    
