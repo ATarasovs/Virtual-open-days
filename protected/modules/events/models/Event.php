@@ -8,6 +8,9 @@
  * @property string $eventName
  * @property string $eventDescription
  * @property string $locationId
+ * @property string $eventStartTime
+ * @property string $isStarted
+ * @property string $isFinished
  */
 class Event extends CActiveRecord
 {
@@ -27,10 +30,10 @@ class Event extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('eventName', 'required'),
+			array('eventName, eventStartTime', 'required'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('eventId, eventName, eventDescription, locationId', 'safe', 'on'=>'search'),
+			array('eventId, eventName, eventDescription, locationId, eventStartTime, isStarted, isFinished', 'safe', 'on'=>'search'),
                     
 //                        array('eventName', 'unique'),
 		);
@@ -56,6 +59,9 @@ class Event extends CActiveRecord
 			'eventId' => 'Event ID',
 			'eventName' => 'Event Name',
 			'eventDescription' => 'Event Description',
+                        'eventStartTime' => 'Event Time',
+                        'isStarted' => 'Is Started',
+                        'isFinished' => 'Is Finished',
 			'locationId' => 'Location ID',
 		);
 	}
@@ -78,10 +84,13 @@ class Event extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-                $criteria->compare('eventId',$this->locationId);
-		$criteria->compare('eventName',$this->locationName, true);
-		$criteria->compare('eventDescription',$this->locationDescription, true);
-                $criteria->compare('locationId',$this->locaionLatitude, true);
+                $criteria->compare('eventId',$this->eventId);
+		$criteria->compare('eventName',$this->eventName, true);
+		$criteria->compare('eventDescription',$this->eventDescription, true);
+                $criteria->compare('eventStartTime',$this->eventStartTime, true);
+                $criteria->compare('isStarted',$this->isStarted, true);
+                $criteria->compare('isFinished',$this->isFinished, true);
+                $criteria->compare('locationId',$this->locationId, true);
                 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
