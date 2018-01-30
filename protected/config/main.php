@@ -22,6 +22,8 @@ return array(
                 'application.modules.locations.components.*',
                 'application.modules.events.models.*',
                 'application.modules.events.components.*',
+                'application.modules.participants.models.*',
+                'application.modules.participants.components.*',
 	),
 
 	'modules'=>array(
@@ -35,6 +37,7 @@ return array(
                 'users',
                 'locations',
                 'events',
+                'participants',
 	),
 
 	// application components
@@ -81,6 +84,7 @@ return array(
                     array(
                         'class' => 'CFileLogRoute', 'enabled' => YII_DEBUG,
                         'logFile' => 'http.log',
+                        'levels' => 'error, warning, trace',
                         'categories' => 'http.*',
                     ),
                     array(
