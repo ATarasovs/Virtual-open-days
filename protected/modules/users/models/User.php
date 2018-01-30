@@ -16,6 +16,8 @@
  * @property string $city
  * @property string $position
  * @property string $birthday
+ * @property string $isAdmin
+ * @property string $isConfirmed
  * @property string $joinDate
  */
 class User extends CActiveRecord
@@ -37,10 +39,10 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('username, password, firstName, lastName, email, country, birthday', 'required'),
-			array('username, password, firstName, lastName, email, phone, country, city, position, birthday', 'length', 'max'=>128),
+			array('username, password, firstName, lastName, email, phone, country, city, position, birthday, isAdmin, isConfirmed', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('username, firstName, lastName, email, country, city, position, birthday', 'safe', 'on'=>'search'),
+			array('username, firstName, lastName, email, country, city, position, birthday, isAdmin, isConfirmed', 'safe', 'on'=>'search'),
                     
                         array('username, email', 'unique'),
                         
@@ -83,6 +85,8 @@ class User extends CActiveRecord
 			'position' => 'Position',
 			'birthday' => 'Birthday',
                         'joinDate' => 'Join date',
+                        'isAdmin' => 'Admin',
+                        'isConfirmed' => 'Confirmed',
 		);
 	}
 
@@ -116,6 +120,8 @@ class User extends CActiveRecord
 		$criteria->compare('city',$this->city,true);
 		$criteria->compare('position',$this->position,true);
 		$criteria->compare('birthday',$this->birthday,true);
+                $criteria->compare('isAdmin',$this->isAdmin,true);
+                $criteria->compare('isConfirmed',$this->isConfirmed,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
