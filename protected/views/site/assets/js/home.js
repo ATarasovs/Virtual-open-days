@@ -17,6 +17,10 @@ function initButtons() {
         console.log(selectedLocation);
         location.href = homeReqUrl + "?selectedlocation=" + selectedLocation;
     });
+    $( ".event" ).click(function() {
+        var eventId = this.id;
+        location.href = eventViewReqUrl + "?id=" + eventId;
+    });
 }
 
 function getParameterByName(name, url) {

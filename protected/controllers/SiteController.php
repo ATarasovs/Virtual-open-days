@@ -2,29 +2,29 @@
 
 class SiteController extends Controller
 {
-	/**
-	 * Declares class-based actions.
-	 */
-	public function actions()
-	{
-		return array(
-			// captcha action renders the CAPTCHA image displayed on the contact page
-			'captcha'=>array(
-				'class'=>'CCaptchaAction',
-				'backColor'=>0xFFFFFF,
-			),
-			// page action renders "static" pages stored under 'protected/views/site/pages'
-			// They can be accessed via: index.php?r=site/page&view=FileName
-			'page'=>array(
-				'class'=>'CViewAction',
-			),
-		);
-	}
+    /**
+     * Declares class-based actions.
+     */
+    public function actions()
+    {
+        return array(
+            // captcha action renders the CAPTCHA image displayed on the contact page
+            'captcha'=>array(
+                'class'=>'CCaptchaAction',
+                'backColor'=>0xFFFFFF,
+            ),
+            // page action renders "static" pages stored under 'protected/views/site/pages'
+            // They can be accessed via: index.php?r=site/page&view=FileName
+            'page'=>array(
+                'class'=>'CViewAction',
+            ),
+        );
+    }
 
-	/**
-	 * This is the default 'index' action that is invoked
-	 * when an action is not explicitly requested by users.
-	 */
+    /**
+     * This is the default 'index' action that is invoked
+     * when an action is not explicitly requested by users.
+     */
     public function actionIndex()
     {
         // choose layout login
@@ -35,42 +35,60 @@ class SiteController extends Controller
         $this->render('index');
     }
         
-        public function actionHome()
-    {
-        $error = false;
-        $criteria = new CDbCriteria();
-        
+    public function actionHome()
+    {        
+        $id = Yii::app()->user->getId();
+        $eventsCriteria = new CDbCriteria();
+        $participantsCriteria = new CDbCriteria();
+        $users = User::model()->findByPk($id);
         $selectedLocation = Yii::app()->request->getParam('selectedlocation');
-        
-        if ($selectedLocation != "") {
-            $criteria->addCondition("locationId = '$selectedLocation'");
-        }
-        
         
         try {
             $locations = Location::model()->findAll();
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
-            $error = $ex->getMessage();
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
-        
+
         try {
-            $events = Event::model()->findAll($criteria);
+            $participantsCriteria->addCondition("userId = '$id'");
+            $participants = Participant::model()->findAll($participantsCriteria);
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
-            $error = $ex->getMessage();
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
+        
+        $subscribedEventIds = array();
+        
+        foreach ($participants as $participant) {
+            array_push($subscribedEventIds, $participant->eventId);
+        }
+        
+        try {
+            if ($selectedLocation != "") {
+                $eventsCriteria->addCondition("locationId = '$selectedLocation'");
+            }
             
-        $this->layout = '//layouts/menu';
+            $eventsCriteria -> addInCondition("eventId", $subscribedEventIds);
+            $subscribedEvents = Event::model()->findAll($eventsCriteria);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if($users->isAdmin == "true") {
+            $this->layout = '//layouts/adminmenu';
+        }
+        else {
+            $this->layout ='//layouts/usermenu';
+        }
             
         $this->render('home',array(
             'locations' => $locations,
-            'events' => $events,
-            'error' => $error
+            'subscribedEvents' => $subscribedEvents,
         ));
     }
 
@@ -92,9 +110,28 @@ class SiteController extends Controller
         if(isset($_POST['LoginForm']))
         {
             $model->attributes=$_POST['LoginForm'];
-            // validate user input and redirect to the previous page if valid
-            if($model->validate() && $model->login())
-                $this->redirect('home');
+//             validate user input and redirect to the previous page if valid
+            if($model->validate() && $model->login()) {
+                $username = $model->username;
+                Yii::trace("###### " . $username, "http");
+                $users = User::model()->findAll();
+                
+                foreach ($users as $user) {
+                    if ($user->username == $model->username) {
+                        if ($user->isAdmin == "true") {
+                            if ($user->isConfirmed == "true") {
+                                $this->redirect('home');
+                            }
+                            else {
+                                Yii::app()->user->setFlash('notice', "Your account wasn't confirmed yet. <br> Try again later or contact our support team");
+                            }
+                        }
+                        else {
+                            $this->redirect('home');
+                        }
+                    }
+                }
+            }
             else {
                 Yii::log("Warning - someone tried to login with incorrect details", 'warning', 'http.threads');
                 Yii::app()->user->setFlash('danger', "The login or password is incorrect, try to relogin");
@@ -108,67 +145,67 @@ class SiteController extends Controller
         $this->render('login',array('model'=>$model));
     }
 
-         /**
-         * Displays the register page
-         */
-        public function actionRegister()
+    /**
+    * Displays the register page
+    */
+    public function actionRegister()
+    {
+        $model= new RegisterForm;
+        $newUser = new User;
+
+        $this->performAjaxValidation($model);
+
+        // collect user input data
+        if(isset($_POST['RegisterForm']))
         {
-            $model= new RegisterForm;
-            $newUser = new User;
-            
-            $this->performAjaxValidation($model);
+            $model->attributes=$_POST['RegisterForm'];
+            $newUser->username = $model->username;
+            $newUser->password = $model->password;
+            $newUser->firstName = $model->firstName;
+            $newUser->lastName = $model->lastName;
+            $newUser->email = $model->email;
+            $newUser->phone = $model->phone;
+            $newUser->country = $model->country;
+            $newUser->city = $model->city;
+            $newUser->position = $model->position;
+            $newUser->birthday = $model->birthday;
+            $newUser->joinDate = date('Y-m-d');
 
-            // collect user input data
-            if(isset($_POST['RegisterForm']))
-            {
-                $model->attributes=$_POST['RegisterForm'];
-                $newUser->username = $model->username;
-                $newUser->password = $model->password;
-                $newUser->firstName = $model->firstName;
-                $newUser->lastName = $model->lastName;
-                $newUser->email = $model->email;
-                $newUser->phone = $model->phone;
-                $newUser->country = $model->country;
-                $newUser->city = $model->city;
-                $newUser->position = $model->position;
-                $newUser->birthday = $model->birthday;
-                $newUser->joinDate = date('Y-m-d');
-
-                if($newUser->save()) {
-                    $identity=new UserIdentity($newUser->username,$model->password);
-                    $identity->authenticate();
-                    Yii::app()->user->login($identity,0);
-                   $this->redirect('home');
-                }
-
+            if($newUser->save()) {
+                $identity=new UserIdentity($newUser->username,$model->password);
+                $identity->authenticate();
+                Yii::app()->user->login($identity,0);
+               $this->redirect('home');
             }
 
-            // choose layout login
-            $this->layout = '//layouts/login';
-
-            // display the register form
-            $this->render('register',array('model'=>$model));
         }
 
-	/**
-	 * Logs out the current user and redirect to homepage.
-	 */
-	public function actionLogout()
-	{
-            Yii::app()->user->logout();
-            $this->redirect(Yii::app()->homeUrl);
-	}
-        
-        /**
-	 * Performs the AJAX validation.
-	 * @param User $model the model to be validated
-	 */
-	protected function performAjaxValidation($model){
-            if(isset($_POST['ajax']) && $_POST['ajax']==='login-form'){
-                $errors = CActiveForm::validate($model);
-                echo $errors;
-                Yii::app()->end();
+        // choose layout login
+        $this->layout = '//layouts/login';
 
-            }
-	}
+        // display the register form
+        $this->render('register',array('model'=>$model));
+    }
+
+    /**
+     * Logs out the current user and redirect to homepage.
+     */
+    public function actionLogout()
+    {
+        Yii::app()->user->logout();
+        $this->redirect(Yii::app()->homeUrl);
+    }
+
+    /**
+     * Performs the AJAX validation.
+     * @param User $model the model to be validated
+     */
+    protected function performAjaxValidation($model){
+        if(isset($_POST['ajax']) && $_POST['ajax']==='login-form'){
+            $errors = CActiveForm::validate($model);
+            echo $errors;
+            Yii::app()->end();
+
+        }
+    }
 }

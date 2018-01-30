@@ -25,25 +25,38 @@
         <div id="map"></div>    
     </div>
     <div class="col-xs-4">
-        <h2>List of locations</h2>
-        <ul class="list-group">
+        <h2>&nbsp;List of locations</h2>
+        <ul class="list-group locations">
             <?php foreach($locations as $location) { ?>
-            <a href="#" class="list-group-item location" id="<?php echo $location->locationId ?>"><?php echo $location->locationName; ?> <span class="badge"><?php echo $location->locationNumberOfEvents; ?></span></a>
+                <a href="#" class="list-group-item location" id="<?php echo $location->locationId ?>"><?php echo $location->locationName; ?> <span class="badge"><?php echo $location->locationNumberOfEvents; ?></span></a>
             <?php } ?>
         </ul>
         
-        <h2>List of events</h2>
-        <ul class="list-group">
-            <?php foreach($events as $event) { ?>
-            <a href="#" class="list-group-item" id="<?php echo $event->eventId ?>"><?php echo $event->eventName; ?></a>
+        <h3>&nbsp;List of events <small>(signed up)</small></h3>
+        <ul class="list-group events">
+            <?php foreach($subscribedEvents as $event) { 
+                if ($event->isStarted == "true" && $event->isFinished == "false") {
+                    $status = "In progress";
+                }
+                else if ($event->isStarted == "true" && $event->isFinished == "true") {
+                    $status = "Finished";
+                }
+                else {
+                    $status = "Not started";
+                }
+            ?>
+            
+                <a href="#" class="list-group-item event" id="<?php echo $event->eventId ?>"><?php echo $event->eventName; ?> (<?php echo $event->eventStartTime; ?>) - <?php echo $status ?></a>
             <?php } ?>
         </ul>
     </div>
 </div>
 
 
-<script>
+<script>    
     var homeReqUrl = '<?php print Yii::app()->createUrl('site/home') ?>';
+    var eventViewReqUrl = '<?php print Yii::app()->createUrl('events/events/view') ?>';
+    
     
     
     function initMap() {
