@@ -38,13 +38,12 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, firstName, lastName, email, country, birthday', 'required'),
 			array('username, password, firstName, lastName, email, phone, country, city, position, birthday, isAdmin, isConfirmed', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('username, firstName, lastName, email, country, city, position, birthday, isAdmin, isConfirmed', 'safe', 'on'=>'search'),
                     
-                        array('username, email', 'unique'),
+//                        array('username, email', 'unique'),
                         
 //                        array('phone',
 //				'ext.validators.UserPhoneValidator', 'userId'=>$this->userId),

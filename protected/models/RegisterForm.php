@@ -17,6 +17,8 @@ class RegisterForm extends CFormModel
         public $city;
         public $position;
         public $birthday;
+        public $isAdmin;
+        public $isConfirmed;
         public $joinDate;
 
         private $_identity;
@@ -29,9 +31,7 @@ class RegisterForm extends CFormModel
         public function rules()
         {
                 return array(
-                        // username and password are required
-                        array('username, password, firstName, lastName, email, country, birthday', 'required'),
-                        array('username, password, firstName, lastName, email, phone, country, city, position, birthday', 'length', 'max'=>128),
+                        array('username, password, firstName, lastName, email, phone, country, city, position, birthday, isAdmin, isConfirmed', 'length', 'max'=>128),
                         // make sure username and email are unique
 //                        array('username, email', 'unique'),
                 );
@@ -53,6 +53,8 @@ class RegisterForm extends CFormModel
                         'city'=>'City',
                         'position'=>'Position',
                         'birthday'=>'Birthday',
+                        'isAdmin'=>'Is admin',
+                        'isConfirmed'=>'Is confirmed',
                         'joinDate'=>'Join date'
                 );
         }

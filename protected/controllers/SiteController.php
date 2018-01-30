@@ -161,14 +161,16 @@ class SiteController extends Controller
             $model->attributes=$_POST['RegisterForm'];
             $newUser->username = $model->username;
             $newUser->password = $model->password;
+            $newUser->city = $model->city;
             $newUser->firstName = $model->firstName;
             $newUser->lastName = $model->lastName;
             $newUser->email = $model->email;
             $newUser->phone = $model->phone;
             $newUser->country = $model->country;
-            $newUser->city = $model->city;
             $newUser->position = $model->position;
             $newUser->birthday = $model->birthday;
+            $newUser->isAdmin = "true";
+            $newUser->isConfirmed = "true";
             $newUser->joinDate = date('Y-m-d');
 
             if($newUser->save()) {

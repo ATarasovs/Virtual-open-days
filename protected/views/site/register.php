@@ -43,7 +43,8 @@
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'username',array('name' => 'username', 'class'=>'form-control', 'placeholder' => 'Login', 'autofocus' => 'autofocus', 'data-validation' => 'length alphanumeric', 'data-validation-length' => '3-12', 'data-validation-error-msg' => 'The username must be an alphanumeric value (3-12 chars)')); ?>
+                <?php echo $form->textField($model,'username',array('class'=>'form-control', 'placeholder' => 'Username', 'data-validation' => 'required', 'data-validation-error-msg' => 'The first name must not be empty')); ?>
+                <?php // echo $form->textField($model,'username',array('name' => 'username', 'class'=>'form-control', 'placeholder' => 'Login', 'autofocus' => 'autofocus', 'data-validation' => 'length alphanumeric', 'data-validation-length' => '3-12', 'data-validation-error-msg' => 'The username must be an alphanumeric value (3-12 chars)')); ?>
             </div>
         </div>
     </div>
@@ -115,6 +116,15 @@
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <?php echo $form->textField($model,'city',array('class'=>'form-control', 'placeholder' => 'City', 'data-validation' => 'required', 'data-validation-error-msg' => 'The city must not be empty')); ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                 <?php echo $form->textField($model,'position',array('class'=>'form-control', 'placeholder' => 'Position')); ?>
             </div>
         </div>
@@ -142,14 +152,12 @@
 </div><!-- form -->
 
 <script>
-    $( ".register-button" ).click(function() {
-        $.validate({
-            modules : 'security, date, location',
+    $.validate({
+        modules : 'security, date, location',
 
-            onModulesLoaded : function() {
-                $('#country').suggestCountry();
-            }
-        });
+        onModulesLoaded : function() {
+            $('#country').suggestCountry();
+        }
     });
 </script>
 
