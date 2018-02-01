@@ -130,16 +130,14 @@
         </div>
     </div>
     
-    <div class="form-group">
-        <div class="cols-sm-10">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'birthday',array('class'=>'form-control', 'placeholder' => 'Birthday', 'data-validation' => 'date', 'data-validation-format' => 'dd/mm/yyyy', 'data-validation-error-msg' => 'The date must be in the format  - dd/mm/yyyy')); ?>
-            </div>
+    <li class="list-group-item">
+        I am administrator
+        <div class="material-switch pull-right">
+            <?php echo $form->checkBox($model,'isAdmin',array('id'=>'admin')); ?>
+            <label for="admin" class="label-primary"></label>
         </div>
-    </div>
-
-    
+    </li>
+    <small>&nbsp;*Request will be sent to one of current admins for confirmation</small>
 
     <div class="row buttons">
         <?php echo CHtml::submitButton('Register',array('class'=>'btn btn-primary btn-lg btn-block register-button',)); ?>

@@ -157,8 +157,16 @@ class SiteController extends Controller
 
         // collect user input data
         if(isset($_POST['RegisterForm']))
-        {
+        {           
             $model->attributes=$_POST['RegisterForm'];
+            
+            if($model->isAdmin == "1") {
+                $isAdmin = "true";
+            } 
+            else {
+                $isAdmin = "false";
+            }
+            
             $newUser->username = $model->username;
             $newUser->password = $model->password;
             $newUser->city = $model->city;
@@ -169,7 +177,7 @@ class SiteController extends Controller
             $newUser->country = $model->country;
             $newUser->position = $model->position;
             $newUser->birthday = $model->birthday;
-            $newUser->isAdmin = "true";
+            $newUser->isAdmin = $isAdmin;
             $newUser->isConfirmed = "true";
             $newUser->joinDate = date('Y-m-d');
 
