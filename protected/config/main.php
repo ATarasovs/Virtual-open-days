@@ -24,6 +24,8 @@ return array(
                 'application.modules.events.components.*',
                 'application.modules.participants.models.*',
                 'application.modules.participants.components.*',
+                'application.modules.messages.models.*',
+                'application.modules.messages.components.*',
 	),
 
 	'modules'=>array(
@@ -38,6 +40,7 @@ return array(
                 'locations',
                 'events',
                 'participants',
+                'messages',
 	),
 
 	// application components

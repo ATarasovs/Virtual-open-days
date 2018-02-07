@@ -1,6 +1,6 @@
 <?php
 
-class EventsModule extends CWebModule
+class MessagesModule extends CWebModule
 {
 	public function init()
 	{
@@ -9,9 +9,7 @@ class EventsModule extends CWebModule
 
 		// import the module-level models and components
 		$this->setImport(array(
-			'events.models.*',
-			'events.components.*',
-                        'messages.models.*',
+			'messages.models.*',
 			'messages.components.*',
 		));
 	}
