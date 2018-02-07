@@ -22,21 +22,23 @@
             <!-- Sidebar Holder -->
             <nav id="sidebar" class="active">
                 <ul class="list-unstyled components">
-                    <li class="active">
+                    <li class="homeLi">
                         <a href="<?php print Yii::app()->createUrl('site/home'); ?>">
                             <i class="glyphicon glyphicon-home"></i>
                             Home
                         </a>
                     </li>
-                    <li>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <li class="eventsLi">
+                        <a href="#eventsSubmenu" data-toggle="collapse" aria-expanded="false">
                             <i class="fa fa-calendar"></i>
                             Events
                         </a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <ul class="collapse list-unstyled" id="eventsSubmenu">
                             <li><a href="<?php print Yii::app()->createUrl('events/events/listsubscribedevents'); ?>">My events</a></li>
                             <li><a href="<?php print Yii::app()->createUrl('events/events/listallevents'); ?>">All events</a></li>
                         </ul>
+                    </li>
+                    <li>
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
                             <i class="glyphicon glyphicon-duplicate"></i>
                             Pages

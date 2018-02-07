@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    $(".homeLi").addClass("active");
+    
     initButtons();
     var selectedLocationFromParam = getParameterByName('selectedlocation');
     $( ".location" ).each(function() {
