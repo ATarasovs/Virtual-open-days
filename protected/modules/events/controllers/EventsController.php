@@ -84,7 +84,7 @@ class EventsController extends Controller
             $this->layout ='//layouts/usermenu';
         }
 
-        $this->render('listAll', array(
+        $this->render('admin', array(
             'events' => $events,
             'pages' => $pages,
         ));
@@ -139,7 +139,7 @@ class EventsController extends Controller
             $this->layout ='//layouts/usermenu';
         }
             
-        $this->render('listAll',array(
+        $this->render('admin',array(
             'events' => $events,
             'pages' => $pages,
         ));
