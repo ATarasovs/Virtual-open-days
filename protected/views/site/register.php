@@ -19,23 +19,8 @@
 <div class="form-horizontal">
     <?php $form = $this->beginWidget('CActiveForm', array(
         'id'=>'register-form',
-        'enableAjaxValidation'=>true,
-        'enableClientValidation'=>false,
-        'clientOptions'=>array(
-            'validateOnSubmit'=>false,
-            'beforeValidate'=>'js:function(){
-
-            }',
-            'afterValidate'=>'js:function(form, data, hasError){
-                if ($.isEmptyObject(data)) {
-                        return true;
-                }
-                else {
-                    showValidationErrors(data);
-                    return false;
-                }
-            }'
-        ),
+        'enableAjaxValidation'=>false,
+        'enableClientValidation'=>false
     )); ?>
 
     
@@ -44,7 +29,6 @@
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                 <?php echo $form->textField($model,'username',array('class'=>'form-control', 'placeholder' => 'Username', 'data-validation' => 'required', 'data-validation-error-msg' => 'The first name must not be empty')); ?>
-                <?php // echo $form->textField($model,'username',array('name' => 'username', 'class'=>'form-control', 'placeholder' => 'Login', 'autofocus' => 'autofocus', 'data-validation' => 'length alphanumeric', 'data-validation-length' => '3-12', 'data-validation-error-msg' => 'The username must be an alphanumeric value (3-12 chars)')); ?>
             </div>
         </div>
     </div>

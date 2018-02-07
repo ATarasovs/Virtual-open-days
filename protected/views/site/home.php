@@ -25,7 +25,7 @@
         <div id="map"></div>    
     </div>
     <div class="col-xs-4">
-        <h2>&nbsp;List of locations</h2>
+        <h3>&nbsp;List of locations</h3>
         <ul class="list-group locations">
             <?php foreach($locations as $location) { ?>
                 <a href="#" class="list-group-item location" id="<?php echo $location->locationId ?>"><?php echo $location->locationName; ?> <span class="badge"><?php echo $location->locationNumberOfEvents; ?></span></a>
