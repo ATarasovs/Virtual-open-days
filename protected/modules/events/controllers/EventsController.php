@@ -77,6 +77,14 @@ class EventsController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
+        try {
+            $participants = Participant::model()->findAll();
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
         if($users->isAdmin == "true") {
             $this->layout = '//layouts/adminmenu';
         }
@@ -84,8 +92,9 @@ class EventsController extends Controller
             $this->layout ='//layouts/usermenu';
         }
 
-        $this->render('admin', array(
+        $this->render('list', array(
             'events' => $events,
+            'participants' => $participants,
             'pages' => $pages,
         ));
     }
@@ -139,7 +148,47 @@ class EventsController extends Controller
             $this->layout ='//layouts/usermenu';
         }
             
-        $this->render('admin',array(
+        $this->render('list',array(
+            'events' => $events,
+            'participants' => $participants,
+            'pages' => $pages,
+        ));
+    }
+    
+        public function actionAdmin() {
+        
+        $id = Yii::app()->user->getId(); 
+        
+        $criteria = new CDbCriteria();
+        
+        try {
+            $users = User::model()->findByPk($id);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        try {
+            $count=Event::model()->count($criteria);
+            $pages=new CPagination($count);
+            $pages->pageSize=10;
+            $pages->applyLimit($criteria);
+            $events = Event::model()->findAll($criteria);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if($users->isAdmin == "true") {
+            $this->layout = '//layouts/adminmenu';
+        }
+        else {
+            $this->layout ='//layouts/usermenu';
+        }
+
+        $this->render('admin', array(
             'events' => $events,
             'pages' => $pages,
         ));
@@ -266,6 +315,30 @@ class EventsController extends Controller
             'locations' => $locations,
         ));
     }   
+    
+    public function actionSubscribe() {
+        $userId = Yii::app()->user->getId(); 
+        $eventId = $_POST['eventId'];
+        $status = $_POST['status'];
+        
+        if ($status == "true") {
+            $model = new Participant();
+            $model->userId = $userId;
+            $model->eventId= $eventId;
+            
+            if ($model->save()) {
+                Yii::trace("Participant form sent", "http");
+            }
+        }
+        
+        else if ($status == "false") {
+            if (Participant::model()->deleteAll("eventId ='" . $eventId . "' AND userId = '" . $userId . "'")) {
+                Yii::trace("Participant form sent", "http");
+            }
+        }
+        
+        Yii::trace($status, "http");
+    }
 
     /**
      * Performs the AJAX validation.

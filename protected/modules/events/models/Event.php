@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'locations':
  * @property integer $eventId
  * @property string $eventName
+ * @property string $eventShortDescription
  * @property string $eventDescription
  * @property string $locationId
  * @property string $eventStartTime
@@ -30,10 +31,9 @@ class Event extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('eventName, eventDescription, eventStartTime', 'required'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-                        array('eventId, eventName, eventDescription, locationId, eventStartTime, isStarted, isFinished', 'safe'),
+                        array('eventId, eventName, eventShortDescription, eventDescription, locationId, eventStartTime, isStarted, isFinished', 'safe'),
 //			array('eventId, eventName, eventDescription, locationId, eventStartTime, isStarted, isFinished', 'safe', 'on'=>'search'),
                     
 //                        array('eventName', 'unique'),
@@ -59,6 +59,7 @@ class Event extends CActiveRecord
 		return array(
 			'eventId' => 'Event ID',
 			'eventName' => 'Event Name',
+                        'eventShortDescription' => 'Event Short Description',
 			'eventDescription' => 'Event Description',
                         'eventStartTime' => 'Event Time',
                         'isStarted' => 'Is Started',
@@ -87,6 +88,7 @@ class Event extends CActiveRecord
 
                 $criteria->compare('eventId',$this->eventId);
 		$criteria->compare('eventName',$this->eventName, true);
+                $criteria->compare('eventShortDescription',$this->eventShortDescription, true);
 		$criteria->compare('eventDescription',$this->eventDescription, true);
                 $criteria->compare('eventStartTime',$this->eventStartTime, true);
                 $criteria->compare('isStarted',$this->isStarted, true);
