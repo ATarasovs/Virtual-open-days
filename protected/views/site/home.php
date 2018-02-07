@@ -34,20 +34,9 @@
         
         <h3>&nbsp;List of events <small>(signed up)</small></h3>
         <ul class="list-group events">
-            <?php foreach($subscribedEvents as $event) { 
-                if ($event->isStarted == "true" && $event->isFinished == "false") {
-                    $status = "In progress";
-                }
-                else if ($event->isStarted == "true" && $event->isFinished == "true") {
-                    $status = "Finished";
-                }
-                else {
-                    $status = "Not started";
-                }
-            ?>
             
-                <a href="#" class="list-group-item event" id="<?php echo $event->eventId ?>"><?php echo $event->eventName; ?> (<?php echo $event->eventStartTime; ?>) - <?php echo $status ?></a>
-            <?php } ?>
+            <?php $this->renderPartial('_events', array('subscribedEvents'=>$subscribedEvents)); ?>
+            
         </ul>
     </div>
 </div>
@@ -56,6 +45,7 @@
 <script>    
     var homeReqUrl = '<?php print Yii::app()->createUrl('site/home') ?>';
     var eventViewReqUrl = '<?php print Yii::app()->createUrl('events/events/view') ?>';
+    var loadEventsReqUrl = '<?php print Yii::app()->createUrl('site/loadEvents') ?>';
     
     
     

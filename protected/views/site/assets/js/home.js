@@ -2,6 +2,7 @@ $(document).ready(function() {
     $(".homeLi").addClass("active");
     
     initButtons();
+    
     var selectedLocationFromParam = getParameterByName('selectedlocation');
     $( ".location" ).each(function() {
         if (this.id == selectedLocationFromParam) {
@@ -16,14 +17,14 @@ $(document).ready(function() {
 function initButtons() {
     $( ".location" ).click(function() {
         var selectedLocation = this.id;
-        console.log(selectedLocation);
-        location.href = homeReqUrl + "?selectedlocation=" + selectedLocation;
+        $(".events").load(loadEventsReqUrl + "?id=" + encodeURIComponent(selectedLocation));
+
     });
     $( ".event" ).click(function() {
         var eventId = this.id;
         location.href = eventViewReqUrl + "?id=" + eventId;
     });
-}
+    
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;

@@ -205,6 +205,46 @@ class SiteController extends Controller
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
     }
+    
+    public function actionLoadEvents() {
+        
+        $id = Yii::app()->user->getId();
+        $eventsCriteria = new CDbCriteria();
+        $participantsCriteria = new CDbCriteria();
+        $selectedLocation = Yii::app()->request->getParam('id');
+        
+        try {
+            $participantsCriteria->addCondition("userId = '$id'");
+            $participants = Participant::model()->findAll($participantsCriteria);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        $subscribedEventIds = array();
+        
+        foreach ($participants as $participant) {
+            array_push($subscribedEventIds, $participant->eventId);
+        }
+        
+        try {
+            if ($selectedLocation != "") {
+                $eventsCriteria->addCondition("locationId = '$selectedLocation'");
+            }
+            
+            $eventsCriteria -> addInCondition("eventId", $subscribedEventIds);
+            $subscribedEvents = Event::model()->findAll($eventsCriteria);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+         $this->renderPartial('_events', array(
+            'subscribedEvents' => $subscribedEvents,
+        ));
+    }
 
     /**
      * Performs the AJAX validation.
