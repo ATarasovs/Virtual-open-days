@@ -30,10 +30,11 @@ class Event extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('eventName, eventStartTime', 'required'),
+			array('eventName, eventDescription, eventStartTime', 'required'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('eventId, eventName, eventDescription, locationId, eventStartTime, isStarted, isFinished', 'safe', 'on'=>'search'),
+                        array('eventId, eventName, eventDescription, locationId, eventStartTime, isStarted, isFinished', 'safe'),
+//			array('eventId, eventName, eventDescription, locationId, eventStartTime, isStarted, isFinished', 'safe', 'on'=>'search'),
                     
 //                        array('eventName', 'unique'),
 		);

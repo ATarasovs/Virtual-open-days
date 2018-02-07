@@ -1,3 +1,7 @@
+<?php 
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.events.assets').'\list-all.js'), CClientScript::POS_HEAD);
+?>
+
 <!--*************************************************************-->
 <div class="row">
     <div class="col-xs-12">
@@ -39,14 +43,14 @@
                </thead>
                <tbody>
                    <?php foreach($events as $event) { ?>
-                   <tr class="table-info" data-event-id="<?php echo $event->eventId; ?>">
+                   <tr class="table-info">
                        <td class="eventName col-xs-3"><?php echo $event->eventName; ?></td>
                        <td class="eventStartTime col-xs-2"><?php echo $event->eventStartTime; ?></td>
                        <td class="location col-xs-1"><?php echo $event->locationId; ?></td>
                        <td class="col-xs-3">
-                           <button class="editBtn btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
-                           <button class="viewBtn btn btn-primary btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button>
-                           <button class="removeBtn btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i> Remove</button>
+                           <button class="editBtn btn btn-primary btn-sm" data-event-id="<?php echo $event->eventId; ?>"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                           <button class="viewBtn btn btn-primary btn-sm" data-event-id="<?php echo $event->eventId; ?>"><i class="fa fa-eye" aria-hidden="true"></i> View</button>
+                           <button class="removeBtn btn btn-danger btn-sm" data-event-id="<?php echo $event->eventId; ?>"><i class="fa fa-times" aria-hidden="true"></i> Remove</button>
                        </td>
                    </tr>
                   <?php } ?>
@@ -80,8 +84,6 @@
 </div>
 
 <script>
-    var salesListReqUrl = '<?php print Yii::app()->createUrl('sales/sale/admin') ?>';	
-    var salesViewReqUrl = '<?php print Yii::app()->createUrl('sales/sale/view') ?>';
-    var saveTribeReqUrl = '<?php print Yii::app()->createUrl('sales/sale/savetribe') ?>';
-    var userId = <?php print Yii::app()->user->getId(); ?>
+    var eventViewReqUrl = '<?php print Yii::app()->createUrl('events/events/view') ?>';
+    var eventEditReqUrl = '<?php print Yii::app()->createUrl('events/events/edit') ?>';
 </script>

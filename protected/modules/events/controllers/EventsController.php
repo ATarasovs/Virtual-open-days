@@ -2,6 +2,22 @@
 
 class EventsController extends Controller
 {
+    public function actions()
+    {
+        return array(
+            // captcha action renders the CAPTCHA image displayed on the contact page
+            'captcha'=>array(
+                'class'=>'CCaptchaAction',
+                'backColor'=>0xFFFFFF,
+            ),
+            // page action renders "static" pages stored under 'protected/views/site/pages'
+            // They can be accessed via: index.php?r=site/page&view=FileName
+            'page'=>array(
+                'class'=>'CViewAction',
+            ),
+        );
+    }
+    
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -28,7 +44,7 @@ class EventsController extends Controller
     {
         return array(
             array('allow',  // allow all users to perform 'index' and 'view' actions
-                'actions'=>array('view, listAllEvents, listSubscribedEvents'),
+                'actions'=>array('view, edit, listAllEvents, listSubscribedEvents'),
                 'users'=>array('*'),
             ),
         );
@@ -46,7 +62,6 @@ class EventsController extends Controller
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
-            $error = $ex->getMessage();
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
@@ -59,7 +74,6 @@ class EventsController extends Controller
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
-            $error = $ex->getMessage();
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
@@ -133,53 +147,125 @@ class EventsController extends Controller
     
     public function actionView(){
 		
-    $eventId = Yii::app()->request->getParam('id');
-    $id = Yii::app()->user->getId(); 
-    
-    try {
-        $users = User::model()->findByPk($id);
-    }
-    catch (Exception $ex){
-        Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
-        $error = $ex->getMessage();
-        Yii::app()->user->setFlash('danger', $ex->getMessage());
-    }
+        $eventId = Yii::app()->request->getParam('id');
+        Yii::trace($eventId, "http");
+        $userId = Yii::app()->user->getId(); 
 
-    if (!empty($eventId)) {
-        try{
-            $model = Event::model()->findByPk($eventId, array());
+        try {
+            $users = User::model()->findByPk($userId);
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
-            $error = $ex->getMessage();
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+
+        if (!empty($eventId)) {
+            try{
+                $model = Event::model()->findByPk($eventId, array());
+            }
+            catch (Exception $ex){
+                Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+                Yii::app()->user->setFlash('danger', $ex->getMessage());
+            }
+
+            if ($model->isStarted == "false") {
+                Yii::app()->user->setFlash("notice", "Event haven't started yet");
+    //            $this->redirect(Yii::app()->createUrl('events/events/view'));
+            }
+            if ($model->isFinished == "true") {
+                Yii::app()->user->setFlash("notice", "Event is finished already");
+                //redirect to the video location of the event
+    //            $this->redirect(Yii::app()->createUrl('events/events/view'));
+            }
+        }
+        else {
+            Yii::app()->user->setFlash("danger", "Event is not selected");
+        }
+        
+        $criteria = new CDbCriteria();
+        $criteria->addCondition("eventId = '$eventId'");
+        try {
+            $messages = Message::model()->findAll($criteria);
+        } 
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+
+        if($users->isAdmin == "true") {
+            $this->layout = '//layouts/adminmenu';
+        }
+        else {
+            $this->layout ='//layouts/usermenu';
+        }
+
+        $this->render('view', array(
+            'model' => $model,
+            'messages' => $messages,
+        ));
+    }
+
+    public function actionEdit(){
+        $eventId = Yii::app()->request->getParam('id');
+        $userId = Yii::app()->user->getId(); 
+        
+        try {
+            $users = User::model()->findByPk($userId);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if ($model->isStarted == "false") {
-            Yii::app()->user->setFlash("notice", "Event haven't started yet");
-//            $this->redirect(Yii::app()->createUrl('events/events/view'));
+        if (!empty($eventId)) {
+            try{
+                $model = Event::model()->findByPk($eventId, array());
+            }
+            catch(EActiveResourceRequestException_ResponseFalse $ex){
+                Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+                Yii::app()->user->setFlash("danger", $ex->getMessage());
+            }
         }
-        if ($model->isFinished == "true") {
-            Yii::app()->user->setFlash("notice", "Event is finished already");
-            //redirect to the video location of the event
-//            $this->redirect(Yii::app()->createUrl('events/events/view'));
+        else {
+            $model = new Event();
         }
-    }
-    else {
-        Yii::app()->user->setFlash("danger", "Event is not selected");
-    }
-    
-    if($users->isAdmin == "true") {
-        $this->layout = '//layouts/adminmenu';
-    }
-    else {
-        $this->layout ='//layouts/usermenu';
-    }
 
-    $this->render('view', array(
-        'model' => $model,
-    ));
-}
+        $this->performAjaxValidation($model);
+        
+        if(isset($_POST['Event'])){
+            $model->attributes=$_POST['Event'];
+
+            if ($model->save()) {
+                Yii::trace("Event form sent", "http");
+                $this->redirect(array('events/listAllEvents'));
+            }
+        }
+        
+        $locations = array();
+        
+        try {
+            $locationsCollection = Location::model()->findAll();
+            foreach($locationsCollection as $locationModel){
+                $locations[$locationModel->locationId] = $locationModel->locationName;
+            }
+        }
+        catch(EActiveResourceRequestException_ResponseFalse $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash("danger", $ex->getMessage());
+        }
+        
+        if($users->isAdmin == "true") {
+            $this->layout = '//layouts/adminmenu';
+        }
+        else {
+            $this->layout ='//layouts/usermenu';
+        }
+
+        $this->render('edit', array(
+            'model' => $model,
+            'locations' => $locations,
+        ));
+    }   
 
     /**
      * Performs the AJAX validation.
@@ -187,7 +273,7 @@ class EventsController extends Controller
      */
     protected function performAjaxValidation($model)
     {
-        if(isset($_POST['ajax']) && $_POST['ajax']==='user-form')
+        if(isset($_POST['ajax']) && $_POST['ajax']==='edit-form')
         {
             echo CActiveForm::validate($model);
             Yii::app()->end();
