@@ -57,6 +57,11 @@
 /*
 Table CSS
 */
+
+.panel-table {
+    font-family: 'Poppins', sans-serif;
+}
+
 .panel-table .panel-body{
   padding:0;
 }
