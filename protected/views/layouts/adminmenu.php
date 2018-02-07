@@ -67,6 +67,17 @@
                             Contact
                         </a>
                     </li>
+                    <li class="adminLi">
+                        <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false">
+                            <i class="fa fa-wrench"></i>
+                            Manage
+                        </a>
+                        <ul class="collapse list-unstyled" id="adminSubmenu">
+                            <li><a href="<?php print Yii::app()->createUrl('events/events/admin'); ?>">Events</a></li>
+                            <li><a href="#">Locations</a></li>
+                            <li><a href="#">Something</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
 

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $(".eventsLi").addClass("active");
+    $(".adminLi").addClass("active");
     
     initButtons();
 });
