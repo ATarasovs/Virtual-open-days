@@ -155,8 +155,7 @@ class EventsController extends Controller
         ));
     }
     
-        public function actionAdmin() {
-        
+    public function actionAdmin() {
         $id = Yii::app()->user->getId(); 
         
         $criteria = new CDbCriteria();

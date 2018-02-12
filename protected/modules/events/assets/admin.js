@@ -14,4 +14,8 @@ function initButtons() {
         var eventId = $(this).attr("data-event-id");
         location.href = eventEditReqUrl + "?id=" + eventId;
     });
+    
+    $( ".createBtn" ).click(function() {
+        location.href = eventEditReqUrl;
+    });
 }

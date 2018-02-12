@@ -34,10 +34,29 @@
                     <div class="col-md-9 home-list-pop-desc inn-list-pop-desc"><h3><?php echo $location->locationName ?></h3>
                         <h4>Department: <?php echo $location->locationDepartment ?></h4>
                         <p><?php echo $location->locationShortDescription ?></p>
-                        <p class="right"><a class="readmore" href="">Read more</a></p>
+                        <p class="right"><a class="readmore" href="<?php print Yii::app()->createUrl('locations/locations/view?id=' . $location->locationId); ?>">Read more</a></p>
                     </div>
                 </div>
             <?php } ?>
+        </div>
+    </div>
+</div>
+<div class="top15"></div>
+<div class="row">
+    <div class="col-xs-12 right">
+        <div class="dataTables_paginate paging_simple_numbers">
+            <?php
+                $this->widget('CLinkPager', array('pages' => $pages,
+                    'header' => '',
+                    'nextPageLabel' => '&rsaquo;',
+                    'prevPageLabel' => '&lsaquo;',
+                    'firstPageLabel' => '&laquo;',
+                    'lastPageLabel' => '&raquo;',
+                    'selectedPageCssClass' => 'active',
+                    'hiddenPageCssClass' => 'disabled',
+                    'htmlOptions' => array('class' => 'pagination', 'style' => 'margin: 0')
+                ));
+            ?>
         </div>
     </div>
 </div>

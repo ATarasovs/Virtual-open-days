@@ -76,6 +76,24 @@
                 </li>
             <?php } ?>
         </ul>
+        <div class="row">
+            <div class="col-xs-12 right">
+                <div class="dataTables_paginate paging_simple_numbers">
+                    <?php
+                        $this->widget('CLinkPager', array('pages' => $pages,
+                            'header' => '',
+                            'nextPageLabel' => '&rsaquo;',
+                            'prevPageLabel' => '&lsaquo;',
+                            'firstPageLabel' => '&laquo;',
+                            'lastPageLabel' => '&raquo;',
+                            'selectedPageCssClass' => 'active',
+                            'hiddenPageCssClass' => 'disabled',
+                            'htmlOptions' => array('class' => 'pagination', 'style' => 'margin: 0')
+                        ));
+                    ?>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
     

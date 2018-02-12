@@ -89,6 +89,44 @@ class LocationsController extends Controller
             'pages' => $pages,
         ));
     }
+    
+    public function actionAdmin() {
+        $id = Yii::app()->user->getId(); 
+        
+        $criteria = new CDbCriteria();
+        
+        try {
+            $users = User::model()->findByPk($id);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        try {
+            $count=Location::model()->count($criteria);
+            $pages=new CPagination($count);
+            $pages->pageSize=10;
+            $pages->applyLimit($criteria);
+            $locations = Location::model()->findAll($criteria);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if($users->isAdmin == "true") {
+            $this->layout = '//layouts/adminmenu';
+        }
+        else {
+            $this->layout ='//layouts/usermenu';
+        }
+
+        $this->render('admin', array(
+            'locations' => $locations,
+            'pages' => $pages,
+        ));
+    }
 
     /**
      * Performs the AJAX validation.

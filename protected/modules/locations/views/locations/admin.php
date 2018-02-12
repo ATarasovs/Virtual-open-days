@@ -1,5 +1,5 @@
 <?php 
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.events.assets').'\admin.js'), CClientScript::POS_HEAD);
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.locations.assets').'\admin.js'), CClientScript::POS_HEAD);
 ?>
 
 <!--*************************************************************-->
@@ -25,7 +25,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col col-xs-6">
-                        <h3 class="panel-title">List of all events</h3>
+                        <h3 class="panel-title">List of all buildings</h3>
                     </div>
                     <div class="col col-xs-6 text-right">
 
@@ -37,20 +37,18 @@
                <table class="table table-striped table-bordered table-list" id="events">
                    <thead>
                        <th>Name</th>
-                       <th>Event time</th>
-                       <th>Location</th>
+                       <th>Department</th>
                        <th>Actions</th>
                    </thead>
                    <tbody>
-                       <?php foreach($events as $event) { ?>
+                       <?php foreach($locations as $location) { ?>
                        <tr class="table-info">
-                           <td class="eventName col-xs-3"><?php echo $event->eventName; ?></td>
-                           <td class="eventStartTime col-xs-2"><?php echo $event->eventStartTime; ?></td>
-                           <td class="location col-xs-1"><?php echo $event->locationId; ?></td>
+                           <td class="locationName col-xs-3"><?php echo $location->locationName; ?></td>
+                           <td class="locaitonDepartment col-xs-3"><?php echo $location->locationDepartment; ?></td>
                            <td class="col-xs-3">
-                               <button class="editBtn btn btn-primary btn-sm" data-event-id="<?php echo $event->eventId; ?>"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
-                               <button class="viewBtn btn btn-primary btn-sm" data-event-id="<?php echo $event->eventId; ?>"><i class="fa fa-eye" aria-hidden="true"></i> View</button>
-                               <button class="removeBtn btn btn-danger btn-sm" data-event-id="<?php echo $event->eventId; ?>"><i class="fa fa-times" aria-hidden="true"></i> Remove</button>
+                               <button class="editBtn btn btn-primary btn-sm" data-location-id="<?php echo $location->locationId; ?>"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                               <button class="viewBtn btn btn-primary btn-sm" data-location-id="<?php echo $location->locationId; ?>"><i class="fa fa-eye" aria-hidden="true"></i> View</button>
+                               <button class="removeBtn btn btn-danger btn-sm" data-location-id="<?php echo $location->locationId; ?>"><i class="fa fa-times" aria-hidden="true"></i> Remove</button>
                            </td>
                        </tr>
                       <?php } ?>
@@ -85,6 +83,6 @@
 </div>
 
 <script>
-    var eventViewReqUrl = '<?php print Yii::app()->createUrl('events/events/view') ?>';
-    var eventEditReqUrl = '<?php print Yii::app()->createUrl('events/events/edit') ?>';
+    var locaitonViewReqUrl = '<?php print Yii::app()->createUrl('locations/locations/view') ?>';
+    var locationEditReqUrl = '<?php print Yii::app()->createUrl('locations/locations/edit') ?>';
 </script>
