@@ -24,6 +24,7 @@ function initButtons() {
         var eventId = this.id;
         location.href = eventViewReqUrl + "?id=" + eventId;
     });
+}
     
 
 function getParameterByName(name, url) {
