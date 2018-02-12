@@ -33,20 +33,23 @@ and open the template in the editor.
 }
 
 body {
-    background-image: url("/vod/images/index-bg.jpg");
-    padding: 0;
-    margin: 0;
+    background: url("/vod/images/index.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 h1 {
     text-align:center;
-    color: white;
-    font-size: 70px;
-    margin-top: 10vw;
+    color: black;
+    font-size: 80px;
+    margin-top: 14vw;
+    font-weight: bold;
 }
 
 .btnGroup {
-    margin-top: 10vw;
+    margin-top: 3vw;
 }
 
 .btn-huge{

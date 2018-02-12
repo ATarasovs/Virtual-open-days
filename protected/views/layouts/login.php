@@ -23,17 +23,16 @@
     </head>
 	<body>
 		<div class="container">
-			<div class="row main">
-				<div class="panel-heading">
-	               <div class="panel-title text-center">
-	               		<h1 class="title">Company Name</h1>
-	               		<hr />
-	               	</div>
-	            </div> 
-				<div class="main-login main-center">
-                                    <?php echo $content; ?>
-				</div>
-			</div>
+                    <div class="row main">
+                        <div class="panel-heading">
+                            <div class="panel-title text-center">
+                                <h1 class="title">Virtual Open Days</h1>
+                            </div>
+                        </div> 
+                        <div class="main-login main-center">
+                            <?php echo $content; ?>
+                        </div>
+                    </div>
 		</div>
                 <div class="top30">`</div>
                 <div class="top30">`</div>
