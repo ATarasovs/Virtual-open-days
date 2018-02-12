@@ -64,7 +64,7 @@ class Event extends CActiveRecord
                         'eventStartTime' => 'Event Time',
                         'isStarted' => 'Is Started',
                         'isFinished' => 'Is Finished',
-			'locationId' => 'Location ID',
+			'locationId' => 'Location',
 		);
 	}
 

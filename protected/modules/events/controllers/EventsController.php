@@ -285,7 +285,7 @@ class EventsController extends Controller
 
             if ($model->save()) {
                 Yii::trace("Event form sent", "http");
-                $this->redirect(array('events/listAllEvents'));
+                $this->redirect(array('events/admin'));
             }
         }
         

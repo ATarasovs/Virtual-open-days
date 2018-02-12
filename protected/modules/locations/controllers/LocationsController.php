@@ -127,6 +127,54 @@ class LocationsController extends Controller
             'pages' => $pages,
         ));
     }
+    
+    public function actionEdit(){
+        $locationId = Yii::app()->request->getParam('id');
+        $userId = Yii::app()->user->getId(); 
+        
+        try {
+            $users = User::model()->findByPk($userId);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if (!empty($locationId)) {
+            try{
+                $model = Location::model()->findByPk($locationId, array());
+            }
+            catch(EActiveResourceRequestException_ResponseFalse $ex){
+                Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+                Yii::app()->user->setFlash("danger", $ex->getMessage());
+            }
+        }
+        else {
+            $model = new Location();
+        }
+
+        $this->performAjaxValidation($model);
+        
+        if(isset($_POST['Location'])){
+            $model->attributes=$_POST['Location'];
+
+            if ($model->save()) {
+                Yii::trace("Location form sent", "http");
+                $this->redirect(array('locations/admin'));
+            }
+        }
+        
+        if($users->isAdmin == "true") {
+            $this->layout = '//layouts/adminmenu';
+        }
+        else {
+            $this->layout ='//layouts/usermenu';
+        }
+
+        $this->render('edit', array(
+            'model' => $model,
+        ));
+    }   
 
     /**
      * Performs the AJAX validation.
