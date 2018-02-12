@@ -21,7 +21,7 @@
 <!--*************************************************************-->
 
 <div class="row">
-    <div class="top30">
+    <div class="top30"></div>
     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
         <ul class="event-list">
             

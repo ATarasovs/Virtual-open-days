@@ -28,6 +28,12 @@
                             Home
                         </a>
                     </li>
+                    <li class="buildingsLi">
+                        <a href="<?php print Yii::app()->createUrl('locations/locations/list'); ?>">
+                            <i class="fa fa-building-o"></i>
+                            Buildings
+                        </a>
+                    </li>
                     <li class="eventsLi">
                         <a href="#eventsSubmenu" data-toggle="collapse" aria-expanded="false">
                             <i class="fa fa-calendar"></i>

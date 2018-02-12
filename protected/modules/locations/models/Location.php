@@ -7,7 +7,11 @@
  * @property integer $locationId
  * @property string $locationName
  * @property string $locationDescription
- * @property string $locationCoordinates
+ * @property string $locationShortDescription
+ * @property string $locationDepartment
+ * @property string $locationLatitude
+ * @property string $locationLongitude
+ * @property string $locaitonImage
  */
 class Location extends CActiveRecord
 {
@@ -27,12 +31,9 @@ class Location extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('locationName', 'required'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('locationId, locationName, locationDescription, locationLatitude, locationLongitude, locationNumberOfEvents', 'safe', 'on'=>'search'),
-                    
-                        array('locationName', 'unique'),
+			array('locationId, locationName, locationDescription, locationShortDescription, locationDepartment locationLatitude, locationLongitude, locaitonImage', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,9 +57,11 @@ class Location extends CActiveRecord
 			'locationId' => 'Location ID',
 			'locationName' => 'Location Name',
 			'locationDescription' => 'Location Description',
+                        'locationShortDescription' => 'Location Short Description',
+                        'locaitonDepartment' => 'Location Department',
 			'locaitonLatitude' => 'Location Latitude',
                         'locaitonLongitude' => 'Location Longitude',
-                        'locaitonNumberOfEvents' => 'Quantity of events',
+                        'locationImage' => 'Location Image',
 		);
 	}
 
@@ -83,9 +86,11 @@ class Location extends CActiveRecord
                 $criteria->compare('locationId',$this->locationId);
 		$criteria->compare('locationName',$this->locationName, true);
 		$criteria->compare('locationDescription',$this->locationDescription, true);
+                $criteria->compare('locationShortDescription',$this->locationShortDescription, true);
+                $criteria->compare('locationDepartment',$this->locationDepartment, true);
                 $criteria->compare('locationLatitude',$this->locaionLatitude, true);
                 $criteria->compare('locationLongitude',$this->locationLongitude, true);
-                $criteria->compare('locaitonNumberOfEvents',$this->locationNumberOfEvents, true);
+                $criteria->compare('locaitonImage',$this->locaitonImage, true);
                 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
