@@ -15,6 +15,9 @@
             <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/menu.css">
             <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/home.css">
             
+            <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/lib/summernote/summernote.css">
+            <script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/summernote/summernote.min.js"></script>
+            
             <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     </head>
     <body>
