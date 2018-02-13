@@ -27,8 +27,14 @@
     <div class="col-xs-4">
         <h3>&nbsp;List of locations</h3>
         <ul class="list-group locations">
-            <?php foreach($locations as $location) { ?>
-                <a href="#" class="list-group-item location" id="<?php echo $location->locationId ?>"><?php echo $location->locationName; ?> <span class="badge"><?php echo $location->locationNumberOfEvents; ?></span></a>
+            <?php foreach($locations as $location) { 
+                    $eventCount = 0;
+                    foreach($subscribedEvents as $event) { 
+                        if ($location->locationId == $event->locationId) {
+                            $eventCount++;
+                        }
+                    }?>
+                <a href="#" class="list-group-item location" id="<?php echo $location->locationId ?>"><?php echo $location->locationName; ?> <span class="badge"><?php echo $eventCount; ?></span></a>
             <?php } ?>
         </ul>
         
