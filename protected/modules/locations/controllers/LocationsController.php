@@ -157,8 +157,21 @@ class LocationsController extends Controller
         
         if(isset($_POST['Location'])){
             $model->attributes=$_POST['Location'];
+            $model->image = CUploadedFile::getInstance($model,'image');
+            $file = CUploadedFile::getInstance($model,'image');
+            $locationName = preg_replace("/[^a-zA-Z0-9]+/", "", $model->locationName);
+            if ($file != null) {
+                $extension = $model->image->getExtensionName();
+                
+                @unlink(Yii::app()->basePath . '/../images/buildings/' . $locationName . '.png');
+                @unlink(Yii::app()->basePath . '/../images/buildings/' . $locationName . '.jpg');
 
+                $model->image->saveAs(Yii::app()->basePath . '/../images/buildings/' . $locationName . '.' . $extension);
+                $model->locationImage = $locationName . '.' . $extension;
+            }
+            
             if ($model->save()) {
+                
                 Yii::trace("Location form sent", "http");
                 $this->redirect(array('locations/admin'));
             }

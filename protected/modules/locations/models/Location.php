@@ -11,10 +11,12 @@
  * @property string $locationDepartment
  * @property string $locationLatitude
  * @property string $locationLongitude
- * @property string $locaitonImage
+ * @property string $locationImage
+ * @property string $image
  */
 class Location extends CActiveRecord
 {
+     public $image;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -33,7 +35,8 @@ class Location extends CActiveRecord
 		return array(
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('locationId, locationName, locationDescription, locationShortDescription, locationDepartment, locationLatitude, locationLongitude, locaitonImage', 'safe'),
+			array('locationId, locationName, locationDescription, locationShortDescription, locationDepartment, locationLatitude, locationLongitude, locationImage', 'safe'),
+			array('image', 'file', 'types'=>'jpg, png', 'safe' => false, 'allowEmpty' => true),
 //			array('locationId, locationName, locationDescription, locationShortDescription, locationDepartment locationLatitude, locationLongitude, locaitonImage', 'safe', 'on'=>'search'),
                 );
 	}
@@ -91,7 +94,7 @@ class Location extends CActiveRecord
                 $criteria->compare('locationDepartment',$this->locationDepartment, true);
                 $criteria->compare('locationLatitude',$this->locaionLatitude, true);
                 $criteria->compare('locationLongitude',$this->locationLongitude, true);
-                $criteria->compare('locaitonImage',$this->locaitonImage, true);
+                $criteria->compare('locationImage',$this->locationImage, true);
                 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

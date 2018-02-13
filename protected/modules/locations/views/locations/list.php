@@ -27,7 +27,7 @@
                 <div class="top30"></div>
                 <div class="row">
                     <?php if ($location->locationImage != "") { ?>  
-                        <div class="col-md-3"> <img class="locationImg" src="/vod/images/<?php echo $location->locationImage ?>" alt=""></div>
+                        <div class="col-md-3"> <img class="locationImg" src="/vod/images/buildings/<?php echo $location->locationImage ?>" alt=""></div>
                     <?php } else {?>
                         <div class="col-md-3"> <img class="locationImg" src="/vod/images/no-image.png" alt=""></div>
                     <?php } ?>
