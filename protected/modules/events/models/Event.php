@@ -13,6 +13,7 @@
  * @property string $isStarted
  * @property string $isFinished
  * @property string $eventImage
+ * @property string $eventVideo
  * @property string $image
  */
 class Event extends CActiveRecord
@@ -36,7 +37,7 @@ class Event extends CActiveRecord
 		return array(
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-                        array('eventId, eventName, eventShortDescription, eventDescription, locationId, eventStartTime, isStarted, isFinished, eventImage', 'safe'),
+                        array('eventId, eventName, eventShortDescription, eventDescription, locationId, eventStartTime, isStarted, isFinished, eventImage, eventVideo', 'safe'),
 			array('image', 'file', 'types'=>'jpg, png', 'safe' => false, 'allowEmpty' => true),
 //			array('eventId, eventName, eventDescription, locationId, eventStartTime, isStarted, isFinished', 'safe', 'on'=>'search'),
                     
@@ -70,6 +71,7 @@ class Event extends CActiveRecord
                         'isFinished' => 'Is Finished',
 			'locationId' => 'Location',
                         'eventImage' => 'Event Image',
+                        'eventVideo' => 'Event Video ID (for example 76HtGVE7bL4)',
 		);
 	}
 
@@ -100,6 +102,7 @@ class Event extends CActiveRecord
                 $criteria->compare('isFinished',$this->isFinished, true);
                 $criteria->compare('locationId',$this->locationId, true);
                 $criteria->compare('eventImage',$this->eventImage, true);
+                $criteria->compare('eventVideo',$this->eventVideo, true);
                 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

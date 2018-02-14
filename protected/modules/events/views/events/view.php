@@ -23,12 +23,15 @@
 
 <div class="container">
     <div class="row">
-<!--        <div class="col-md-7">
-            <div class="youtube">
-                <iframe src="https://www.youtube.com/embed/_IPXiNIXuFI" class="video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-        </div>-->
+        <div class="col-md-7">
+            <?php if ($model->eventVideo != "") { ?>
+                <div class="youtube">
+                    <!--<iframe src="https://www.youtube.com/embed/<?php // echo $model->eventVideo ?>?autoplay=1" class="video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+                </div>
+            <?php } ?>
+        </div>
         <div class="col-md-5">
+            <div class="top15"></div>
             <div class="panel-primary">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-comment"></span> Chat
@@ -52,10 +55,28 @@
             </div>
         </div>
     </div>
+    
+    <div class="top30"></div>
+    
+    <div class="row">
+        <div class="col-xs-12">
+            <?php if($users->isAdmin == "true" && $model->isStarted == "false") { ?>
+                <button type="button" class="btn btn-success btn-block startEventBtn">Start event</button>
+            <?php } ?>
+
+            <button type="button" class="btn btn-danger btn-block finishEventBtn hide">Finish event</button>
+
+            <?php if($users->isAdmin == "true" && $model->isStarted == "true" && $model->isFinished == "false") { ?>
+                <button type="button" class="btn btn-danger btn-block finishEventBtn">Finish event</button>
+            <?php } ?>
+        </div>
+    </div>
 </div>
 
 <script>
+    var eventId = '<?php print Yii::app()->request->getParam('id') ?>';
+    
     var loadMessagesReqUrl = '<?php print Yii::app()->createUrl('messages/messages/loadMessages') ?>';
     var sendMessageReqUrl = '<?php print Yii::app()->createUrl('messages/messages/sendMessage') ?>';
-    var eventId = '<?php print Yii::app()->request->getParam('id') ?>';
+    var changeStatusEventReqUrl = '<?php print Yii::app()->createUrl('events/events/changeStatusEvent') ?>';
 </script>

@@ -234,14 +234,16 @@ class EventsController extends Controller
                 Yii::app()->user->setFlash('danger', $ex->getMessage());
             }
 
-            if ($model->isStarted == "false") {
-                Yii::app()->user->setFlash("notice", "Event haven't started yet");
-    //            $this->redirect(Yii::app()->createUrl('events/events/view'));
-            }
-            if ($model->isFinished == "true") {
-                Yii::app()->user->setFlash("notice", "Event is finished already");
-                //redirect to the video location of the event
-    //            $this->redirect(Yii::app()->createUrl('events/events/view'));
+            if ($users->isAdmin == "false") {
+                if ($model->isStarted == "false") {
+                    Yii::app()->user->setFlash("notice", "Event haven't started yet");
+                    $this->redirect(Yii::app()->createUrl('events/events/listSubscribedEvents'));
+                }
+                if ($model->isFinished == "true") {
+                    Yii::app()->user->setFlash("notice", "Event is finished already");
+                    //redirect to the video location of the event
+        //            $this->redirect(Yii::app()->createUrl('events/events/view'));
+                }
             }
         }
         else {
@@ -268,6 +270,7 @@ class EventsController extends Controller
         $this->render('view', array(
             'model' => $model,
             'messages' => $messages,
+            'users' => $users,
         ));
     }
 
@@ -300,6 +303,12 @@ class EventsController extends Controller
         
         if(isset($_POST['Event'])){
             $model->attributes=$_POST['Event'];
+            
+            if (empty($eventId)) {
+                $model->isStarted = "false";
+                $model->isFalse = "false";
+            }
+            
             $model->image = CUploadedFile::getInstance($model,'image');
             $file = CUploadedFile::getInstance($model,'image');
             $eventName = preg_replace("/[^a-zA-Z0-9]+/", "", $model->eventName);
@@ -368,6 +377,32 @@ class EventsController extends Controller
         
         Yii::trace($status, "http");
     }
+    
+    public function actionChangeStatusEvent() {
+        $eventId = $_POST['eventId'];
+        
+        try{
+            $model = Event::model()->findByPk($eventId, array());
+            
+        }
+        catch(EActiveResourceRequestException_ResponseFalse $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash("danger", $ex->getMessage());
+        }
+        
+        
+        if ($model->isStarted == "false") {
+            $model->isStarted = "true";
+        }
+        
+        else if ($model->isStarted == "true" && $model->isFinished == "false") {
+            $model->isFinished = "true";
+        }
+        
+        if ($model->save()) {
+            Yii::trace("Event was started", "http");
+        }
+    }      
 
     /**
      * Performs the AJAX validation.
