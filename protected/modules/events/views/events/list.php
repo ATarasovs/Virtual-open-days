@@ -44,13 +44,22 @@
                         <span class="year"><?php echo $year ?></span>
                         <span class="time"><?php echo $hour ?>:<?php echo $minute ?></span>
                     </time>
-                    <img alt="Independence Day" src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" />
-                    <div class="info">
+                    <?php if ($event->eventImage != "") { ?>  
+                        <img src="/vod/images/events/<?php echo $event->eventImage ?>" alt="">
+                    <?php } else {?>
+                        <img src="/vod/images/no-image.png" alt="">
+                    <?php } ?>
+                    <div class="info information">
                         <h2 class="title"><?php echo $event->eventName ?></h2>
-                        <p class="desc"><?php echo $event->eventShortDescription ?><br><small><strong>Event starts:&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $day ?>&nbsp;<?php echo $monthName ?>&nbsp;&nbsp;<?php echo $hour ?>:<?php echo $minute ?></strong></small> </p>
+                        <?php foreach ($locations as $location) {
+                            if ($location->locationId == $event->locationId) {
+                                $locationName = $location->locationName;
+                            }
+                        } ?>
+                        <div class="top10"></div><p class="desc"><small><strong>Location:&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $locationName ?><br>Event starts:&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $day ?>&nbsp;<?php echo $monthName ?>&nbsp;&nbsp;<?php echo $hour ?>:<?php echo $minute ?></strong><br>Click on the event to read more</small></p>
                     </div>
 
-                    <div class="social">
+                    <div class="social">    
                         <div class="material-switch pull-right">
                             <?php 
                                 $count = 0;
@@ -71,7 +80,10 @@
                 </li>
                 <li class="event-details">
                     <div class="info" style="height:auto">
-                        <p class="desc"><?php echo $event->eventDescription ?></p>    
+                        <div class="col-xs-12">
+                            <p class="desc"><?php echo $event->eventShortDescription ?></p> 
+                            <button class="viewBtn btn btn-link btn-default pull-right" data-event-id="<?php echo $event->eventId; ?>">Open event</button>
+                        </div>
                     </div>
                 </li>
             <?php } ?>
@@ -99,5 +111,6 @@
     
 <script>
     var userId = '<?php print Yii::app()->user->getId(); ?>';
-    var subscribeReqUrl = '<?php print Yii::app()->createUrl('events/events/subscribe') ?>';    
+    var subscribeReqUrl = '<?php print Yii::app()->createUrl('events/events/subscribe') ?>'; 
+    var eventViewReqUrl = '<?php print Yii::app()->createUrl('events/events/view') ?>';
 </script>

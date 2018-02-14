@@ -19,7 +19,8 @@
 <?php $form = $this->beginWidget('CActiveForm', array(
     'id'=>'edit-form',
     'enableAjaxValidation'=>false,
-    'enableClientValidation'=>false
+    'enableClientValidation'=>false,
+    'htmlOptions' => array('enctype' => 'multipart/form-data'),
 )); ?>
 
 <div class="row">
@@ -29,18 +30,6 @@
     </div>
     
     <div class="col-sm-4">
-        <span class="left"><?php echo $form->labelEx($model,'eventShortDescription', array('class'=>'form-signin-heading')); ?></span>
-        <?php echo $form->textField($model,'eventShortDescription',array('id' => 'eventShortDescription', 'class'=>'form-control', 'placeholder' => 'Short Description')); ?>
-    </div>
-
-    <div class="col-sm-4">
-        <span class="left"><?php echo $form->labelEx($model,'eventDescription', array('class'=>'form-signin-heading')); ?></span>
-        <?php echo $form->textField($model,'eventDescription',array('id' => 'eventDescription', 'class'=>'form-control', 'placeholder' => 'Description')); ?>
-    </div>
-</div>
-<div class="top10"></div>
-<div class="row">
-    <div class="col-sm-4">
         <span class="left"><?php echo $form->labelEx($model,'eventStartTime', array('class'=>'form-signin-heading')); ?></span>
         <?php echo $form->textField($model,'eventStartTime',array('id' => 'eventStartTime', 'class'=>'form-control', 'placeholder' => 'Date & Time')); ?>
     </div>
@@ -48,6 +37,39 @@
     <div class="col-sm-4">
         <span class="left"><?php echo $form->labelEx($model,'locationId', array('class'=>'form-signin-heading')); ?></span>
         <?php echo $form->dropDownList($model, 'locationId', $locations, array('class' => 'form-control chosen-select locationId', 'prompt' => '')); ?>
+    </div>
+</div>
+
+<div class="top17"></div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <span class="left"><?php echo $form->labelEx($model,'eventShortDescription', array('class'=>'form-signin-heading')); ?></span>
+        <?php echo $form->textArea($model,'eventShortDescription',array('id' => 'eventShortDescription', 'class'=>'form-control summernote', 'placeholder' => 'Short Description')); ?>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <span class="left"><?php echo $form->labelEx($model,'eventDescription', array('class'=>'form-signin-heading')); ?></span>
+        <?php echo $form->textArea($model,'eventDescription',array('id' => 'eventDescription', 'class'=>'form-control summernote', 'placeholder' => 'Description')); ?>
+    </div>
+</div>
+
+<div class="top10"></div>
+
+<div class="row">
+    <div class="col-sm-4">
+        <span class="left"><label class="form-signin-heading">Current image</label></span>
+        <?php if ($model->eventImage != "") { ?>  
+            <span class="left"><img class="uploadImg" src="/vod/images/events/<?php echo $model->eventImage ?>" alt=""></span>
+        <?php } else {?>
+            <span class="left"><img class="uploadImg" src="/vod/images/no-image.png" alt=""></span>
+        <?php } ?>
+    </div>
+    <div class="col-sm-4">
+        <span class="left"><?php echo $form->labelEx($model,'image', array('class'=>'form-signin-heading')); ?></span>
+        <?php echo $form->fileField($model, 'image'); ?>
     </div>
 </div>
 
@@ -75,6 +97,12 @@
 <script>
     $(document).ready(function() {
         $(".adminLi").addClass("active");
+
+        $('.summernote').summernote({
+            height: 200,                 
+            maxHeight: null,
+            minHeight: null
+        });
 
         initButtons();
     });

@@ -66,6 +66,14 @@ class EventsController extends Controller
         }
         
         try {
+            $locations = Location::model()->findAll();
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        try {
             $count=Event::model()->count($criteria);
             $pages=new CPagination($count);
             $pages->pageSize=10;
@@ -95,6 +103,7 @@ class EventsController extends Controller
         $this->render('list', array(
             'events' => $events,
             'participants' => $participants,
+            'locations' => $locations,
             'pages' => $pages,
         ));
     }
@@ -107,6 +116,14 @@ class EventsController extends Controller
         
         try {
             $users = User::model()->findByPk($id);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        try {
+            $locations = Location::model()->findAll();
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
@@ -152,6 +169,7 @@ class EventsController extends Controller
             'events' => $events,
             'participants' => $participants,
             'pages' => $pages,
+            'locations' => $locations,
         ));
     }
     
@@ -282,6 +300,18 @@ class EventsController extends Controller
         
         if(isset($_POST['Event'])){
             $model->attributes=$_POST['Event'];
+            $model->image = CUploadedFile::getInstance($model,'image');
+            $file = CUploadedFile::getInstance($model,'image');
+            $eventName = preg_replace("/[^a-zA-Z0-9]+/", "", $model->eventName);
+            if ($file != null) {
+                $extension = $model->image->getExtensionName();
+                
+                @unlink(Yii::app()->basePath . '/../images/events/' . $eventName . '.png');
+                @unlink(Yii::app()->basePath . '/../images/events/' . $eventName . '.jpg');
+
+                $model->image->saveAs(Yii::app()->basePath . '/../images/events/' . $eventName . '.' . $extension);
+                $model->eventImage = $eventName . '.' . $extension;
+            }
 
             if ($model->save()) {
                 Yii::trace("Event form sent", "http");

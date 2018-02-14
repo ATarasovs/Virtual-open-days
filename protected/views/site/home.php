@@ -84,7 +84,7 @@
         var count = 1;
         
         <?php foreach ($locations as $location) { ?>
-            locations.push(['<?php echo CJSON::encode($location->locationName); ?>', <?php echo CJSON::encode($location->locationLatitude); ?>, <?php echo CJSON::encode($location->locationLongitude); ?>, count, <?php echo CJSON::encode($location->locationDescription); ?>]);
+            locations.push(['<?php echo CJSON::encode($location->locationName); ?>', <?php echo CJSON::encode($location->locationLatitude); ?>, <?php echo CJSON::encode($location->locationLongitude); ?>, count, <?php echo CJSON::encode($location->locationShortDescription); ?>]);
             count++;
         <?php } ?>
       

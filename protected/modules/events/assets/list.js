@@ -13,6 +13,12 @@ $(document).ready(function() {
 });
 
 function initButtons() {
+    
+    $( ".viewBtn" ).click(function() {
+        var eventId = $(this).attr("data-event-id");
+        location.href = eventViewReqUrl + "?id=" + eventId;
+    });
+    
     $('.event-list > li > time').click(function() {
         if (!$(this).parent().nextAll('.event-details').first().hasClass('disabled')) {
             $(this).parent().nextAll('.event-details').first().height('auto');
@@ -27,7 +33,7 @@ function initButtons() {
             $(this).parent().nextAll('.event-details').first().slideToggle();
         }
     });
-    $('.event-list > li > .info').click(function() {
+    $('.event-list > li > .information').click(function() {
         if (!$(this).parent().nextAll('.event-details').first().hasClass('disabled')) {
             $(this).parent().nextAll('.event-details').first().height('auto');
             $(this).parent().nextAll('.event-details').first().nextAll('.info').first().height('auto');

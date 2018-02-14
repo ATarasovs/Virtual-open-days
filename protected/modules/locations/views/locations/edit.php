@@ -49,7 +49,7 @@
     </div>
 </div>
 
-<div class="top10"></div>
+<div class="top17"></div>
 
 <div class="row">
     <div class="col-sm-12">
@@ -57,8 +57,6 @@
             <?php echo $form->textArea($model,'locationShortDescription',array('id' => 'locationShortDescription', 'class'=>'form-control summernote', 'placeholder' => 'Short Description')); ?>
     </div>
 </div>
-
-<div class="top10"></div>
 
 <div class="row">
     <div class="col-sm-12">
@@ -73,9 +71,9 @@
     <div class="col-sm-4">
         <span class="left"><label class="form-signin-heading">Current image</label></span>
         <?php if ($model->locationImage != "") { ?>  
-            <span class="left"><img class="locationImg" src="/vod/images/buildings/<?php echo $model->locationImage ?>" alt=""></span>
+            <span class="left"><img class="uploadImg" src="/vod/images/buildings/<?php echo $model->locationImage ?>" alt=""></span>
         <?php } else {?>
-            <span class="left"><img class="locationImg" src="/vod/images/no-image.png" alt=""></span>
+            <span class="left"><img class="uploadImg" src="/vod/images/no-image.png" alt=""></span>
         <?php } ?>
     </div>
     <div class="col-sm-4">

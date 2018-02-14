@@ -9,5 +9,5 @@
         $status = "Not started";
     }
 ?>
-    <a href="#" class="list-group-item event" id="<?php echo $event->eventId ?>"><?php echo $event->eventName; ?> (<?php echo $event->eventStartTime; ?>) - <?php echo $status ?></a>
+    <a href="<?php print Yii::app()->createUrl('events/events/view'); ?>?id=<?php echo $event->eventId ?>" class="list-group-item event" id="<?php echo $event->eventId ?>"><?php echo $event->eventName; ?> (<?php echo $event->eventStartTime; ?>) - <?php echo $status ?></a>
 <?php } ?>
