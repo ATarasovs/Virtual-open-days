@@ -188,6 +188,40 @@ class LocationsController extends Controller
             'model' => $model,
         ));
     }   
+    
+    public function actionView() {
+        $locationId = Yii::app()->request->getParam('id');
+        $userId = Yii::app()->user->getId(); 
+        
+        try {
+            $users = User::model()->findByPk($userId);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if (!empty($locationId)) {
+            try{
+                $model = Location::model()->findByPk($locationId, array());
+            }
+            catch(EActiveResourceRequestException_ResponseFalse $ex){
+                Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+                Yii::app()->user->setFlash("danger", $ex->getMessage());
+            }
+        }
+        
+        if($users->isAdmin == "true") {
+            $this->layout = '//layouts/adminmenu';
+        }
+        else {
+            $this->layout ='//layouts/usermenu';
+        }
+
+        $this->render('view', array(
+            'model' => $model,
+        ));
+    }
 
     /**
      * Performs the AJAX validation.
