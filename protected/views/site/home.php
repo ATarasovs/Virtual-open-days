@@ -25,7 +25,7 @@
         <div id="map"></div>    
     </div>
     <div class="col-xs-4">
-        <h3>&nbsp;List of locations</h3>
+        <h3>&nbsp;<i class="fa fa-building-o" aria-hidden="true"></i> List of locations</h3>
         <ul class="list-group locations">
             <?php foreach($locations as $location) { 
                     $eventCount = 0;
@@ -38,7 +38,7 @@
             <?php } ?>
         </ul>
         
-        <h3>&nbsp;List of events <small>(signed up)</small></h3>
+        <h3>&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i> List of events <small>(<i class="fa fa-star" aria-hidden="true"></i> signed up)</small></h3>
         <ul class="list-group events">
             
             <?php $this->renderPartial('_events', array('subscribedEvents'=>$subscribedEvents)); ?>
