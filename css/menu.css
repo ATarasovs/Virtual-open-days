@@ -143,7 +143,7 @@ i, span {
     position: relative;
 }
 
-#sidebar a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+#sidebar a[aria-expanded="false"]::before, #sidebar a[aria-expanded="true"]::before {
     content: '\e259';
     display: block;
     position: absolute;

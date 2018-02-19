@@ -237,12 +237,9 @@ class EventsController extends Controller
             if ($users->isAdmin == "false") {
                 if ($model->isStarted == "false") {
                     Yii::app()->user->setFlash("notice", "Event haven't started yet");
-                    $this->redirect(Yii::app()->createUrl('events/events/listSubscribedEvents'));
                 }
                 if ($model->isFinished == "true") {
                     Yii::app()->user->setFlash("notice", "Event is finished already");
-                    //redirect to the video location of the event
-        //            $this->redirect(Yii::app()->createUrl('events/events/view'));
                 }
             }
         }

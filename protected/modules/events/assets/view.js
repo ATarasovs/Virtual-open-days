@@ -27,6 +27,8 @@ function initButtons() {
         
         $(".startEventBtn").addClass("hide");
         $(".finishEventBtn").removeClass("hide");
+        $(".liveLi").removeClass("hide");
+        $("#infoMessage").empty();
         $("#infoMessage").append("<div class='alert alert-warning alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>The event started successfully.</div>");
     });
     
@@ -38,11 +40,14 @@ function initButtons() {
         }); 
         
         $(".finishEventBtn").addClass("hide");
+        $(".liveLi").addClass("hide");
+        $(".videoLi").removeClass("hide");
+        $("#infoMessage").empty();
         $("#infoMessage").append("<div class='alert alert-warning alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>The event finished successfully.</div>");
     });
 }
 
 function loadMessages() {
-   $(".chat").load(loadMessagesReqUrl + "?id=" + encodeURIComponent(eventId));
+   $(".chatLive").load(loadMessagesReqUrl + "?id=" + encodeURIComponent(eventId));
 }
 setInterval(loadMessages, 5000);

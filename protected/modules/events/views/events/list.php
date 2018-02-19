@@ -36,6 +36,8 @@
                 $hour = $datetime->format('H');
                 $minute = $datetime->format('i');
                 
+                $locationName = "";
+                
                 ?>
                 <li>
                     <time datetime="2016-02-14">

@@ -22,42 +22,111 @@
 
 
 <div class="container">
+    <div class="page-header">
+        <h1><?php echo $model->eventName; ?> view</h1>
+    </div>
+    
     <div class="row">
-        <div class="col-md-7">
-            <?php if ($model->eventVideo != "") { ?>
-                <div class="youtube">
-                    <!--<iframe src="https://www.youtube.com/embed/<?php // echo $model->eventVideo ?>?autoplay=1" class="video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
-                </div>
-            <?php } ?>
-        </div>
-        <div class="col-md-5">
-            <div class="top15"></div>
-            <div class="panel-primary">
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-info">
                 <div class="panel-heading">
-                    <span class="glyphicon glyphicon-comment"></span> Chat
-                </div>
-                <div class="panel-body">
-                    <ul class="chat">
+                    <ul class="nav nav-tabs">
                         
-                        <?php $this->renderPartial('_messages', array('messages'=>$messages)); ?>
-
+                        <li class="active"><a href="#tab1" data-toggle="tab">Information</a></li>
+                        
+                        <?php if ($model->isStarted == "true" && $model->isFinished == "false") { ?>
+                            <li class="liveLi"><a href="#tab2" class="liveTabLi" data-toggle="tab">Live</a></li>
+                        <?php } else {?>
+                            <li class="hide liveLi"><a href="#tab2" class="liveTabLi" data-toggle="tab">Live</a></li>
+                        <?php } ?>
+                            
+                        <?php if ($model->isFinished == "true") {  ?>
+                            <li class="videoLi"><a href="#tab3" class="videoTabLi" data-toggle="tab">Video</a></li>
+                        <?php } else {?>
+                            <li class="hide videoLi"><a href="#tab3" class="videoTabLi" data-toggle="tab">Video</a></li>
+                        <?php } ?>
                     </ul>
                 </div>
-                <div class="panel-footer">
-                    <div class="input-group">
-                        <input id="message" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                        <span class="input-group-btn">
-                            <button class="sendBtn btn btn-warning btn-sm" id="btn-chat">
-                                Send</button>
-                        </span>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        
+                        <div class="tab-pane fade in active" id="tab1">
+                            sdsd
+                        </div>
+                        
+                        <div class="tab-pane fade" id="tab2" class="liveTab">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <?php if ($model->eventVideo != "") { ?>
+                                        <div class="youtube">
+                                            <iframe src="https://www.youtube.com/embed/<?php echo $model->eventVideo ?>?autoplay=0" class="video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="top15"></div>
+                                    <div class="panel-primary">
+                                        <div class="panel-heading">
+                                            <span class="glyphicon glyphicon-comment"></span> Chat
+                                        </div>
+                                        <div class="panel-body">
+                                            <ul class="chat chatLive">
+                                                <?php $this->renderPartial('_messages', array('messages'=>$messages)); ?>
+                                            </ul>
+                                        </div>
+                                        <div class="panel-footer">
+                                            <div class="input-group">
+                                                <input id="message" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                                                <span class="input-group-btn">
+                                                    <button class="sendBtn btn btn-warning btn-sm" id="btn-chat">
+                                                        Send</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="tab3">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <?php if ($model->eventVideo != "") { ?>
+                                        <div class="youtube">
+                                            <iframe src="https://www.youtube.com/embed/<?php echo $model->eventVideo ?>?autoplay=0" class="video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="top15"></div>
+                                    <div class="panel-primary">
+                                        <div class="panel-heading">
+                                            <span class="glyphicon glyphicon-comment"></span> Chat
+                                        </div>
+                                        <div class="panel-body">
+                                            <ul class="chat">
+                                                <?php $this->renderPartial('_messages', array('messages'=>$messages)); ?>
+                                            </ul>
+                                        </div>
+                                        <div class="panel-footer">
+                                            <div class="input-group">
+                                                <input id="message" type="text" class="form-control input-sm disabled" placeholder="Type your message here..." />
+                                                <span class="input-group-btn">
+                                                    <button class="sendBtn btn btn-warning btn-sm disabled" id="btn-chat">
+                                                        Send</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="top30"></div>
-    
     <div class="row">
         <div class="col-xs-12">
             <?php if($users->isAdmin == "true" && $model->isStarted == "false") { ?>
