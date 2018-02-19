@@ -47,6 +47,10 @@
         <span class="left"><?php echo $form->labelEx($model,'eventVideo', array('class'=>'form-signin-heading')); ?></span>
         <?php echo $form->textField($model,'eventVideo',array('id' => 'eventVideo', 'class'=>'form-control', 'placeholder' => 'Name')); ?>
     </div>
+    <div class="col-sm-4">
+        <span class="left"><?php echo $form->labelEx($model,'eventLead', array('class'=>'form-signin-heading')); ?></span>
+        <?php echo $form->textField($model,'eventLead',array('id' => 'eventLead', 'class'=>'form-control', 'placeholder' => 'Name')); ?>
+    </div>
 </div>
 
 <div class="top17"></div>

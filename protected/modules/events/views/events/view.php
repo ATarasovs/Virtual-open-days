@@ -21,11 +21,8 @@
 <!--*************************************************************-->
 
 
-<div class="container">
-    <div class="page-header">
-        <h1><?php echo $model->eventName; ?> view</h1>
-    </div>
-    
+<div class="container">    
+    <h2><?php echo $model->eventName; ?></h2>
     <div class="row">
         <div class="col-md-12">
             <div class="panel with-nav-tabs panel-info">
@@ -51,7 +48,45 @@
                     <div class="tab-content">
                         
                         <div class="tab-pane fade in active" id="tab1">
-                            sdsd
+                            <div class="top15"></div>
+                            <div class="row">
+                                <div class="col-md-offset-1 col-xs-2">
+                                    <!--<div class="thumbnail">-->
+                                        <?php if ($model->eventImage != "") { ?>  
+                                            <img src="/vod/images/events/<?php echo $model->eventImage ?>" alt="" style="width:100%">
+                                        <?php } else {?>
+                                            <img src="/vod/images/no-image.png" alt="" style="width:100%">
+                                    <!--</div>-->
+                                    <?php } ?>
+                                </div>
+                                <div class="col-md-offset-1 col-xs-7">
+                                    <?php echo $model->eventShortDescription ?>
+                                </div>
+                            </div>
+                            <div class="top15"></div>
+                            <div class="row">
+                                <div class="col-md-offset-1 col-xs-10">
+                                    <h3>Full description</h3>
+                                    <?php echo $model->eventDescription ?>
+                                </div>
+                            </div>
+                            <div class="top15"></div>
+                            <div class="row">
+                                <div class="col-md-offset-1 col-xs-10">
+                                    <?php 
+                                        $datetime = new DateTime($model->eventStartTime);
+                                        $year = $datetime->format('Y');
+                                        $month = $datetime->format('m');
+                                        $monthObj   = DateTime::createFromFormat('!m', $month);
+                                        $monthName = $monthObj->format('F');
+//                                        $monthNameShort = substr($monthName, 0, 3); // March
+                                        $day = $datetime->format('d');
+                                        $hour = $datetime->format('H');
+                                        $minute = $datetime->format('i');
+                                    ?>
+                                    <b>The event will be covered by <?php echo $model->eventLead ?> on <?php echo $day . " " . $monthName . " " . $year . " " . $hour . ":" . $minute?></b>
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="tab-pane fade" id="tab2" class="liveTab">
