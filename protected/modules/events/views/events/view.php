@@ -91,14 +91,18 @@
                         
                         <div class="tab-pane fade" id="tab2" class="liveTab">
                             <div class="row">
-                                <div class="col-md-7">
-                                    <?php if ($model->eventVideo != "") { ?>
+                                <div class="col-md-7 leftCol">
+                                    <?php if ($model->eventVideo != "") {?>
                                         <div class="youtube">
                                             <iframe src="https://www.youtube.com/embed/<?php echo $model->eventVideo ?>?autoplay=0" class="video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                         </div>
-                                    <?php } ?>
+                                        <?php if ($users->isAdmin == "true") {?> 
+                                            <div class="top15"></div>
+                                            <button type="button" class="btn btn-success btn-block hideVideoBtn">Hide video</button>
+                                        <?php } 
+                                    } ?>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-5 rightCol">
                                     <div class="top15"></div>
                                     <div class="panel-primary">
                                         <div class="panel-heading">
@@ -119,6 +123,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <?php if ($users->isAdmin == "true") {?> 
+                                        <div class="top15"></div>
+                                        <button type="button" class="btn btn-success btn-block showVideoBtn hide">Show video</button>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

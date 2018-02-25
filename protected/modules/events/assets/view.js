@@ -10,6 +10,23 @@ function initButtons() {
         sendMessage();
     });
     
+    $( ".hideVideoBtn" ).click(function() {
+        $(".leftCol").addClass("hide");
+        $(".hideVideoBtn").addClass("hide");
+        $(".showVideoBtn").removeClass("hide");
+        $(".rightCol").removeClass("col-md-5");
+        $(".rightCol").addClass("col-md-offset-3 col-md-6"); 
+        $('iframe').attr('src', $('iframe').attr('src'));
+    });
+    
+    $( ".showVideoBtn" ).click(function() {
+        $(".leftCol").removeClass("hide");
+        $(".hideVideoBtn").removeClass("hide");
+        $(".showVideoBtn").addClass("hide");
+        $(".rightCol").addClass("col-md-5");
+        $(".rightCol").removeClass("col-md-offset-3 col-md-6");  
+    });
+    
     $( ".startEventBtn" ).click(function() {
         $.ajax({
             method: "POST",
@@ -48,7 +65,11 @@ function initKeyPress() {
 }
 
 function loadMessages() {
-   $(".chatLive").load(loadMessagesReqUrl + "?id=" + encodeURIComponent(eventId));
+    
+//    var scroll = $(".chat").scrollTop();
+//    console.log(scroll);
+//    $('.panel-body').scrollTop($('.chat')[0].scrollHeight);
+    $(".chatLive").load(loadMessagesReqUrl + "?id=" + encodeURIComponent(eventId));
 }
 setInterval(loadMessages, 5000);
 
