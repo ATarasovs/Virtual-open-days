@@ -9,14 +9,16 @@ function initButtons() {
     $( ".sendBtn" ).click(function() {
         var message = $("#message").val();
         
-        $.ajax({
-            method: "POST",
-            url: sendMessageReqUrl, // here your URL address
-            data: { message: message,
-                    eventId: eventId}
-          }); 
-        $("#message").val("");
-        loadMessages();
+        if ($.trim(message).length > 0) {
+            $.ajax({
+                method: "POST",
+                url: sendMessageReqUrl, // here your URL address
+                data: { message: message,
+                        eventId: eventId}
+              }); 
+            $("#message").val("");
+            loadMessages();
+        }
     });
     
     $( ".startEventBtn" ).click(function() {
@@ -53,14 +55,17 @@ function initKeyPress() {
         if(e.which == 13) {
             var message = $("#message").val();
         
-            $.ajax({
-                method: "POST",
-                url: sendMessageReqUrl, // here your URL address
-                data: { message: message,
-                        eventId: eventId}
-              }); 
-            $("#message").val("");
-            loadMessages();
+        
+            if ($.trim(message).length > 0) {
+                $.ajax({
+                    method: "POST",
+                    url: sendMessageReqUrl, // here your URL address
+                    data: { message: message,
+                            eventId: eventId}
+                  }); 
+                $("#message").val("");
+                loadMessages();
+            }
         }
     });
 }
