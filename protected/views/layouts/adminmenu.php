@@ -84,7 +84,7 @@
                         <ul class="collapse list-unstyled" id="adminSubmenu">
                             <li><a href="<?php print Yii::app()->createUrl('locations/locations/admin'); ?>">Buildings</a></li>
                             <li><a href="<?php print Yii::app()->createUrl('events/events/admin'); ?>">Events</a></li>
-                            <li><a href="#">Something</a></li>
+                            <li><a href="<?php print Yii::app()->createUrl('media/media/admin'); ?>">Media</a></li>
                         </ul>
                     </li>
                 </ul>
