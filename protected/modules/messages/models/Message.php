@@ -7,7 +7,8 @@
  * @property integer $id
  * @property string $login
  * @property string $author
- * @property string $messages
+ * @property string $message
+ * @property string $time
  * @property string $chatId
  */
 class Message extends CActiveRecord
@@ -31,7 +32,7 @@ class Message extends CActiveRecord
 			array('login', 'required'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-                        array('id, login, author, message, evntId', 'safe'),
+                        array('id, login, author, message, eventId, time', 'safe'),
 //			array('eventId, eventName, eventDescription, locationId, eventStartTime, isStarted, isFinished', 'safe', 'on'=>'search'),
                     
 //                        array('eventName', 'unique'),
@@ -60,6 +61,7 @@ class Message extends CActiveRecord
                         'author' => 'Author',
 			'message' => 'Message',
                         'eventId' => 'Event ID',
+                        'time' => 'Time',
 		);
 	}
 
@@ -86,6 +88,7 @@ class Message extends CActiveRecord
                 $criteria->compare('author',$this->author, true);
 		$criteria->compare('message',$this->message, true);
                 $criteria->compare('eventId',$this->eventId, true);
+                $criteria->compare('time',$this->time, true);
                 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

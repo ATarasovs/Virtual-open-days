@@ -1,4 +1,7 @@
-<?php foreach($messages as $message) { 
+<?php foreach($messages as $message) {
+    $datetime = new DateTime($message->time);
+    $timeSent = $datetime->format('d.m.Y H:i:s');
+
     if ($message->login == Yii::app()->user->getName()) { ?>
         <li class="message right clearfix" id="myMessage">
             <span class="chat-img pull-right">
@@ -7,7 +10,7 @@
             <div class="chat-body clearfix">
                 <div class="header">
                     <small class="pull-left text-muted">
-                        <span class="glyphicon glyphicon-time"></span>12 mins ago
+                        <span class="glyphicon glyphicon-time"></span><?php echo $timeSent; ?>
                     </small>
                     <strong class="pull-right primary-font"><?php echo $message->author; ?></strong> <br/>
                 </div>
@@ -26,7 +29,7 @@
                 <div class="header">
                     <strong class="primary-font"><?php echo $message->author; ?></strong> 
                     <small class="pull-right text-muted">
-                        <span class="glyphicon glyphicon-time"></span>12 mins ago
+                        <span class="glyphicon glyphicon-time"></span><?php echo $timeSent ?>
                     </small>
                 </div>
                 <p>
