@@ -7,18 +7,7 @@ $(document).ready(function() {
 
 function initButtons() {
     $( ".sendBtn" ).click(function() {
-        var message = $("#message").val();
-        
-        if ($.trim(message).length > 0) {
-            $.ajax({
-                method: "POST",
-                url: sendMessageReqUrl, // here your URL address
-                data: { message: message,
-                        eventId: eventId}
-              }); 
-            $("#message").val("");
-            loadMessages();
-        }
+        sendMessage();
     });
     
     $( ".startEventBtn" ).click(function() {
@@ -53,19 +42,7 @@ function initButtons() {
 function initKeyPress() {
     $("#message").keypress(function(e) {
         if(e.which == 13) {
-            var message = $("#message").val();
-        
-        
-            if ($.trim(message).length > 0) {
-                $.ajax({
-                    method: "POST",
-                    url: sendMessageReqUrl, // here your URL address
-                    data: { message: message,
-                            eventId: eventId}
-                  }); 
-                $("#message").val("");
-                loadMessages();
-            }
+            sendMessage();
         }
     });
 }
@@ -74,3 +51,18 @@ function loadMessages() {
    $(".chatLive").load(loadMessagesReqUrl + "?id=" + encodeURIComponent(eventId));
 }
 setInterval(loadMessages, 5000);
+
+function sendMessage() {
+    var message = $("#message").val();
+        
+    if ($.trim(message).length > 0) {
+        $.ajax({
+            method: "POST",
+            url: sendMessageReqUrl, // here your URL address
+            data: { message: message,
+                    eventId: eventId}
+          }); 
+        $("#message").val("");
+        loadMessages();
+    }
+}
