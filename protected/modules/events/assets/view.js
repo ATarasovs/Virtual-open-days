@@ -2,6 +2,7 @@ $(document).ready(function() {
     $(".eventsLi").addClass("active");
     
     initButtons();
+    initKeyPress();
 });
 
 function initButtons() {
@@ -44,6 +45,23 @@ function initButtons() {
         $(".videoLi").removeClass("hide");
         $("#infoMessage").empty();
         $("#infoMessage").append("<div class='alert alert-warning alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>The event finished successfully.</div>");
+    });
+}
+
+function initKeyPress() {
+    $("#message").keypress(function(e) {
+        if(e.which == 13) {
+            var message = $("#message").val();
+        
+            $.ajax({
+                method: "POST",
+                url: sendMessageReqUrl, // here your URL address
+                data: { message: message,
+                        eventId: eventId}
+              }); 
+            $("#message").val("");
+            loadMessages();
+        }
     });
 }
 
