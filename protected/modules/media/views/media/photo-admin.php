@@ -21,7 +21,7 @@
 <!--*************************************************************-->
 <div class="row">
     <?php foreach ($photos as $photo) { ?>
-        <div class="col-lg-3 col-sm-4 col-xs-6"><a photo-id="<?php echo $photo->mediaId ?>" href="javascript:;"><img class="thumbnail img-responsive" src="/vod/images/media/photos/<?php echo $photo->locationId ?>/<?php echo $photo->mediaPath ?>"></a></div>
+        <div class="col-lg-3 col-sm-4 col-xs-6"><a data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $photo->locationId ?>" href="javascript:;"><img class="thumbnail img-responsive" src="/vod/images/media/photos/<?php echo $photo->locationId ?>/<?php echo $photo->mediaPath ?>"></a></div>
     <?php } ?>
 </div>
 
@@ -38,7 +38,7 @@
 		
             </div>
             <div class="modal-footer">
-                <button class="removeBtn btn btn-danger">Delete</button>
+                <button class="deleteBtn btn btn-danger">Delete</button>
                 <button class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -49,4 +49,5 @@
     var locationId = '<?php print Yii::app()->request->getParam('id') ?>';
 
     var uploadPhotoReqUrl = '<?php print Yii::app()->createUrl('media/media/uploadphoto') ?>';
+    var deletePhotoReqUrl = '<?php print Yii::app()->createUrl('media/media/deletephoto') ?>';
 </script>

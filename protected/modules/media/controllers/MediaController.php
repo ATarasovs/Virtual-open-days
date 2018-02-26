@@ -200,19 +200,34 @@ class MediaController extends Controller
     
         }
         
-        
         if($users->isAdmin == "true") {
             $this->layout = '//layouts/adminmenu';
         }
         else {
             $this->layout ='//layouts/usermenu';
-        }
-        
+        } 
         
         $this->render('photo-upload', array(
 //            'locations' => $locations,
             'model' => $model,
         ));
+    }
+    
+    public function actionDeletePhoto() {
+        $userId = Yii::app()->user->getId(); 
+        $locationId = Yii::app()->request->getParam('locationid');
+        $photoId = Yii::app()->request->getParam('id');
+        $photoTitle = Yii::app()->request->getParam('title');
+        $photoFolder = Yii::app()->request->getParam('folder');
+        
+        Yii::trace("###### folder" . $photoFolder, "http");
+        Yii::trace("###### title" . $photoTitle, "http");
+        
+        if (Media::model()->deleteAll("mediaId ='" . $photoId . "'")) {
+            @unlink(Yii::app()->basePath . '/../images/media/photos/' . $photoFolder . '/'. $photoTitle);
+            Yii::trace("Photo was successfully removed", "http");
+            $this->redirect(array('media/photosadmin?id=' . $locationId));
+        }
     }
 
 
