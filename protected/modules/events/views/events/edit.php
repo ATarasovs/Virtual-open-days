@@ -1,3 +1,13 @@
+<?php 
+    $this->widget('application.components.BreadCrumb', array(
+        'crumbs' => array(
+            array('name' => 'Home', 'url' => array('/site/home')),
+            array('name' => 'Events list', 'url' => array('/events/events/admin')),
+            array('name' => 'Event edit <small>(' . $model->eventName . ')</small>'),
+        ),
+    )); 
+?>
+
 <!--*************************************************************-->
 <div class="row">
     <div class="col-xs-12">
@@ -16,6 +26,7 @@
 </div>
 <!--*************************************************************-->
 
+<h2>Event</h2>
 <?php $form = $this->beginWidget('CActiveForm', array(
     'id'=>'edit-form',
     'enableAjaxValidation'=>false,

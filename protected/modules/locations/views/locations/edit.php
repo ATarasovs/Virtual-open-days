@@ -1,3 +1,13 @@
+<?php 
+    $this->widget('application.components.BreadCrumb', array(
+        'crumbs' => array(
+            array('name' => 'Home', 'url' => array('/site/home')),
+            array('name' => 'Locations list', 'url' => array('/locations/locations/admin')),
+            array('name' => 'Location edit <small>(' . $model->locationName . ')</small>'),
+        ),
+    )); 
+?>
+
 <!--*************************************************************-->
 <div class="row">
     <div class="col-xs-12">

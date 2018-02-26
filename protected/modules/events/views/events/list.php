@@ -1,7 +1,13 @@
 <?php 
     Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.events.assets').'\list.js'), CClientScript::POS_HEAD);
-?>
 
+    $this->widget('application.components.BreadCrumb', array(
+        'crumbs' => array(
+            array('name' => 'Home', 'url' => array('/site/home')),
+            array('name' => 'Events list'),
+        ),
+    ));
+?>
 <!--*************************************************************-->
 <div class="row">
     <div class="col-xs-12">

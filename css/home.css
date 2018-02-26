@@ -757,16 +757,15 @@ Breadcrumb CSS
 */
 
 ul.breadcrumb {
-    padding: 10px 16px;
     list-style: none;
-    background-color: #eee;
+    background-color: #FAFAFA;
 }
 ul.breadcrumb li {
     display: inline;
-    font-size: 18px;
+    font-size: 17px;
 }
 ul.breadcrumb li+li:before {
-    padding: 8px;
+    /*padding: 8px;*/
     color: black;
     content: "/\00a0";
 }

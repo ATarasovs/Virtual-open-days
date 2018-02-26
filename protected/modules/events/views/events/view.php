@@ -2,6 +2,16 @@
     Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.events.assets').'\view.js'), CClientScript::POS_HEAD);
 ?>
 
+<?php 
+    $this->widget('application.components.BreadCrumb', array(
+        'crumbs' => array(
+            array('name' => 'Home', 'url' => array('/site/home')),
+            array('name' => 'Events list', 'url' => array('/events/events/listallevents')),
+            array('name' => 'Event view <small>(' . $model->eventName . ')</small>'),
+        ),
+    )); 
+?>
+
 <!--*************************************************************-->
 <div class="row">
     <div class="col-xs-12">
@@ -21,7 +31,7 @@
 <!--*************************************************************-->
 
 
-<div class="container">    
+<div class="container"> 
     <h2><?php echo $model->eventName; ?></h2>
     <div class="row">
         <div class="col-md-12">

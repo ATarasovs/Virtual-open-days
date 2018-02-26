@@ -2,6 +2,15 @@
     Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.locations.assets').'\admin.js'), CClientScript::POS_HEAD);
 ?>
 
+<?php 
+    $this->widget('application.components.BreadCrumb', array(
+        'crumbs' => array(
+            array('name' => 'Home', 'url' => array('/site/home')),
+            array('name' => 'Locations list'),
+        ),
+    ));
+?>
+
 <!--*************************************************************-->
 <div class="row">
     <div class="col-xs-12">
