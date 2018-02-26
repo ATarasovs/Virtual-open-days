@@ -152,14 +152,6 @@ class MediaController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-//        try{
-//            $locations = Location::model()->findByPk($locationId, array());
-//        }
-//        catch(EActiveResourceRequestException_ResponseFalse $ex){
-//            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
-//            Yii::app()->user->setFlash("danger", $ex->getMessage());
-//        }
-        
         $model = new Media();
         
         $this->performAjaxValidation($model);
@@ -168,8 +160,6 @@ class MediaController extends Controller
             $model->image = CUploadedFile::getInstance($model,'image');
             $file = CUploadedFile::getInstance($model,'image');
             $folderName = $locationId;
-//            $folderName = preg_replace("/[^a-zA-Z0-9]+/", "", $locations->locationName);
-            
             $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $charactersLength = strlen($characters);
             $fileName = '';
@@ -218,7 +208,6 @@ class MediaController extends Controller
         } 
         
         $this->render('photo-upload', array(
-//            'locations' => $locations,
             'model' => $model,
         ));
     }
