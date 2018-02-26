@@ -107,14 +107,112 @@ class MediaController extends Controller
         ));
     } 
     
-    public function actionPhotos() {
+    public function actionPhotosAdmin() {
         
+        $id = Yii::app()->user->getId();
+        $locationId = Yii::app()->request->getParam('id');
+        
+        $criteria = new CDbCriteria();
+        
+        try {
+            $users = User::model()->findByPk($id);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        $criteria->addCondition("mediaType = 'photo'");
+        $criteria->addCondition("locationId = '$locationId'");
+        
+        $photos = Media::model()->findAll($criteria);
+        
+        if($users->isAdmin == "true") {
+            $this->layout = '//layouts/adminmenu';
+        }
+        else {
+            $this->layout ='//layouts/usermenu';
+        }
+        
+        $this->render('photo-admin', array(
+            'photos' => $photos,
+        ));
     }
     
     public function actionUploadPhoto() {
-        if (!file_exists('path/to/directory')) {
-            mkdir('path/to/directory', 0777, true);
+        
+        $locationId = Yii::app()->request->getParam('id');
+        $id = Yii::app()->user->getId();
+        
+        try {
+            $users = User::model()->findByPk($id);
         }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+//        try{
+//            $locations = Location::model()->findByPk($locationId, array());
+//        }
+//        catch(EActiveResourceRequestException_ResponseFalse $ex){
+//            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+//            Yii::app()->user->setFlash("danger", $ex->getMessage());
+//        }
+        
+        $model = new Media();
+        
+        $this->performAjaxValidation($model);
+        
+        if(isset($_POST['Media'])){
+            $model->image = CUploadedFile::getInstance($model,'image');
+            $file = CUploadedFile::getInstance($model,'image');
+            $folderName = $locationId;
+//            $folderName = preg_replace("/[^a-zA-Z0-9]+/", "", $locations->locationName);
+            
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $fileName = '';
+            for ($i = 0; $i < 10; $i++) {
+                $fileName .= $characters[rand(0, $charactersLength - 1)];
+            }
+            
+            if ($file != null) {
+                $extension = $model->image->getExtensionName();
+                
+                if (!file_exists(Yii::app()->basePath . '/../images/media/photos/' . $folderName)) {
+                    mkdir(Yii::app()->basePath . '/../images/media/photos/' . $folderName, 0777, true);
+                }
+                
+                @unlink(Yii::app()->basePath . '/../images/media/photos/' . $folderName . '/' . $fileName . '.png');
+                @unlink(Yii::app()->basePath . '/../images/media/photos/' . $folderName . '/' . $fileName . '.jpg');
+
+                $model->image->saveAs(Yii::app()->basePath . '/../images/media/photos/' . $folderName . '/' . $fileName . '.' . $extension);
+                $model->mediaPath = $fileName . '.' . $extension;
+                $model->mediaType = "photo";
+                $model->locationId = $locationId;
+            }
+
+            if ($model->save()) {
+                Yii::trace("Media form sent", "http");
+                $this->redirect(array('media/photosadmin'));
+            }
+    
+        }
+        
+        
+        if($users->isAdmin == "true") {
+            $this->layout = '//layouts/adminmenu';
+        }
+        else {
+            $this->layout ='//layouts/usermenu';
+        }
+        
+        
+        $this->render('photo-upload', array(
+//            'locations' => $locations,
+            'model' => $model,
+        ));
     }
 
 

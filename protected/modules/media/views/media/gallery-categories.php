@@ -4,7 +4,7 @@
     ?>
         <div class="col-sm-4">
             <div class="thumbnail">
-                <a href="<?php print Yii::app()->createUrl('media/media/photos?id=' . $location->locationId); ?>">
+                <a href="<?php print Yii::app()->createUrl('media/media/photosadmin?id=' . $location->locationId); ?>">
                     <?php if ($location->locationImage != "") { ?>  
                         <img src="/vod/images/buildings/<?php echo $location->locationImage ?>" alt="" style="width:100%;">
                     <?php } else {?>
