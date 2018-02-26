@@ -180,25 +180,34 @@ class MediaController extends Controller
             if ($file != null) {
                 $extension = $model->image->getExtensionName();
                 
-                if (!file_exists(Yii::app()->basePath . '/../images/media/photos/' . $folderName)) {
-                    mkdir(Yii::app()->basePath . '/../images/media/photos/' . $folderName, 0777, true);
+                if ($extension == "png" || $extension == "jpg") {
+                    if (!file_exists(Yii::app()->basePath . '/../images/media/photos/' . $folderName)) {
+                        mkdir(Yii::app()->basePath . '/../images/media/photos/' . $folderName, 0777, true);
+                    }
+
+                    @unlink(Yii::app()->basePath . '/../images/media/photos/' . $folderName . '/' . $fileName . '.png');
+                    @unlink(Yii::app()->basePath . '/../images/media/photos/' . $folderName . '/' . $fileName . '.jpg');
+
+                    $model->image->saveAs(Yii::app()->basePath . '/../images/media/photos/' . $folderName . '/' . $fileName . '.' . $extension);
+                    $model->mediaPath = $fileName . '.' . $extension;
+                    $model->mediaType = "photo";
+                    $model->locationId = $locationId;
+
+                    if ($model->save()) {
+                        Yii::trace("Media form sent", "http");
+                        Yii::app()->user->setFlash("success", "Photo was successfully added");
+                        $this->redirect(array('media/photosadmin?id=' . $locationId));
+                    }
                 }
-                
-                @unlink(Yii::app()->basePath . '/../images/media/photos/' . $folderName . '/' . $fileName . '.png');
-                @unlink(Yii::app()->basePath . '/../images/media/photos/' . $folderName . '/' . $fileName . '.jpg');
-
-                $model->image->saveAs(Yii::app()->basePath . '/../images/media/photos/' . $folderName . '/' . $fileName . '.' . $extension);
-                $model->mediaPath = $fileName . '.' . $extension;
-                $model->mediaType = "photo";
-                $model->locationId = $locationId;
+                else {
+                    Yii::app()->user->setFlash("danger", "The uploaded file is not an image");
+                    $this->redirect(array('media/uploadphoto?id=' . $locationId));
+                }
             }
-
-            if ($model->save()) {
-                Yii::trace("Media form sent", "http");
-                Yii::app()->user->setFlash("success", "Photo was successfully added");
-                $this->redirect(array('media/photosadmin?id=' . $locationId));
+            else {
+                Yii::app()->user->setFlash("danger", "There was no file selected to upload");
+                $this->redirect(array('media/uploadphoto?id=' . $locationId));
             }
-    
         }
         
         if($users->isAdmin == "true") {
