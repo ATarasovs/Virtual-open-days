@@ -25,7 +25,7 @@
         <div id="map"></div>    
     </div>
     <div class="col-xs-4">
-        <h3>&nbsp;<i class="fa fa-building-o" aria-hidden="true"></i> List of locations</h3>
+        <h3>&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i> List of locations</h3>
         <ul class="list-group locations">
             <?php foreach($locations as $location) { 
                     $eventCount = 0;
