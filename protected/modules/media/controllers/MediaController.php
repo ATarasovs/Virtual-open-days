@@ -195,7 +195,7 @@ class MediaController extends Controller
 
             if ($model->save()) {
                 Yii::trace("Media form sent", "http");
-                $this->redirect(array('media/photosadmin'));
+                $this->redirect(array('media/photosadmin?id=' . $locationId));
             }
     
         }
