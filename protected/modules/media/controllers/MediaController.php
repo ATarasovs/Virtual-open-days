@@ -195,6 +195,7 @@ class MediaController extends Controller
 
             if ($model->save()) {
                 Yii::trace("Media form sent", "http");
+                Yii::app()->user->setFlash("success", "Photo was successfully added");
                 $this->redirect(array('media/photosadmin?id=' . $locationId));
             }
     
@@ -214,18 +215,15 @@ class MediaController extends Controller
     }
     
     public function actionDeletePhoto() {
-        $userId = Yii::app()->user->getId(); 
         $locationId = Yii::app()->request->getParam('locationid');
         $photoId = Yii::app()->request->getParam('id');
         $photoTitle = Yii::app()->request->getParam('title');
         $photoFolder = Yii::app()->request->getParam('folder');
         
-        Yii::trace("###### folder" . $photoFolder, "http");
-        Yii::trace("###### title" . $photoTitle, "http");
-        
         if (Media::model()->deleteAll("mediaId ='" . $photoId . "'")) {
             @unlink(Yii::app()->basePath . '/../images/media/photos/' . $photoFolder . '/'. $photoTitle);
             Yii::trace("Photo was successfully removed", "http");
+            Yii::app()->user->setFlash("success", "Photo was successfully removed");
             $this->redirect(array('media/photosadmin?id=' . $locationId));
         }
     }
