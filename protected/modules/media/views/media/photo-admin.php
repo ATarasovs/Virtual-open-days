@@ -21,16 +21,32 @@
 <!--*************************************************************-->
 <div class="row">
     <?php foreach ($photos as $photo) { ?>
-        <div class="col-sm-4">
-            <span class="left"><img class="img" src="/vod/images/media/photos/<?php echo $photo->locationId ?>/<?php echo $photo->mediaPath ?>" alt=""></span>
-        </div>
+        <div class="col-lg-3 col-sm-4 col-xs-6"><a photo-id="<?php echo $photo->mediaId ?>" href="javascript:;"><img class="thumbnail img-responsive" src="/vod/images/media/photos/<?php echo $photo->locationId ?>/<?php echo $photo->mediaPath ?>"></a></div>
     <?php } ?>
 </div>
 
 <button class="uploadBtn btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> Upload</button>
 
+<div tabindex="-1" class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+		<button class="close" type="button" data-dismiss="modal">×</button>
+                <!--<h3 class="modal-title">Heading</h3>-->
+            </div>
+            <div class="modal-body">
+		
+            </div>
+            <div class="modal-footer">
+                <button class="removeBtn btn btn-danger">Delete</button>
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var locationId = '<?php print Yii::app()->request->getParam('id') ?>';
-    
-    uploadPhotoReqUrl = '<?php print Yii::app()->createUrl('media/media/uploadphoto') ?>';
+
+    var uploadPhotoReqUrl = '<?php print Yii::app()->createUrl('media/media/uploadphoto') ?>';
 </script>
