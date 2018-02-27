@@ -39,7 +39,7 @@ class Event extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
                         array('eventId, eventName, eventShortDescription, eventDescription, locationId, eventStartTime, isStarted, isFinished, eventImage, eventLead, eventVideo', 'safe'),
-			array('image', 'file', 'types'=>'jpg, png', 'safe' => false, 'allowEmpty' => true),
+			array('image', 'file', 'types'=>'jpg, png, jpeg, bmp, tiff, gif', 'safe' => false, 'allowEmpty' => true),
 //			array('eventId, eventName, eventDescription, locationId, eventStartTime, isStarted, isFinished', 'safe', 'on'=>'search'),
                     
 //                        array('eventName', 'unique'),

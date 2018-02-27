@@ -314,6 +314,10 @@ class EventsController extends Controller
                 
                 @unlink(Yii::app()->basePath . '/../images/events/' . $eventName . '.png');
                 @unlink(Yii::app()->basePath . '/../images/events/' . $eventName . '.jpg');
+                @unlink(Yii::app()->basePath . '/../images/events/' . $eventName . '.jpeg');
+                @unlink(Yii::app()->basePath . '/../images/events/' . $eventName . '.bmp');
+                @unlink(Yii::app()->basePath . '/../images/events/' . $eventName . '.tiff');
+                @unlink(Yii::app()->basePath . '/../images/events/' . $eventName . '.gif');
 
                 $model->image->saveAs(Yii::app()->basePath . '/../images/events/' . $eventName . '.' . $extension);
                 $model->eventImage = $eventName . '.' . $extension;

@@ -165,6 +165,10 @@ class LocationsController extends Controller
                 
                 @unlink(Yii::app()->basePath . '/../images/buildings/' . $locationName . '.png');
                 @unlink(Yii::app()->basePath . '/../images/buildings/' . $locationName . '.jpg');
+                @unlink(Yii::app()->basePath . '/../images/buildings/' . $locationName . '.jpeg');
+                @unlink(Yii::app()->basePath . '/../images/buildings/' . $locationName . '.bmp');
+                @unlink(Yii::app()->basePath . '/../images/buildings/' . $locationName . '.tiff');
+                @unlink(Yii::app()->basePath . '/../images/buildings/' . $locationName . '.gif');
 
                 $model->image->saveAs(Yii::app()->basePath . '/../images/buildings/' . $locationName . '.' . $extension);
                 $model->locationImage = $locationName . '.' . $extension;

@@ -36,7 +36,7 @@ class Location extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('locationId, locationName, locationDescription, locationShortDescription, locationDepartment, locationLatitude, locationLongitude, locationImage', 'safe'),
-			array('image', 'file', 'types'=>'jpg, png', 'safe' => false, 'allowEmpty' => true),
+			array('image', 'file', 'types'=>'jpg, png, jpeg, bmp, tiff, gif', 'safe' => false, 'allowEmpty' => true),
 //			array('locationId, locationName, locationDescription, locationShortDescription, locationDepartment locationLatitude, locationLongitude, locaitonImage', 'safe', 'on'=>'search'),
                 );
 	}
