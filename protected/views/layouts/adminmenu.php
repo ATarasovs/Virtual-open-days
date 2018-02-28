@@ -107,7 +107,7 @@
                             </a>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="<?php print Yii::app()->createUrl('site/home'); ?>">Home</a></li>
-                                <li><a href="#">Profile <small>(<?php echo Yii::app()->user->getName(); ?>)</small></a></li>
+                                <li><a href="<?php print Yii::app()->createUrl('users/users/view?id=' . Yii::app()->user->getId()); ?>">Profile <small>(<?php echo Yii::app()->user->getName(); ?>)</small></a></li>
                                 <li><?php echo CHtml::link('Logout',array('/site/logout')); ?></li>
                             </ul>
                         </div>
