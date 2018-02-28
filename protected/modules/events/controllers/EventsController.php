@@ -312,6 +312,10 @@ class EventsController extends Controller
             if ($file != null) {
                 $extension = $model->image->getExtensionName();
                 
+                if (!file_exists(Yii::app()->basePath . '/../images/events')) {
+                    mkdir(Yii::app()->basePath . '/../images/events', 0777, true);
+                }
+                    
                 @unlink(Yii::app()->basePath . '/../images/events/' . $eventName . '.png');
                 @unlink(Yii::app()->basePath . '/../images/events/' . $eventName . '.jpg');
                 @unlink(Yii::app()->basePath . '/../images/events/' . $eventName . '.jpeg');

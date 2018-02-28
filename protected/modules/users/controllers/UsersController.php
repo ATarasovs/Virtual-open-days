@@ -123,6 +123,10 @@ class UsersController extends Controller
             if ($file != null) {
                 $extension = $model->image->getExtensionName();
                 
+                if (!file_exists(Yii::app()->basePath . '/../images/users')) {
+                    mkdir(Yii::app()->basePath . '/../images/users', 0777, true);
+                }
+                
                 @unlink(Yii::app()->basePath . '/../images/users/' . $userImageName . '.png');
                 @unlink(Yii::app()->basePath . '/../images/users/' . $userImageName . '.jpg');
                 @unlink(Yii::app()->basePath . '/../images/users/' . $userImageName . '.jpeg');

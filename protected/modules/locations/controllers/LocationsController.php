@@ -163,6 +163,10 @@ class LocationsController extends Controller
             if ($file != null) {
                 $extension = $model->image->getExtensionName();
                 
+                if (!file_exists(Yii::app()->basePath . '/../images/buildings')) {
+                    mkdir(Yii::app()->basePath . '/../images/buildings', 0777, true);
+                }
+                
                 @unlink(Yii::app()->basePath . '/../images/buildings/' . $locationName . '.png');
                 @unlink(Yii::app()->basePath . '/../images/buildings/' . $locationName . '.jpg');
                 @unlink(Yii::app()->basePath . '/../images/buildings/' . $locationName . '.jpeg');
