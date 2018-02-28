@@ -86,9 +86,9 @@
     <div class="col-sm-4">
         <span class="left"><label class="form-signin-heading">Current image</label></span>
         <?php if ($model->eventImage != "") { ?>  
-            <span class="left"><img class="uploadImg" src="/vod/images/events/<?php echo $model->eventImage ?>" alt=""></span>
+            <div class="left"><img class="uploadImg" src="/vod/images/events/<?php echo $model->eventImage ?>" alt=""></div>
         <?php } else {?>
-            <span class="left"><img class="uploadImg" src="/vod/images/no-image.png" alt=""></span>
+            <div class="left"><img class="uploadImg" src="/vod/images/no-image.png" alt=""></div>
         <?php } ?>
     </div>
     <div class="col-sm-4">
