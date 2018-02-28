@@ -34,7 +34,7 @@
                             $eventCount++;
                         }
                     }?>
-                <a href="#" class="list-group-item location" id="<?php echo $location->locationId ?>"><?php echo $location->locationName; ?> <span class="badge"><?php echo $eventCount; ?></span></a>
+                <a href="javascript:;" class="list-group-item location" id="<?php echo $location->locationId ?>"><?php echo $location->locationName; ?> <span class="badge"><?php echo $eventCount; ?></span></a>
             <?php } ?>
         </ul>
         
