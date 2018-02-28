@@ -137,6 +137,7 @@ class UsersController extends Controller
             if ($model->save()) {
                 
                 Yii::trace("User form sent", "http");
+                Yii::app()->user->setFlash("success", "The changes were confirmed");
                 $this->redirect(array('users/admin'));
             }
         }
