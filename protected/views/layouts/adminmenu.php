@@ -27,7 +27,7 @@
                 <ul class="list-unstyled components">
                     <li class="homeLi">
                         <a href="<?php print Yii::app()->createUrl('site/home'); ?>">
-                            <i class="glyphicon glyphicon-home"></i>
+                            <i class="fa fa-home fa-3x"></i>
                             Home
                         </a>
                     </li>
@@ -48,33 +48,31 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="#">
+                            <i class="fa fa-comments"></i>
+                            Forum
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            Analytics
+                        </a>
+                    </li>
+                    <li>
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
                             <i class="glyphicon glyphicon-duplicate"></i>
                             Pages
                         </a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li><a href="#">Page 1</a></li>
-                            <li><a href="#">Page 2</a></li>
-                            <li><a href="#">Page 3</a></li>
+                            <li><a href="#">About Scotland</a></li>
+                            <li><a href="#">About Dundee</a></li>
+                            <li><a href="#">About University</a></li>
+                            <li><a href="#">How to apply</a></li>
+                            <li><a href="#">Costs & Funding</a></li>
+                            <li><a href="#">Accommodation</a></li>
+                            <li><a href="#">Entertainment</a></li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-link"></i>
-                            Portfolio
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-paperclip"></i>
-                            FAQ
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-send"></i>
-                            Contact
-                        </a>
                     </li>
                     <li class="adminLi">
                         <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false">
@@ -85,6 +83,13 @@
                             <li><a href="<?php print Yii::app()->createUrl('locations/locations/admin'); ?>">Locations</a></li>
                             <li><a href="<?php print Yii::app()->createUrl('events/events/admin'); ?>">Events</a></li>
                             <li><a href="<?php print Yii::app()->createUrl('media/media/admin'); ?>">Media</a></li>
+                            <li><a href="#">About Scotland</a></li>
+                            <li><a href="#">About Dundee</a></li>
+                            <li><a href="#">About University</a></li>
+                            <li><a href="#">How to apply</a></li>
+                            <li><a href="#">Costs & Funding</a></li>
+                            <li><a href="#">Accommodation</a></li>
+                            <li><a href="#">Entertainment</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -100,7 +105,7 @@
                                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo.png" alt="Dundee University Virtual Open Days" style="width:247px;height:43px;">
                             </a>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#">Home</a></li>
+                                <li><a href="<?php print Yii::app()->createUrl('site/home'); ?>">Home</a></li>
                                 <li><a href="#">Profile <small>(<?php echo Yii::app()->user->getName(); ?>)</small></a></li>
                                 <li><?php echo CHtml::link('Logout',array('/site/logout')); ?></li>
                             </ul>
