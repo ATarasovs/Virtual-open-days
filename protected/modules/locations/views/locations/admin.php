@@ -34,7 +34,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col col-xs-6">
-                        <h3 class="panel-title">List of all buildings</h3>
+                        <h3 class="panel-title">List of all locations</h3>
                     </div>
                     <div class="col col-xs-6 text-right">
 
