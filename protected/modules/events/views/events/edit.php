@@ -26,7 +26,6 @@
 </div>
 <!--*************************************************************-->
 
-<h2>Event</h2>
 <?php $form = $this->beginWidget('CActiveForm', array(
     'id'=>'edit-form',
     'enableAjaxValidation'=>false,

@@ -43,7 +43,7 @@ class User extends CActiveRecord
 		return array(
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('userId, username, firstName, lastName, email, country, city, position, birthday, isAdmin, isConfirmed, userImage', 'safe'),
+			array('userId, username, password, firstName, lastName, phone, email, country, city, position, birthday, isAdmin, isConfirmed, userImage', 'safe'),
                         array('image', 'file', 'types'=>'jpg, png, jpeg, bmp, tiff, gif', 'safe' => false, 'allowEmpty' => true),
 //                        array('username, email', 'unique'),
                         

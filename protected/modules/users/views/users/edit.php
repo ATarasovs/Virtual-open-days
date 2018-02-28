@@ -84,6 +84,13 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-sm-4">
+        <span class="left"><?php echo $form->labelEx($model,'password', array('class'=>'form-signin-heading')); ?></span>
+        <?php echo $form->passwordField($model,'password',array('id' => 'password', 'class'=>'form-control', 'placeholder' => 'Password')); ?>
+    </div>
+</div>
+
 <div class="top10"></div>
 
 <div class="row">
@@ -125,7 +132,7 @@
 <script>
     $(document).ready(function() {
         $(".adminLi").addClass("active");
-        
+        $("#password").val("");
         initButtons();
     });
     
