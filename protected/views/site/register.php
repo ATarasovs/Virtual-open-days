@@ -73,6 +73,15 @@
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <?php echo $form->textField($model,'birthday',array('id' => 'datepicker', 'class'=>'form-control', 'placeholder' => 'Birthday', 'data-validation' => 'birthdate', 'data-validation-format' => 'dd/mm/yyyy', 'data-validation-error-msg' => 'The birthday should be in the format "dd/mm/yyyy"')); ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="cols-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                 <?php echo $form->textField($model,'email',array('class'=>'form-control', 'placeholder' => 'Email', 'data-validation' => 'email')); ?>
             </div>
         </div>
@@ -141,6 +150,11 @@
             $('#country').suggestCountry();
         }
     });
+    
+    $( function() {
+//        $( "#datepicker" ).datepicker();
+        $('#datepicker').datepicker({dateFormat: 'dd/mm/yy'});
+    } );
 </script>
 
 <script>
