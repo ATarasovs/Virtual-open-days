@@ -80,6 +80,7 @@
                             Manage
                         </a>
                         <ul class="collapse list-unstyled" id="adminSubmenu">
+                            <li><a href="<?php print Yii::app()->createUrl('users/users/admin'); ?>">Users</a></li>
                             <li><a href="<?php print Yii::app()->createUrl('locations/locations/admin'); ?>">Locations</a></li>
                             <li><a href="<?php print Yii::app()->createUrl('events/events/admin'); ?>">Events</a></li>
                             <li><a href="<?php print Yii::app()->createUrl('media/media/admin'); ?>">Media</a></li>

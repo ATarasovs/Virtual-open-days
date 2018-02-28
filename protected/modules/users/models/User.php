@@ -19,9 +19,12 @@
  * @property string $isAdmin
  * @property string $isConfirmed
  * @property string $joinDate
+ * @property string $userImage
+ * @property string $image
  */
 class User extends CActiveRecord
 {
+        public $image;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -38,11 +41,10 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, firstName, lastName, email, phone, country, city, position, birthday, isAdmin, isConfirmed', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('username, firstName, lastName, email, country, city, position, birthday, isAdmin, isConfirmed', 'safe', 'on'=>'search'),
-                    
+			array('userId, username, firstName, lastName, email, country, city, position, birthday, isAdmin, isConfirmed, userImage', 'safe'),
+                        array('image', 'file', 'types'=>'jpg, png, jpeg, bmp, tiff, gif', 'safe' => false, 'allowEmpty' => true),
 //                        array('username, email', 'unique'),
                         
 //                        array('phone',
@@ -86,6 +88,7 @@ class User extends CActiveRecord
                         'joinDate' => 'Join date',
                         'isAdmin' => 'Admin',
                         'isConfirmed' => 'Confirmed',
+                        'userImage' => 'User Image',
 		);
 	}
 
@@ -121,6 +124,7 @@ class User extends CActiveRecord
 		$criteria->compare('birthday',$this->birthday,true);
                 $criteria->compare('isAdmin',$this->isAdmin,true);
                 $criteria->compare('isConfirmed',$this->isConfirmed,true);
+                $criteria->compare('userImage',$this->userImage, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
