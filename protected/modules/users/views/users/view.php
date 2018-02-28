@@ -81,3 +81,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        initButtons();
+    });
+    
+    function initButtons() {
+        $( ".viewBtn" ).click(function() {
+            location.href = userEditReqUrl + "?id=" + userId;
+        });
+    }
+
+    var userId = '<?php print Yii::app()->user->getId() ?>'; 
+    var userEditReqUrl = '<?php print Yii::app()->createUrl('users/users/edit') ?>';
+</script>
