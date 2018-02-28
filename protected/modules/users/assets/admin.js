@@ -7,7 +7,7 @@ $(document).ready(function() {
 function initButtons() {
     $( ".viewBtn" ).click(function() {
         var userId = $(this).attr("data-user-id");
-        location.href = locationViewReqUrl + "?id=" + userId;
+        location.href = userViewReqUrl + "?id=" + userId;
     });
     
     $( ".editBtn" ).click(function() {

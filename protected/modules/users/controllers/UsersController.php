@@ -154,7 +154,7 @@ class UsersController extends Controller
     }   
     
     public function actionView() {
-        $locationId = Yii::app()->request->getParam('id');
+        $id = Yii::app()->request->getParam('id');
         $userId = Yii::app()->user->getId(); 
         
         try {
@@ -165,9 +165,9 @@ class UsersController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if (!empty($locationId)) {
+        if (!empty($id)) {
             try{
-                $model = Location::model()->findByPk($locationId, array());
+                $model = User::model()->findByPk($id, array());
             }
             catch(EActiveResourceRequestException_ResponseFalse $ex){
                 Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
@@ -184,6 +184,7 @@ class UsersController extends Controller
 
         $this->render('view', array(
             'model' => $model,
+            'users' => $users,
         ));
     }
 
