@@ -1,3 +1,21 @@
+<!--*************************************************************-->
+<div class="row">
+    <div class="col-xs-12">
+        <div id="infoMessage">
+            <?php
+                foreach (Yii::app()->user->getFlashes() as $key => $message) {
+                    if ($key == 'notice') {
+                        $key = 'warning';
+                    }
+                    echo '<div class="alert alert-' . $key . ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    ' . $message . "</div>\n";
+                }
+            ?>
+        </div>
+    </div>
+</div>
+<!--*************************************************************-->
+
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1 toppad" >
