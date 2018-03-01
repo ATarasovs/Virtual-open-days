@@ -9,6 +9,7 @@
  * @property string $eventShortDescription
  * @property string $eventDescription
  * @property string $locationId
+ * @property string $eventStartDate
  * @property string $eventStartTime
  * @property string $isStarted
  * @property string $isFinished
@@ -38,7 +39,7 @@ class Event extends CActiveRecord
 		return array(
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-                        array('eventId, eventName, eventShortDescription, eventDescription, locationId, eventStartTime, isStarted, isFinished, eventImage, eventLead, eventVideo', 'safe'),
+                        array('eventId, eventName, eventShortDescription, eventDescription, locationId, eventStartDate, eventStartTime, isStarted, isFinished, eventImage, eventLead, eventVideo', 'safe'),
 			array('image', 'file', 'types'=>'jpg, png, jpeg, bmp, tiff, gif', 'safe' => false, 'allowEmpty' => true),
 //			array('eventId, eventName, eventDescription, locationId, eventStartTime, isStarted, isFinished', 'safe', 'on'=>'search'),
                     
@@ -67,6 +68,7 @@ class Event extends CActiveRecord
 			'eventName' => 'Event Name',
                         'eventShortDescription' => 'Event Short Description',
 			'eventDescription' => 'Event Description',
+                        'eventStartDate' => 'Event Date',
                         'eventStartTime' => 'Event Time',
                         'isStarted' => 'Is Started',
                         'isFinished' => 'Is Finished',
@@ -99,6 +101,7 @@ class Event extends CActiveRecord
 		$criteria->compare('eventName',$this->eventName, true);
                 $criteria->compare('eventShortDescription',$this->eventShortDescription, true);
 		$criteria->compare('eventDescription',$this->eventDescription, true);
+                $criteria->compare('eventStartDate',$this->eventStartDate, true);
                 $criteria->compare('eventStartTime',$this->eventStartTime, true);
                 $criteria->compare('isStarted',$this->isStarted, true);
                 $criteria->compare('isFinished',$this->isFinished, true);

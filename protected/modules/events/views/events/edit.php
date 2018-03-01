@@ -36,30 +36,17 @@
 <div class="row">
     <div class="col-sm-4">
         <span class="left"><?php echo $form->labelEx($model,'eventName', array('class'=>'form-signin-heading')); ?></span>
-        <?php echo $form->textField($model,'eventName',array('id' => 'eventName', 'class'=>'form-control', 'placeholder' => 'Name')); ?>
-    </div>
-    
-    <div class="col-sm-4">
-        <span class="left"><?php echo $form->labelEx($model,'eventStartTime', array('class'=>'form-signin-heading')); ?></span>
-        <?php echo $form->textField($model,'eventStartTime',array('id' => 'eventStartTime', 'class'=>'form-control', 'placeholder' => 'Date & Time')); ?>
+        <?php echo $form->textField($model,'eventName',array('id' => 'eventName', 'class'=>'form-control', 'placeholder' => 'Name', 'data-validation' => 'required', 'data-validation-error-msg' => 'The event name must not be empty')); ?>
     </div>
     
     <div class="col-sm-4">
         <span class="left"><?php echo $form->labelEx($model,'locationId', array('class'=>'form-signin-heading')); ?></span>
-        <?php echo $form->dropDownList($model, 'locationId', $locations, array('class' => 'form-control chosen-select locationId', 'prompt' => '')); ?>
+        <?php echo $form->dropDownList($model, 'locationId', $locations, array('class' => 'form-control chosen-select locationId', 'prompt' => '', 'data-validation' => 'required', 'data-validation-error-msg' => 'The event location must not be empty')); ?>
     </div>
-</div>
-
-<div class="top10"></div>
-
-<div class="row">
+    
     <div class="col-sm-4">
         <span class="left"><?php echo $form->labelEx($model,'eventVideo', array('class'=>'form-signin-heading')); ?></span>
-        <?php echo $form->textField($model,'eventVideo',array('id' => 'eventVideo', 'class'=>'form-control', 'placeholder' => 'Name')); ?>
-    </div>
-    <div class="col-sm-4">
-        <span class="left"><?php echo $form->labelEx($model,'eventLead', array('class'=>'form-signin-heading')); ?></span>
-        <?php echo $form->textField($model,'eventLead',array('id' => 'eventLead', 'class'=>'form-control', 'placeholder' => 'Name')); ?>
+        <?php echo $form->textField($model,'eventVideo',array('id' => 'eventVideo', 'class'=>'form-control', 'placeholder' => 'Event video ID')); ?>
     </div>
 </div>
 
@@ -81,18 +68,51 @@
 
 <div class="top10"></div>
 
+<div class="row">    
+    <div class="col-sm-4">
+        <span class="left"><?php echo $form->labelEx($model,'eventStartDate', array('class'=>'form-signin-heading')); ?></span>
+        <?php echo $form->textField($model,'eventStartDate',array('id' => 'datepicker', 'class'=>'form-control', 'placeholder' => 'Start date', 'data-validation' => 'date', 'data-validation-format' => 'dd/mm/yyyy', 'data-validation-error-msg' => 'The event start date must be in the format "dd/mm/yyyy"')); ?>
+    </div>
+    
+    <div class="col-sm-4">
+        <span class="left"><?php echo $form->labelEx($model,'eventStartTime', array('class'=>'form-signin-heading')); ?></span>
+        <?php echo $form->textField($model,'eventStartTime',array('id' => 'eventStartTime', 'class'=>'form-control timepicker', 'placeholder' => 'Start time', 'data-validation' => 'time', 'data-validation-error-msg' => 'The event start time must be in the format "HH:mm"')); ?>
+    </div>
+    
+    <div class="col-sm-4">
+        <span class="left"><?php echo $form->labelEx($model,'eventLead', array('class'=>'form-signin-heading')); ?></span>
+        <?php echo $form->textField($model,'eventLead',array('id' => 'eventLead', 'class'=>'form-control', 'placeholder' => 'Name', 'data-validation' => 'required', 'data-validation-error-msg' => 'The event lead must not be empty')); ?>
+    </div>
+</div>
+
+<div class="top30"></div>
+
 <div class="row">
     <div class="col-sm-4">
-        <span class="left"><label class="form-signin-heading">Current image</label></span>
+        <span class="left"><label class="form-signin-heading">Current image (Ratio 1:1)</label></span>
         <?php if ($model->eventImage != "") { ?>  
-            <div class="left"><img class="uploadImg" src="/vod/images/events/<?php echo $model->eventImage ?>" alt=""></div>
+            <div class="left"><img class="uploadImg" src="/vod/images/events/<?php echo $model->eventImage ?>" alt="120" width="200" height="200"></div>
         <?php } else {?>
-            <div class="left"><img class="uploadImg" src="/vod/images/no-image.png" alt=""></div>
+            <div class="left"><img class="uploadImg" src="/vod/images/no-image.png" alt="" height="200" width="200"></div>
         <?php } ?>
-    </div>
-    <div class="col-sm-4">
-        <span class="left"><?php echo $form->labelEx($model,'image', array('class'=>'form-signin-heading')); ?></span>
-        <?php echo $form->fileField($model, 'image'); ?>
+
+    
+
+        <div class="top15"></div>
+        <div class="input-group image-preview">
+            <input type="text" class="form-control image-preview-filename" disabled="disabled">
+            <span class="input-group-btn">
+                <div class="btn btn-default image-preview-input">
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                    <?php if ($model->eventImage == "") { ?>  
+                        <span class="image-preview-input-title">Browse</span>
+                    <?php } else {?>
+                        <span class="image-preview-input-title">Change</span>
+                    <?php } ?>
+                    <?php echo $form->fileField($model, 'image',array('id' => 'fileImage', 'data-validation' => 'mime', 'data-validation-allowing' => 'jpg, png, gif, jpeg, bmp, tiff', 'data-validation-error-msg' => 'Only files of type jpg, png, gif, jpeg, bmp, tiff are allowed')); ?>
+                </div>
+            </span>
+        </div>
     </div>
 </div>
 
@@ -102,7 +122,7 @@
     <div class="col-md-12">
         <?php
             echo CHtml::htmlButton('<i class="ace-icon fa fa-check bigger-125"></i> Save', array(
-                'class' => 'btn btn-success btn-sm operationBtn',
+                'class' => 'btn btn-success btn-sm operationBtn submitBtn',
                 'encode' => false,
                 'type' => 'submit',
                 'id' => 'sendBtn')
@@ -117,7 +137,7 @@
 
 <?php $this->endWidget(); ?>
 
-<script>
+<script>        
     $(document).ready(function() {
         $(".adminLi").addClass("active");
 
@@ -127,12 +147,62 @@
             minHeight: null
         });
 
+        $(function() {
+            $('#datepicker').datepicker({dateFormat: 'dd/mm/yy'});
+        });    
+        
+        $('.timepicker').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 15,
+            minTime: '8',
+            maxTime: '20:00',
+            startTime: '08:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+
         initButtons();
+        imagePreview();
     });
     
     function initButtons() {
         $( ".backBtn" ).click(function() {
             location.href = locationAdminReqUrl;
+        });
+        
+        $( ".submitBtn" ).click(function() {
+            $.validate({
+                modules : 'date, file',
+
+                onModulesLoaded : function() {
+                }
+            });
+        });
+    }
+    
+    function imagePreview() {
+        $(function() {
+            // Create the close button
+            var closebtn = $('<button/>', {
+                type:"button",
+                text: 'x',
+                id: 'close-preview',
+                style: 'font-size: initial;',
+            });
+            closebtn.attr("class","close pull-right");
+            
+            // Create the preview image
+            $(".image-preview-input input:file").change(function (){   
+                var file = this.files[0];
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(".image-preview-input-title").text("Change");
+                    $(".image-preview-filename").val(file.name); 
+                    $('.uploadImg').attr('src', e.target.result);
+                }        
+                reader.readAsDataURL(file);
+            });
         });
     }
     
