@@ -74,6 +74,7 @@ class EventsController extends Controller
         }
         
         try {
+            $criteria->order = "eventStartTime ASC";
             $count=Event::model()->count($criteria);
             $pages=new CPagination($count);
             $pages->pageSize=10;
@@ -146,6 +147,7 @@ class EventsController extends Controller
         }
         
         try {
+            $eventsCriteria->order = "eventStartTime ASC";
             $eventsCriteria -> addInCondition("eventId", $subscribedEventIds);
             $count=Event::model()->count($eventsCriteria);
             $pages=new CPagination($count);
@@ -186,7 +188,8 @@ class EventsController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        try {
+        try { 
+            $criteria->order = "eventStartTime ASC";
             $count=Event::model()->count($criteria);
             $pages=new CPagination($count);
             $pages->pageSize=10;
