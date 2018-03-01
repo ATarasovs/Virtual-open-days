@@ -80,6 +80,38 @@
                                     <?php echo $model->eventDescription ?>
                                 </div>
                             </div>
+                            <!--<div class="top15"></div>-->
+                            <div class="row">
+                                <div class="col-md-offset-1 col-xs-10">
+                                    <h3>List of participants</h3>
+                                    <div class="panel panel-default panel-table">
+                                        <div class="panel-body">
+                                            <table class="table table-striped table-bordered table-list" id="events">
+                                                <thead>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Country</th>
+                                                    <th>Position</th>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($participants as $participant) {
+                                                        foreach ($allUsers as $user) {
+                                                            if ($participant->userId == $user->userId) { ?>
+                                                                <tr class="table-info">
+                                                                    <td class="col-xs-3"><a href="<?php print Yii::app()->createUrl('users/users/view?id=' . $user->userId); ?>"><?php echo $user->firstName; ?> <?php echo $user->lastName; ?></a></td>
+                                                                    <td class="col-xs-3"><?php echo $user->email; ?></td>
+                                                                    <td class="col-xs-3"><?php echo $user->country; ?></td>
+                                                                    <td class="col-xs-3"><?php echo $user->position; ?></td>
+                                                                </tr>
+                                                            <?php }
+                                                        }
+                                                    } ?>
+                                                </tbody>    
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="top15"></div>
                             <div class="row">
                                 <div class="col-md-offset-1 col-xs-10">

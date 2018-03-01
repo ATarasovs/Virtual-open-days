@@ -214,8 +214,10 @@ class EventsController extends Controller
     public function actionView(){
 		
         $eventId = Yii::app()->request->getParam('id');
-        Yii::trace($eventId, "http");
         $userId = Yii::app()->user->getId(); 
+        
+        $messageCriteria = new CDbCriteria();
+        $participantCriteria = new CDbCriteria();
 
         try {
             $users = User::model()->findByPk($userId);
@@ -247,10 +249,26 @@ class EventsController extends Controller
             Yii::app()->user->setFlash("danger", "Event is not selected");
         }
         
-        $criteria = new CDbCriteria();
-        $criteria->addCondition("eventId = '$eventId'");
+        $messageCriteria->addCondition("eventId = '$eventId'");
         try {
-            $messages = Message::model()->findAll($criteria);
+            $messages = Message::model()->findAll($messageCriteria);
+        } 
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        try {
+            $allUsers = User::model()->findAll();
+        } 
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        $participantCriteria->addCondition("eventId = '$eventId'");
+        try {
+            $participants = Participant::model()->findAll($participantCriteria);
         } 
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
@@ -268,6 +286,8 @@ class EventsController extends Controller
             'model' => $model,
             'messages' => $messages,
             'users' => $users,
+            'participants' => $participants,
+            'allUsers' => $allUsers,
         ));
     }
 
