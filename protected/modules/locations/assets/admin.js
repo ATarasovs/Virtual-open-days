@@ -18,4 +18,15 @@ function initButtons() {
     $( ".createBtn" ).click(function() {
         location.href = locationEditReqUrl;
     });
+    
+    $( ".deleteBtn" ).click(function() {
+        var locationId = $(this).attr("data-location-id");
+        location.href = locationDeleteReqUrl + "?id=" + locationId;
+    });
+    
+    $( ".removeBtn" ).click(function() {
+        var locationId = $(this).attr("data-location-id");
+        $(".deleteBtn").attr("data-location-id", locationId);
+        
+    });
 }

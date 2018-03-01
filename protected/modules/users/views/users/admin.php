@@ -61,7 +61,7 @@
                            <td class="col-xs-3">
                                <button class="editBtn btn btn-primary btn-sm" data-user-id="<?php echo $user->userId; ?>"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                                <button class="viewBtn btn btn-primary btn-sm" data-user-id="<?php echo $user->userId; ?>"><i class="fa fa-eye" aria-hidden="true"></i> View</button>
-                               <button class="removeBtn btn btn-danger btn-sm" data-user-id="<?php echo $user->userId; ?>"><i class="fa fa-times" aria-hidden="true"></i> Remove</button>
+                               <button class="removeBtn btn btn-danger btn-sm" data-user-id="<?php echo $user->userId; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-times" aria-hidden="true"></i> Delete</button>
                            </td>
                        </tr>
                       <?php } ?>
@@ -95,7 +95,28 @@
     </div>
 </div>
 
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete user</h4>
+            </div>
+            
+            <div class="modal-body">
+                <p>Are you sure that you want to remove this user?</p>
+                <p><b>All messages and forum posts made by this user will be removed.</b></p>
+            </div>
+        
+            <div class="modal-footer">
+                <button class="deleteBtn btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i> Delete</button>
+            </div>
+        </div> 
+    </div>
+</div>
+
 <script>
     var userViewReqUrl = '<?php print Yii::app()->createUrl('users/users/view') ?>';
     var userEditReqUrl = '<?php print Yii::app()->createUrl('users/users/edit') ?>';
+    var userDeleteReqUrl = '<?php print Yii::app()->createUrl('users/users/deleterecord') ?>';
 </script>

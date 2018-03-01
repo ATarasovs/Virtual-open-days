@@ -231,6 +231,34 @@ class LocationsController extends Controller
             'model' => $model,
         ));
     }
+    
+    public function actionDeleteRecord() {
+        $locationId = Yii::app()->request->getParam('id');
+        
+        $criteria = new CDbCriteria();
+        $criteria->addCondition("locationId = '$locationId'");
+        $events = Event::model()->findAll($criteria);
+        
+        foreach($events as $event) { 
+            if (Participant::model()->deleteAll("eventId ='" . $event->eventId . "'")) {
+                Yii::trace("Participant form sent", "http");
+            }
+        }
+        
+        if (Event::model()->deleteAll("locationId ='" . $locationId . "'")) {
+            Yii::trace("Event form sent", "http");
+        }
+        
+        if (Media::model()->deleteAll("locationId ='" . $locationId . "'")) {
+            Yii::trace("Media form sent", "http");
+        }
+        
+        if (Location::model()->deleteAll("locationId ='" . $locationId . "'")) {
+            Yii::trace("Location form sent", "http");
+            Yii::app()->user->setFlash("success", "The changes were confirmed");
+            $this->redirect(array('locations/admin'));
+        }
+    }
 
     /**
      * Performs the AJAX validation.

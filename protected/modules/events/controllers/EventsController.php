@@ -360,6 +360,20 @@ class EventsController extends Controller
         ));
     }   
     
+    public function actionDeleteRecord() {
+        $eventId = Yii::app()->request->getParam('id');
+        
+        if (Participant::model()->deleteAll("eventId ='" . $eventId . "'")) {
+            Yii::trace("Participant form sent", "http");
+        }
+        
+        if (Event::model()->deleteAll("eventId ='" . $eventId . "'")) {
+            Yii::trace("Event form sent", "http");
+            Yii::app()->user->setFlash("success", "The changes were confirmed");
+            $this->redirect(array('events/admin'));
+        }
+    }
+    
     public function actionSubscribe() {
         $userId = Yii::app()->user->getId(); 
         $eventId = $_POST['eventId'];

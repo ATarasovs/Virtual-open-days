@@ -18,4 +18,14 @@ function initButtons() {
     $( ".createBtn" ).click(function() {
         location.href = userEditReqUrl;
     });
+    
+    $( ".deleteBtn" ).click(function() {
+        var userId = $(this).attr("data-user-id");
+        location.href = userDeleteReqUrl + "?id=" + userId;
+    });
+    
+    $( ".removeBtn" ).click(function() {
+        var eventId = $(this).attr("data-user-id");
+        $(".deleteBtn").attr("data-user-id", eventId);
+    });
 }

@@ -55,9 +55,9 @@
                            <td class="locationName col-xs-3"><?php echo $location->locationName; ?></td>
                            <td class="locaitonDepartment col-xs-3"><?php echo $location->locationDepartment; ?></td>
                            <td class="col-xs-3">
-                               <button class="editBtn btn btn-primary btn-sm" data-location-id="<?php echo $location->locationId; ?>"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
-                               <button class="viewBtn btn btn-primary btn-sm" data-location-id="<?php echo $location->locationId; ?>"><i class="fa fa-eye" aria-hidden="true"></i> View</button>
-                               <button class="removeBtn btn btn-danger btn-sm" data-location-id="<?php echo $location->locationId; ?>"><i class="fa fa-times" aria-hidden="true"></i> Remove</button>
+                                <button class="editBtn btn btn-primary btn-sm" data-location-id="<?php echo $location->locationId; ?>"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                                <button class="viewBtn btn btn-primary btn-sm" data-location-id="<?php echo $location->locationId; ?>"><i class="fa fa-eye" aria-hidden="true"></i> View</button>
+                                <button class="removeBtn btn btn-danger btn-sm" data-location-id="<?php echo $location->locationId; ?>" data-toggle="modal" data-target="#myModal"><i class="fa fa-times" aria-hidden="true"></i> Delete</button>
                            </td>
                        </tr>
                       <?php } ?>
@@ -91,7 +91,28 @@
     </div>
 </div>
 
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete location</h4>
+            </div>
+            
+            <div class="modal-body">
+                <p>Are you sure that you want to remove this location?</p>
+                <p><b>All media files and events connected to this location will be removed.</b></p>
+            </div>
+        
+            <div class="modal-footer">
+                <button class="deleteBtn btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i> Delete</button>
+            </div>
+        </div> 
+    </div>
+</div>  
+
 <script>
     var locaitonViewReqUrl = '<?php print Yii::app()->createUrl('locations/locations/view') ?>';
     var locationEditReqUrl = '<?php print Yii::app()->createUrl('locations/locations/edit') ?>';
+    var locationDeleteReqUrl = '<?php print Yii::app()->createUrl('locations/locations/deleterecord') ?>';
 </script>

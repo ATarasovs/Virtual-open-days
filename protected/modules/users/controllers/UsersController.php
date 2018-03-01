@@ -192,6 +192,38 @@ class UsersController extends Controller
             'users' => $users,
         ));
     }
+    
+    public function actionDeleteRecord() {
+        $userId = Yii::app()->request->getParam('id');
+        $id = Yii::app()->user->getId();
+        
+        try {
+            $users = User::model()->findByPk($userId);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if ($userId == $id) {
+            Yii::app()->user->setFlash("danger", "You are not able to remove the user you are logged in with");
+            $this->redirect(array('users/admin'));
+        }
+        
+        if (Participant::model()->deleteAll("userId ='" . $userId . "'")) {
+            Yii::trace("Participant form sent", "http");
+        }
+        
+        if (Message::model()->deleteAll("login ='" . $users->username . "'")) {
+            Yii::trace("Message form sent", "http");
+        }
+        
+        if (User::model()->deleteAll("userId ='" . $userId . "'")) {
+            Yii::trace("User form sent", "http");
+            Yii::app()->user->setFlash("success", "The changes were confirmed");
+            $this->redirect(array('users/admin'));
+        }
+    }
 
     /**
      * Performs the AJAX validation.
