@@ -135,14 +135,17 @@
         ?>
 
         <a class="btn btn-primary btn-sm backBtn">
-            <i class="fa fa-list-alt bigger-125"></i> <?php print Yii::t('common', 'Back to list'); ?>
+            <i class="fa fa-list-alt bigger-125"></i> <?php print Yii::t('common', 'Back to profile'); ?>
         </a>
+        
     </div>
 </div>
 
 <?php $this->endWidget(); ?>
 
 <script>
+    var userId = '<?php print Yii::app()->request->getParam('id') ?>';
+    
     $(document).ready(function() {
         $(".adminLi").addClass("active");
         $("#password").val("");
@@ -157,7 +160,7 @@
     
     function initButtons() {
         $( ".backBtn" ).click(function() {
-            location.href = userAdminReqUrl;
+            location.href = userProfileReqUrl + "?id=" + userId;
         });
         
         $( ".submitBtn" ).click(function() {
@@ -196,5 +199,5 @@
         });
     }
     
-    userAdminReqUrl = '<?php print Yii::app()->createUrl('users/users/admin') ?>';
+    userProfileReqUrl = '<?php print Yii::app()->createUrl('users/users/view') ?>';
 </script>
