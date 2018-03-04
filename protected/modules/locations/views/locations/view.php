@@ -40,8 +40,8 @@
                     <ul class="nav nav-tabs">
                         
                         <li class="active"><a href="#tab1" class="informationTabLi" data-toggle="tab">Information</a></li>
-                        <li><a href="#tab2" class="galleryTabLi" data-toggle="tab">Gallery</a></li>
-                        <li><a href="#tab3" class="photosTabLi" data-toggle="tab">360 photos</a></li>
+                        <li><a href="#tab2" class="photosTabLi" data-toggle="tab">Photos</a></li>
+                        <li><a href="#tab3" class="panoramasTabLi" data-toggle="tab">360 photos</a></li>
                         <li><a href="#tab4" class="videosTabLi" data-toggle="tab">Videos</a></li>
                     </ul>
                 </div>
@@ -70,8 +70,11 @@
                             </div>
                         </div>
                         
-                        <div class="tab-pane fade" id="tab2" class="liveTab">
+                        <div class="tab-pane fade" id="tab2">
                             <div class="row">
+                                <?php foreach ($photos as $photo) { ?>
+                                    <div class="col-lg-3 col-sm-4 col-xs-6"><a data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $photo->locationId ?>" href="javascript:;"><img class="thumbnail img-responsive" src="/vod/images/media/photos/<?php echo $photo->locationId ?>/<?php echo $photo->mediaPath ?>"></a></div>
+                                <?php } ?>
                             </div>
                         </div>
                         
@@ -92,6 +95,43 @@
     </div>
 </div>
 
-<script>
+<div tabindex="-1" class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-dialog-photo">
+        <div class="modal-content">
+            <div class="modal-header">
+		<button class="close" type="button" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+		
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+    $(document).ready(function() {
+        $(".buildingsLi").addClass("active");
+
+        initButtons();
+    });
+    
+    function initButtons() {
+        $('.thumbnail').click(function(){
+            $('.modal-body').empty();
+
+            var photoId = $(this).parent('a').attr("data-photo-id");
+            var photoTitle = $(this).parent('a').attr("data-photo-title");
+            var photoFolder = $(this).parent('a').attr("data-photo-folder");
+
+            $(".deleteBtn").attr("data-photo-id", photoId);
+            $(".deleteBtn").attr("data-photo-title", photoTitle);
+            $(".deleteBtn").attr("data-photo-folder", photoFolder);
+
+            $($(this).parents('div').html()).appendTo('.modal-body');
+            $('#myModal').modal({show:true});
+        });
+    }
 </script>

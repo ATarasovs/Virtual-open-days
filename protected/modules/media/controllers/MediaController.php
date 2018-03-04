@@ -133,7 +133,13 @@ class MediaController extends Controller
         $criteria->addCondition("mediaType = 'photo'");
         $criteria->addCondition("locationId = '$locationId'");
         
-        $photos = Media::model()->findAll($criteria);
+        try {
+            $photos = Media::model()->findAll($criteria);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
         
         if($users->isAdmin == "true") {
             $this->layout = '//layouts/adminmenu';

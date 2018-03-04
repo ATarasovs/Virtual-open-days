@@ -202,6 +202,8 @@ class LocationsController extends Controller
         $locationId = Yii::app()->request->getParam('id');
         $userId = Yii::app()->user->getId(); 
         
+        $photosCriteria = new CDbCriteria();
+        
         try {
             $users = User::model()->findByPk($userId);
         }
@@ -220,6 +222,17 @@ class LocationsController extends Controller
             }
         }
         
+        $photosCriteria->addCondition("mediaType = 'photo'");
+        $photosCriteria->addCondition("locationId = '$locationId'");
+        
+        try {
+            $photos = Media::model()->findAll($photosCriteria);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
         if($users->isAdmin == "true") {
             $this->layout = '//layouts/adminmenu';
         }
@@ -229,6 +242,7 @@ class LocationsController extends Controller
 
         $this->render('view', array(
             'model' => $model,
+            'photos' => $photos,
         ));
     }
     
