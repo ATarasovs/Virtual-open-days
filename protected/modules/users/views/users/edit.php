@@ -87,12 +87,7 @@
 <div class="row">
     <div class="col-sm-4">
         <span class="left"><?php echo $form->labelEx($model,'password', array('class'=>'form-signin-heading')); ?></span>
-        <?php echo $form->passwordField($model,'password',array('id' => 'password', 'name' => 'pass_confirmation', 'class'=>'form-control', 'placeholder' => 'Password', 'data-validation' => 'length', 'data-validation-length' => '7-20', 'data-validation-error-msg' => 'The password must be  between 7-20 characters')); ?>
-    </div>
-    
-    <div class="col-sm-4">
-        <label>Confirm password</label>
-        <input class="form-control" placeholder="Confirm password" type="password" name="pass" data-validation="confirmation" data-validation-error-msg = "Your password and password confiramtion must be same">
+        <?php echo $form->passwordField($model,'password',array('id' => 'password', 'class'=>'form-control', 'placeholder' => 'Password', 'data-validation' => 'length', 'data-validation-length' => '7-20', 'data-validation-error-msg' => 'The password must be  between 7-20 characters')); ?>
     </div>
 </div>
 

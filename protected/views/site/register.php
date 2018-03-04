@@ -28,7 +28,7 @@
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'username',array('class'=>'form-control', 'placeholder' => 'Username', 'data-validation' => 'required', 'data-validation-error-msg' => 'The first name must not be empty')); ?>
+                <?php echo $form->textField($model,'username',array('class'=>'form-control', 'placeholder' => 'Username', 'data-validation' => 'required', 'data-validation-error-msg' => 'The username must not be empty')); ?>
             </div>
         </div>
     </div>
@@ -37,16 +37,7 @@
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
-                <?php echo $form->passwordField($model,'password',array('name' => 'pass_confirmation', 'class'=>'form-control', 'placeholder' => 'Password', 'data-validation' => 'length', 'data-validation-length' => '7-20', 'data-validation-error-msg' => 'The password must be  between 7-20 characters')); ?>
-            </div>
-        </div>
-    </div>
-    
-    <div class="form-group">
-        <div class="cols-sm-10">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
-                <input class="form-control" placeholder="Confirm password" type="password" name="pass" data-validation="confirmation" data-validation-error-msg = "Your password and password confiramtion must be same">
+                <?php echo $form->passwordField($model,'password',array('class'=>'form-control', 'placeholder' => 'Password', 'data-validation' => 'length', 'data-validation-length' => '7-20', 'data-validation-error-msg' => 'The password must be  between 7-20 characters')); ?>
             </div>
         </div>
     </div>
