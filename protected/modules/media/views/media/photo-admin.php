@@ -3,7 +3,7 @@
         'crumbs' => array(
             array('name' => 'Home', 'url' => array('/site/home')),
             array('name' => 'Media', 'url' => array('/media/media/admin')),
-            array('name' => 'Photo Categories', 'url' => array('/media/media/photoscategories')),
+            array('name' => 'Photo categories', 'url' => array('/media/media/photoscategories')),
             array('name' => 'Photos <small>(' . $location->locationName . ')</small>'),
         ),
     )); 
@@ -36,7 +36,14 @@
     <?php } ?>
 </div>
 
-<button class="uploadBtn btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> Upload</button>
+<div class="row">
+    <div class="col-md-12">
+        <button class="uploadBtn btn btn-success btn-sm"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
+        <a class="btn btn-primary btn-sm backBtn">
+            <i class="fa fa-file-image-o bigger-125"></i> <?php print Yii::t('common', 'Back to photo categories'); ?>
+        </a>
+    </div>
+</div>
 
 <div tabindex="-1" class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-dialog-photo">
@@ -59,6 +66,7 @@
 <script>
     var locationId = '<?php print Yii::app()->request->getParam('id') ?>';
 
+    var mediaPhotoCategoriesReqUrl = '<?php print Yii::app()->createUrl('media/media/photoscategories') ?>';
     var uploadPhotoReqUrl = '<?php print Yii::app()->createUrl('media/media/uploadphoto') ?>';
     var deletePhotoReqUrl = '<?php print Yii::app()->createUrl('media/media/deletephoto') ?>';
 </script>

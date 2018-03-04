@@ -5,6 +5,10 @@ $(document).ready(function() {
 });
 
 function initButtons() {
+    $( ".backBtn" ).click(function() {
+            location.href = mediaPhotoCategoriesReqUrl;
+        });
+    
     $( ".uploadBtn" ).click(function() {
       location.href = uploadPhotoReqUrl + "?id=" + locationId;
     });

@@ -28,3 +28,27 @@
         </div>
     <?php } ?>
 </div>
+
+<div class="top5"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-primary btn-sm backBtn">
+            <i class="fa fa-list-alt bigger-125"></i> <?php print Yii::t('common', 'Back to media'); ?>
+        </a>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        initButtons();
+    });
+    
+    function initButtons() {
+        $( ".backBtn" ).click(function() {
+            location.href = mediaAdminReqUrl;
+        });
+    }
+    
+    mediaAdminReqUrl = '<?php print Yii::app()->createUrl('media/media/admin') ?>';
+</script>

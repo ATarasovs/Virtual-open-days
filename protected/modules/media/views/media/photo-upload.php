@@ -3,9 +3,9 @@
         'crumbs' => array(
             array('name' => 'Home', 'url' => array('/site/home')),
             array('name' => 'Media', 'url' => array('/media/media/admin')),
-            array('name' => 'Photo Categories', 'url' => array('/media/media/photoscategories')),
+            array('name' => 'Photo categories', 'url' => array('/media/media/photoscategories')),
             array('name' => 'Photos <small>(' . $location->locationName . ')</small>', 'url' => array('/media/media/photosadmin?id=' . $location->locationId)),
-            array('name' => 'Upload Photo'),
+            array('name' => 'Upload photo'),
         ),
     )); 
 ?>
@@ -47,7 +47,7 @@
 <div class="row">
     <div class="col-md-12">
         <?php
-            echo CHtml::htmlButton('<i class="ace-icon fa fa-check bigger-125"></i> Upload', array(
+            echo CHtml::htmlButton('<i class="ace-icon fa fa-upload bigger-125"></i> Upload', array(
                 'class' => 'btn btn-success btn-sm operationBtn',
                 'encode' => false,
                 'type' => 'submit',
@@ -56,7 +56,7 @@
         ?>
 
         <a class="btn btn-primary btn-sm backBtn">
-            <i class="fa fa-list-alt bigger-125"></i> <?php print Yii::t('common', 'Back to list'); ?>
+            <i class="fa fa-file-image-o bigger-125"></i> <?php print Yii::t('common', 'Back to photos'); ?>
         </a>
     </div>
 </div>
@@ -65,5 +65,17 @@
 
 
 <script>
-
+    var locationId = '<?php print Yii::app()->request->getParam('id') ?>';
+    
+    $(document).ready(function() {
+        initButtons();
+    });
+    
+    function initButtons() {
+        $( ".backBtn" ).click(function() {
+            location.href = mediaPhotosReqUrl + "?id=" + locationId;
+        });
+    }
+    
+    var mediaPhotosReqUrl = '<?php print Yii::app()->createUrl('media/media/photosadmin') ?>';
 </script>
