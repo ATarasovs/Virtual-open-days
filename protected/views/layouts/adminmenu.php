@@ -66,7 +66,7 @@
                             Analytics
                         </a>
                     </li>
-                    <li>
+                    <li class="pagesLi">
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
                             <i class="glyphicon glyphicon-duplicate"></i>
                             Pages

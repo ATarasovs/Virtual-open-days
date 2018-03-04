@@ -41,7 +41,7 @@
 
 <script>
     $(document).ready(function() {
-        $(".buildingsLi").addClass("active");
+        $(".pagesLi").addClass("active");
 
         initButtons();
     });
