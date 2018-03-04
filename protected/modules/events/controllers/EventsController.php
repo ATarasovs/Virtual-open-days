@@ -201,6 +201,14 @@ class EventsController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
+        try {
+            $locations = Location::model()->findAll();
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
         if($users->isAdmin == "true") {
             $this->layout = '//layouts/adminmenu';
         }
@@ -211,6 +219,7 @@ class EventsController extends Controller
         $this->render('admin', array(
             'events' => $events,
             'pages' => $pages,
+            'locations' => $locations,
         ));
     }
     

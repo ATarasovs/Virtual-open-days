@@ -115,16 +115,17 @@
                             <div class="top15"></div>
                             <div class="row">
                                 <div class="col-md-offset-1 col-xs-10">
-                                    <?php 
-                                        $datetime = new DateTime($model->eventStartTime);
-                                        $year = $datetime->format('Y');
-                                        $month = $datetime->format('m');
+                                    <?php
+                                        $date = DateTime::createFromFormat('d/m/Y', $model->eventStartDate);
+                                        $time = DateTime::createFromFormat('H:i', $model->eventStartTime);
+                                        $year = $date->format('Y');
+                                        $month = $date->format('m');
                                         $monthObj   = DateTime::createFromFormat('!m', $month);
                                         $monthName = $monthObj->format('F');
 //                                        $monthNameShort = substr($monthName, 0, 3); // March
-                                        $day = $datetime->format('d');
-                                        $hour = $datetime->format('H');
-                                        $minute = $datetime->format('i');
+                                        $day = $date->format('d');
+                                        $hour = $time->format('H');
+                                        $minute = $time->format('i');
                                     ?>
                                     <b>The event will be covered by <?php echo $model->eventLead ?> on <?php echo $day . " " . $monthName . " " . $year . " " . $hour . ":" . $minute?></b>
                                 </div>

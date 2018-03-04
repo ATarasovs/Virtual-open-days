@@ -32,15 +32,16 @@
         <ul class="event-list">
             
             <?php foreach ($events as $event) { 
-                $datetime = new DateTime($event->eventStartTime);
-                $year = $datetime->format('Y');
-                $month = $datetime->format('m');
+                $date = DateTime::createFromFormat('d/m/Y', $event->eventStartDate);
+                $time = DateTime::createFromFormat('H:i', $event->eventStartTime);
+                $year = $date->format('Y');
+                $month = $date->format('m');
                 $monthObj   = DateTime::createFromFormat('!m', $month);
                 $monthName = $monthObj->format('F');
-                $monthNameShort = substr($monthName, 0, 3); // March
-                $day = $datetime->format('d');
-                $hour = $datetime->format('H');
-                $minute = $datetime->format('i');
+                $monthNameShort = substr($monthName, 0, 3);
+                $day = $date->format('d');
+                $hour = $time->format('H');
+                $minute = $time->format('i');
                 
                 $locationName = "";
                 

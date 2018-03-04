@@ -44,16 +44,22 @@
                <table class="table table-striped table-bordered table-list" id="events">
                    <thead>
                        <th>Name</th>
-                       <th>Event time</th>
+                       <th>Date</th>
+                       <th>Time</th>
                        <th>Location</th>
                        <th>Actions</th>
                    </thead>
                    <tbody>
                        <?php foreach($events as $event) { ?>
                        <tr class="table-info">
-                           <td class="eventName col-xs-3"><?php echo $event->eventName; ?></td>
-                           <td class="eventStartTime col-xs-2"><?php echo $event->eventStartTime; ?></td>
-                           <td class="location col-xs-1"><?php echo $event->locationId; ?></td>
+                           <td class="eventName col-xs-4"><?php echo $event->eventName; ?></td>
+                           <td class="eventStartTime col-xs-1"><?php echo $event->eventStartDate; ?></td>
+                           <td class="eventStartTime col-xs-1"><?php echo $event->eventStartTime; ?></td>
+                           <?php foreach ($locations as $location) {
+                               if ($location->locationId == $event->locationId) { ?>
+                                   <td class="location col-xs-3"><?php echo $location->locationName; ?></td>
+                               <?php }
+                           } ?>
                            <td class="col-xs-3">
                                <button class="editBtn btn btn-primary btn-sm" data-event-id="<?php echo $event->eventId; ?>"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                                <button class="viewBtn btn btn-primary btn-sm" data-event-id="<?php echo $event->eventId; ?>"><i class="fa fa-eye" aria-hidden="true"></i> View</button>
