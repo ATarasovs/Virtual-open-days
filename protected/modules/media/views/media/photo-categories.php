@@ -1,3 +1,13 @@
+<?php 
+    $this->widget('application.components.BreadCrumb', array(
+        'crumbs' => array(
+            array('name' => 'Home', 'url' => array('/site/home')),
+            array('name' => 'Media', 'url' => array('/media/media/admin')),
+            array('name' => 'Photo categories'),
+        ),
+    )); 
+?>
+
 <div class="row">
     <?php
         foreach ($locations as $location) {

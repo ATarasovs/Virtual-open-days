@@ -102,7 +102,7 @@ class MediaController extends Controller
             $this->layout ='//layouts/usermenu';
         }
 
-        $this->render('gallery-categories', array(
+        $this->render('photo-categories', array(
             'locations' => $locations,
         ));
     } 
@@ -116,6 +116,14 @@ class MediaController extends Controller
         
         try {
             $users = User::model()->findByPk($id);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        try {
+            $location = Location::model()->findByPk($locationId);
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
@@ -136,6 +144,7 @@ class MediaController extends Controller
         
         $this->render('photo-admin', array(
             'photos' => $photos,
+            'location' => $location,
         ));
     }
     
@@ -143,6 +152,14 @@ class MediaController extends Controller
         
         $locationId = Yii::app()->request->getParam('id');
         $id = Yii::app()->user->getId();
+        
+        try {
+            $location = Location::model()->findByPk($locationId);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
         
         try {
             $users = User::model()->findByPk($id);
@@ -209,6 +226,7 @@ class MediaController extends Controller
         
         $this->render('photo-upload', array(
             'model' => $model,
+            'location' => $location,
         ));
     }
     
@@ -225,8 +243,7 @@ class MediaController extends Controller
             $this->redirect(array('media/photosadmin?id=' . $locationId));
         }
     }
-
-
+    
     /**
      * Performs the AJAX validation.
      * @param User $model the model to be validated

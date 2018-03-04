@@ -1,5 +1,13 @@
 <?php 
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.media.assets').'\photos-admin.js'), CClientScript::POS_HEAD);
+    $this->widget('application.components.BreadCrumb', array(
+        'crumbs' => array(
+            array('name' => 'Home', 'url' => array('/site/home')),
+            array('name' => 'Media', 'url' => array('/media/media/admin')),
+            array('name' => 'Photo Categories', 'url' => array('/media/media/photoscategories')),
+            array('name' => 'Photos <small>(' . $location->locationName . ')</small>', 'url' => array('/media/media/photosadmin?id=' . $location->locationId)),
+            array('name' => 'Upload Photo'),
+        ),
+    )); 
 ?>
 
 <!--*************************************************************-->
