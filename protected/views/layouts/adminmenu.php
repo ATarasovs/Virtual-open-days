@@ -72,13 +72,18 @@
                             Pages
                         </a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li><a href="#">About Scotland</a></li>
-                            <li><a href="#">About Dundee</a></li>
-                            <li><a href="#">About University</a></li>
-                            <li><a href="#">How to apply</a></li>
-                            <li><a href="#">Costs & Funding</a></li>
-                            <li><a href="#">Accommodation</a></li>
-                            <li><a href="#">Entertainment</a></li>
+                            <?php 
+                                try{
+                                    $pages = Information::model()->findAll();
+                                }
+                                catch(EActiveResourceRequestException_ResponseFalse $ex){
+                                    Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+                                    Yii::app()->user->setFlash("danger", $ex->getMessage());
+                                } ?>
+                                
+                                <?php foreach ($pages as $page) { ?>
+                                    <li><a href="<?php print Yii::app()->createUrl('/information/information/view?id=' . $page->informationId); ?>"><?php print $page->informationTitle ?></a></li>
+                                <?php } ?>
                         </ul>
                     </li>
                     <li class="adminLi">
@@ -91,13 +96,7 @@
                             <li><a href="<?php print Yii::app()->createUrl('locations/locations/admin'); ?>">Locations</a></li>
                             <li><a href="<?php print Yii::app()->createUrl('events/events/admin'); ?>">Events</a></li>
                             <li><a href="<?php print Yii::app()->createUrl('media/media/admin'); ?>">Media</a></li>
-                            <li><a href="#">About Scotland</a></li>
-                            <li><a href="#">About Dundee</a></li>
-                            <li><a href="#">About University</a></li>
-                            <li><a href="#">How to apply</a></li>
-                            <li><a href="#">Costs & Funding</a></li>
-                            <li><a href="#">Accommodation</a></li>
-                            <li><a href="#">Entertainment</a></li>
+                            <li><a href="<?php print Yii::app()->createUrl('/information/information/admin'); ?>">Pages</a></li>
                         </ul>
                     </li>
                 </ul>
