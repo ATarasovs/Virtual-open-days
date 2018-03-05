@@ -51,17 +51,24 @@ class InformationController extends Controller
     }
     
     public function actionAdmin() {
+        
         $id = Yii::app()->user->getId(); 
         
-        $criteria = new CDbCriteria();
-        
         try {
-            $users = User::model()->findByPk($id);
+          $user = User::model()->findByPk($id);
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
+        
+        if ($user->isAdmin != "true") {
+            Yii::trace("Someone without required permission tried to access admin page", "http");
+            Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
+            $this->redirect(array('/site/home'));
+        }
+        
+        $criteria = new CDbCriteria();
         
         try {
             $count=Information::model()->count($criteria);
@@ -105,16 +112,24 @@ class InformationController extends Controller
     }
 
     public function actionEdit(){
-        $informationId = Yii::app()->request->getParam('id');
-        $userId = Yii::app()->user->getId(); 
+        
+        $id = Yii::app()->user->getId(); 
         
         try {
-            $users = User::model()->findByPk($userId);
+          $user = User::model()->findByPk($id);
         }
         catch (Exception $ex){
-            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
-            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+        Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
+        
+        if ($user->isAdmin != "true") {
+            Yii::trace("Someone without required permission tried to access admin page", "http");
+                Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
+                $this->redirect(array('/site/home'));
+        }
+        
+        $informationId = Yii::app()->request->getParam('id');
         
         if (!empty($informationId)) {
             try{
@@ -149,6 +164,23 @@ class InformationController extends Controller
     }
     
     public function actionDeleteRecord() {
+        
+        $id = Yii::app()->user->getId(); 
+        
+        try {
+          $user = User::model()->findByPk($id);
+        }
+        catch (Exception $ex){
+        Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+        Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if ($user->isAdmin != "true") {
+            Yii::trace("Someone without required permission tried to access admin page", "http");
+                Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
+                $this->redirect(array('/site/home'));
+        }
+        
         $informationId = Yii::app()->request->getParam('id');
         
         if (Information::model()->deleteAll("informationId ='" . $informationId . "'")) {

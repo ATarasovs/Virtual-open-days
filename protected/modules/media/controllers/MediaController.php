@@ -51,40 +51,45 @@ class MediaController extends Controller
     }
     
     public function actionAdmin() {
+        
         $id = Yii::app()->user->getId(); 
         
-        $criteria = new CDbCriteria();
-        
         try {
-            $users = User::model()->findByPk($id);
+          $user = User::model()->findByPk($id);
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
+        if ($user->isAdmin != "true") {
+            Yii::trace("Someone without required permission tried to access admin page", "http");
+            Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
+            $this->redirect(array('/site/home'));
         }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        
+        $this->layout = '//layouts/menu';
 
         $this->render('admin', array(
         ));
     } 
     
     public function actionPhotosCategories() {
+        
         $id = Yii::app()->user->getId(); 
         
-        $criteria = new CDbCriteria();
-        
         try {
-            $users = User::model()->findByPk($id);
+          $user = User::model()->findByPk($id);
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
             Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if ($user->isAdmin != "true") {
+            Yii::trace("Someone without required permission tried to access admin page", "http");
+            Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
+            $this->redirect(array('/site/home'));
         }
         
         try {
@@ -104,18 +109,25 @@ class MediaController extends Controller
     
     public function actionPhotosAdmin() {
         
-        $id = Yii::app()->user->getId();
-        $locationId = Yii::app()->request->getParam('id');
-        
-        $criteria = new CDbCriteria();
+        $id = Yii::app()->user->getId(); 
         
         try {
-            $users = User::model()->findByPk($id);
+          $user = User::model()->findByPk($id);
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
+        
+        if ($user->isAdmin != "true") {
+            Yii::trace("Someone without required permission tried to access admin page", "http");
+            Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
+            $this->redirect(array('/site/home'));
+        }
+        
+        $locationId = Yii::app()->request->getParam('id');
+        
+        $criteria = new CDbCriteria();
         
         try {
             $location = Location::model()->findByPk($locationId);
@@ -146,19 +158,26 @@ class MediaController extends Controller
     
     public function actionUploadPhoto() {
         
-        $locationId = Yii::app()->request->getParam('id');
-        $id = Yii::app()->user->getId();
+        $id = Yii::app()->user->getId(); 
         
         try {
-            $location = Location::model()->findByPk($locationId);
+          $user = User::model()->findByPk($id);
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
+        if ($user->isAdmin != "true") {
+            Yii::trace("Someone without required permission tried to access admin page", "http");
+            Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
+            $this->redirect(array('/site/home'));
+        }
+        
+        $locationId = Yii::app()->request->getParam('id');
+        
         try {
-            $users = User::model()->findByPk($id);
+            $location = Location::model()->findByPk($locationId);
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
@@ -222,6 +241,23 @@ class MediaController extends Controller
     }
     
     public function actionDeletePhoto() {
+        
+        $id = Yii::app()->user->getId(); 
+        
+        try {
+          $user = User::model()->findByPk($id);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if ($user->isAdmin != "true") {
+            Yii::trace("Someone without required permission tried to access admin page", "http");
+            Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
+            $this->redirect(array('/site/home'));
+        }
+        
         $locationId = Yii::app()->request->getParam('locationid');
         $photoId = Yii::app()->request->getParam('id');
         $photoTitle = Yii::app()->request->getParam('title');
