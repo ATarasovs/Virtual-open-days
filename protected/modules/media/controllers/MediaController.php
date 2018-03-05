@@ -95,12 +95,7 @@ class MediaController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
 
         $this->render('photo-categories', array(
             'locations' => $locations,
@@ -141,12 +136,7 @@ class MediaController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
         
         $this->render('photo-admin', array(
             'photos' => $photos,
@@ -223,12 +213,7 @@ class MediaController extends Controller
             }
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        } 
+        $this->layout = '//layouts/menu';
         
         $this->render('photo-upload', array(
             'model' => $model,

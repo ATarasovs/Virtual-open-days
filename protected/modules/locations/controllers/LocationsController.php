@@ -53,17 +53,7 @@ class LocationsController extends Controller
     
     public function actionList() {
         
-        $id = Yii::app()->user->getId(); 
-        
         $criteria = new CDbCriteria();
-        
-        try {
-            $users = User::model()->findByPk($id);
-        }
-        catch (Exception $ex){
-            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
-            Yii::app()->user->setFlash('danger', $ex->getMessage());
-        }
         
         try {
             $count=Location::model()->count($criteria);
@@ -77,12 +67,7 @@ class LocationsController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
 
         $this->render('list', array(
             'locations' => $locations,
@@ -115,12 +100,7 @@ class LocationsController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
 
         $this->render('admin', array(
             'locations' => $locations,
@@ -186,12 +166,7 @@ class LocationsController extends Controller
             }
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
 
         $this->render('edit', array(
             'model' => $model,
@@ -199,18 +174,10 @@ class LocationsController extends Controller
     }   
     
     public function actionView() {
+        
         $locationId = Yii::app()->request->getParam('id');
-        $userId = Yii::app()->user->getId(); 
         
         $photosCriteria = new CDbCriteria();
-        
-        try {
-            $users = User::model()->findByPk($userId);
-        }
-        catch (Exception $ex){
-            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
-            Yii::app()->user->setFlash('danger', $ex->getMessage());
-        }
         
         if (!empty($locationId)) {
             try{
@@ -233,12 +200,7 @@ class LocationsController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
 
         $this->render('view', array(
             'model' => $model,

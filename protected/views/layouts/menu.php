@@ -86,19 +86,29 @@
                                 <?php } ?>
                         </ul>
                     </li>
-                    <li class="adminLi">
-                        <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false">
-                            <i class="fa fa-wrench"></i>
-                            Manage
-                        </a>
-                        <ul class="collapse list-unstyled" id="adminSubmenu">
-                            <li><a href="<?php print Yii::app()->createUrl('users/users/admin'); ?>">Users</a></li>
-                            <li><a href="<?php print Yii::app()->createUrl('locations/locations/admin'); ?>">Locations</a></li>
-                            <li><a href="<?php print Yii::app()->createUrl('events/events/admin'); ?>">Events</a></li>
-                            <li><a href="<?php print Yii::app()->createUrl('media/media/admin'); ?>">Media</a></li>
-                            <li><a href="<?php print Yii::app()->createUrl('/information/information/admin'); ?>">Pages</a></li>
-                        </ul>
-                    </li>
+                    <?php $id = Yii::app()->user->getId(); 
+                    try {
+                        $user = User::model()->findByPk($id);
+                    }
+                    catch (Exception $ex){
+                        Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+                        Yii::app()->user->setFlash('danger', $ex->getMessage());
+                    }
+                    if ($user->isAdmin == "true") {?>
+                        <li class="adminLi">
+                            <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false">
+                                <i class="fa fa-wrench"></i>
+                                Manage
+                            </a>
+                            <ul class="collapse list-unstyled" id="adminSubmenu">
+                                <li><a href="<?php print Yii::app()->createUrl('users/users/admin'); ?>">Users</a></li>
+                                <li><a href="<?php print Yii::app()->createUrl('locations/locations/admin'); ?>">Locations</a></li>
+                                <li><a href="<?php print Yii::app()->createUrl('events/events/admin'); ?>">Events</a></li>
+                                <li><a href="<?php print Yii::app()->createUrl('media/media/admin'); ?>">Media</a></li>
+                                <li><a href="<?php print Yii::app()->createUrl('/information/information/admin'); ?>">Pages</a></li>
+                            </ul>
+                        </li>
+                    <?php } ?>
                 </ul>
             </nav>
 

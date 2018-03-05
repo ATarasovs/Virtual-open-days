@@ -112,7 +112,7 @@
 </div>  
 
 <script>
-    var locaitonViewReqUrl = '<?php print Yii::app()->createUrl('locations/locations/view') ?>';
+    var locationViewReqUrl = '<?php print Yii::app()->createUrl('locations/locations/view') ?>';
     var locationEditReqUrl = '<?php print Yii::app()->createUrl('locations/locations/edit') ?>';
     var locationDeleteReqUrl = '<?php print Yii::app()->createUrl('locations/locations/deleterecord') ?>';
 </script>

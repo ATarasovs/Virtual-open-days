@@ -75,12 +75,7 @@ class UsersController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if($user->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
 
         $this->render('admin', array(
             'users' => $users,
@@ -146,12 +141,7 @@ class UsersController extends Controller
             }
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
 
         $this->render('edit', array(
             'model' => $model,
@@ -159,11 +149,12 @@ class UsersController extends Controller
     }   
     
     public function actionView() {
-        $id = Yii::app()->request->getParam('id');
-        $userId = Yii::app()->user->getId(); 
+        
+        $selectedUserId = Yii::app()->request->getParam('id');
+        $id = Yii::app()->user->getId(); 
         
         try {
-            $users = User::model()->findByPk($userId);
+            $users = User::model()->findByPk($id);
         }
         catch (Exception $ex){
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
@@ -180,12 +171,7 @@ class UsersController extends Controller
             }
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
 
         $this->render('view', array(
             'model' => $model,

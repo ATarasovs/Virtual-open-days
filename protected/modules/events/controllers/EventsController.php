@@ -53,17 +53,7 @@ class EventsController extends Controller
     
     public function actionListAllEvents() {
         
-        $id = Yii::app()->user->getId(); 
-        
         $criteria = new CDbCriteria();
-        
-        try {
-            $users = User::model()->findByPk($id);
-        }
-        catch (Exception $ex){
-            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
-            Yii::app()->user->setFlash('danger', $ex->getMessage());
-        }
         
         try {
             $locations = Location::model()->findAll();
@@ -94,12 +84,7 @@ class EventsController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
 
         $this->render('list', array(
             'events' => $events,
@@ -110,18 +95,11 @@ class EventsController extends Controller
     }
     
     public function actionListSubscribedEvents() {
+        
         $id = Yii::app()->user->getId();
         
         $eventsCriteria = new CDbCriteria();
         $participantsCriteria = new CDbCriteria();
-        
-        try {
-            $users = User::model()->findByPk($id);
-        }
-        catch (Exception $ex){
-            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
-            Yii::app()->user->setFlash('danger', $ex->getMessage());
-        }
         
         try {
             $locations = Location::model()->findAll();
@@ -160,12 +138,7 @@ class EventsController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
             
         $this->render('list',array(
             'events' => $events,
@@ -209,12 +182,7 @@ class EventsController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
 
         $this->render('admin', array(
             'events' => $events,
@@ -287,12 +255,7 @@ class EventsController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
 
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
 
         $this->render('view', array(
             'model' => $model,
@@ -379,12 +342,7 @@ class EventsController extends Controller
             Yii::app()->user->setFlash("danger", $ex->getMessage());
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
 
         $this->render('edit', array(
             'model' => $model,

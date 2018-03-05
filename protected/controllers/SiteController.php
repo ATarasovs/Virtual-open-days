@@ -38,9 +38,10 @@ class SiteController extends Controller
     public function actionHome()
     {        
         $id = Yii::app()->user->getId();
+        
         $eventsCriteria = new CDbCriteria();
         $participantsCriteria = new CDbCriteria();
-        $users = User::model()->findByPk($id);
+        
         $selectedLocation = Yii::app()->request->getParam('selectedlocation');
         
         try {
@@ -79,12 +80,7 @@ class SiteController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if($users->isAdmin == "true") {
-            $this->layout = '//layouts/adminmenu';
-        }
-        else {
-            $this->layout ='//layouts/usermenu';
-        }
+        $this->layout = '//layouts/menu';
             
         $this->render('home',array(
             'locations' => $locations,
