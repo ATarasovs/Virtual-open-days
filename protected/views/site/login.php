@@ -28,20 +28,18 @@
 
     
     <div class="form-group">
-        <!--<label for="name" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'username'); ?></label>-->
         <div class="cols-sm-10">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <span class="input-group-addon">&nbsp;<i class="fa fa-user fa" aria-hidden="true"></i>&nbsp;</span>
                 <?php echo $form->textField($model,'username',array('class'=>'form-control', 'placeholder' => 'Login', 'required' => 'required', 'autofocus' => 'autofocus')); ?>
             </div>
         </div>
     </div>
 
     <div class="form-group">
-        <!--<label for="name" class="cols-sm-10 control-label"><?php echo $form->labelEx($model,'password'); ?></label>-->
         <div class="cols-sm-10">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
+                <span class="input-group-addon">&nbsp;<i class="fa fa-lock fa" aria-hidden="true"></i>&nbsp;</span>
                 <?php echo $form->passwordField($model,'password',array('class'=>'form-control', 'placeholder' => 'Password', 'required' => 'required')); ?>
             </div>
         </div>
