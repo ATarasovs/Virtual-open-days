@@ -27,6 +27,5 @@ function initButtons() {
     $( ".removeBtn" ).click(function() {
         var locationId = $(this).attr("data-location-id");
         $(".deleteBtn").attr("data-location-id", locationId);
-        
     });
 }

@@ -43,7 +43,7 @@
             </div>
 
             <div class="panel-body">
-               <table class="table table-striped table-bordered table-list" id="events">
+               <table class="table table-striped table-bordered table-list" id="graphs">
                    <thead>
                        <th>Name</th>
                        <th>Department</th>
