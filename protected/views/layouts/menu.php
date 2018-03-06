@@ -25,6 +25,11 @@
             <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/lib/summernote/summernote.css">
             <script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/summernote/summernote.js"></script>
             
+            <script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/chartjs/chart.min.js"></script>
+            <script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/chartjs/chart.bundle.min.js"></script>
+            
+            
+            
             <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     </head>
     <body>
