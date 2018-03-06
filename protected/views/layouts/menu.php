@@ -65,8 +65,8 @@
                             Forum
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
+                    <li class="analyticsLi">
+                        <a href="<?php print Yii::app()->createUrl('analytics/analytics/view'); ?>">
                             <i class="fa fa-pie-chart"></i>
                             Analytics
                         </a>
@@ -110,6 +110,7 @@
                                 <li><a href="<?php print Yii::app()->createUrl('locations/locations/admin'); ?>">Locations</a></li>
                                 <li><a href="<?php print Yii::app()->createUrl('events/events/admin'); ?>">Events</a></li>
                                 <li><a href="<?php print Yii::app()->createUrl('media/media/admin'); ?>">Media</a></li>
+                                <li><a href="<?php print Yii::app()->createUrl('analytics/analytics/admin'); ?>">Analytics</a></li>
                                 <li><a href="<?php print Yii::app()->createUrl('/information/information/admin'); ?>">Pages</a></li>
                             </ul>
                         </li>

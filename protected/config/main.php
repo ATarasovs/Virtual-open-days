@@ -30,6 +30,8 @@ return array(
                 'application.modules.media.components.*',
                 'application.modules.information.models.*',
                 'application.modules.information.components.*',
+                'application.modules.analytics.models.*',
+                'application.modules.analytics.components.*',
 	),
 
 	'modules'=>array(
@@ -47,6 +49,7 @@ return array(
                 'messages',
                 'media',
                 'information',
+                'analytics',
 	),
 
 	// application components
