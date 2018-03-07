@@ -61,6 +61,17 @@
     opacity:0.6;      
 }
 
+.breadcrumb {
+    margin-bottom: 0px;
+}
+
+.item-listing {
+    padding: 20px;
+    /*magrin-right: 20px;*/
+    }
+
+
+
 
 
 
@@ -70,6 +81,9 @@
 Table CSS
 */
 
+.panel {
+    margin-top: 20px;
+}
 .panel-table {
     font-family: 'Poppins', sans-serif;
 }
@@ -825,6 +839,11 @@ margin-top:20px;
 End of Profile CSS
 */
 
+
+/*
+Image Preview CSS
+*/
+
 .image-preview-input {
     position: relative;
     overflow: hidden;
@@ -855,3 +874,7 @@ End of Profile CSS
 .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
    z-index: 0; 
 }
+
+/*
+End of Image Preview CSS
+*/

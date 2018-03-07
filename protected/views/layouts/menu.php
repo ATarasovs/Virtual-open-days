@@ -123,7 +123,7 @@
 
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <div class="collapse navbar-collapse">
                             <a href="<?php print Yii::app()->createUrl('site/home'); ?>">
                                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo.png" alt="Dundee University Virtual Open Days" style="width:247px;height:43px;">
                             </a>

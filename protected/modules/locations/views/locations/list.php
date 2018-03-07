@@ -26,10 +26,10 @@
     </div>
 </div>
 <!--*************************************************************-->
-<div class="row">
+<div class="container-fluid">
     <div class="top30"></div>
     <div class="item-listing small-padding-bg">
-        <div class="container">
+        <!--<div class="container">-->
             <?php foreach ($locations as $location) { ?>
                 <div class="top30"></div>
                 <div class="row">
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             <?php } ?>
-        </div>
+        <!--</div>-->
     </div>
 </div>
 <div class="top15"></div>
