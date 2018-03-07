@@ -234,7 +234,7 @@ class AnalyticsController extends Controller
         }
         
         if (Chart::model()->deleteAll("id ='" . $chartId . "'")) {
-            Yii::trace("Information form sent", "http");
+            Yii::trace("Chart form sent", "http");
             Yii::app()->user->setFlash("success", "The changes were confirmed");
             $this->redirect(array('analytics/admin'));
         }

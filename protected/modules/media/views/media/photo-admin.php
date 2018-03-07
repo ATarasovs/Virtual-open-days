@@ -30,6 +30,15 @@
     </div>
 </div>
 <!--*************************************************************-->
+
+<div class="row">
+    <div class="col-md-12">
+        <button class="uploadBtn btn btn-success btn-block"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
+    </div>
+</div>
+
+<div class="top30"></div>
+
 <div class="row">
     <?php foreach ($photos as $photo) { ?>
         <div class="col-lg-3 col-sm-4 col-xs-6"><a data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $photo->locationId ?>" href="javascript:;"><img class="thumbnail img-responsive" src="/vod/images/media/photos/<?php echo $photo->locationId ?>/<?php echo $photo->mediaPath ?>"></a></div>
@@ -38,7 +47,6 @@
 
 <div class="row">
     <div class="col-md-12">
-        <button class="uploadBtn btn btn-success btn-sm"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
         <a class="btn btn-primary btn-sm backBtn">
             <i class="fa fa-file-image-o bigger-125"></i> <?php print Yii::t('common', 'Back to photo categories'); ?>
         </a>
