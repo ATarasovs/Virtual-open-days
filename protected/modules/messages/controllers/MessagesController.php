@@ -96,7 +96,7 @@ class MessagesController extends Controller
         $model->eventId = $eventId;
 
         if ($model->save()) {
-            Yii::trace("Event form sent", "http");
+            Yii::trace("Message form sent", "http");
         }
         else {
             Yii::trace("Something went wrong", "http");

@@ -43,14 +43,9 @@
         <span class="left"><?php echo $form->labelEx($model,'type', array('class'=>'form-signin-heading')); ?></span>
         <?php echo $form->dropDownList($model,'type', 
                 array(
-                    '' => '', 
-                    'bar' => 'Bar chart', 
-                    'line' => 'Line chart',
+                    '' => '',
                     'pie' => 'Pie chart',
-                    'radar' => 'Radar chart',
-                    'polarArea' => 'Polar area chart',
-                    'doughnut' => 'Doughnut chart',
-                    'horizontalBar' => 'Horizontal bar chart'
+                    'doughnut' => 'Doughnut chart'
                 ), 
                 array('id' => 'type', 'class'=>'form-control', 'data-validation' => 'required', 'data-validation-error-msg' => 'The type must not be empty')); ?>
     </div>
@@ -80,6 +75,19 @@
                        <td>Actions</td>
                    </thead>
                    <tbody>
+                       <?php foreach ($datas as $data) { ?>
+                            <tr>
+                                <td class="col-xs-6">
+                                    <input type="text" class="form-control" value="<?php echo $data->title; ?>">
+                                </td>
+                                <td class="col-xs-3">
+                                    <input type="text" class="form-control" value="<?php echo $data->number; ?>">
+                                </td>
+                                <td class="col-xs-3">
+                                    <a class="btn btn-danger btn-sm deleteRowBtn"><i class="fa fa-times bigger-125"></i> Delete</a>
+                                </td>
+                            </tr>
+                       <?php } ?>
                    </tbody>    
                </table>
             </div>
@@ -116,6 +124,8 @@
 <?php $this->endWidget(); ?>
 
 <script>
+    var chartId = '<?php print Yii::app()->request->getParam('id') ?>';
+    
     $(document).ready(function() {
         $(".adminLi").addClass("active");
 
@@ -128,6 +138,7 @@
         });
         
         $( ".submitBtn" ).click(function() {
+            saveData();
             $.validate({
                 modules : '',
 
@@ -160,5 +171,43 @@
                 '</tr>');
     }
     
+    function saveData() {
+        var data = {};
+        var key = "";
+        var value = "";
+        
+        $('#data tbody tr').each(function(){
+            var count = 0;
+            $(this).find('td').each(function(){
+                if (count == 0) {
+                    key = $(this).find('input').val();
+                }
+                if (count == 1) {
+                    value = $(this).find('input').val();
+                }
+                if (count == 2) {
+                    data[key] = value;
+                    return false;
+                }
+                
+//                console.log("hello world");
+                count++;
+            })
+        })
+        
+        data = JSON.stringify(data);
+//        numbrs = JSON.stringify(numbers);
+        console.log(data);
+//        console.log(numbers);
+
+        $.ajax({
+            method: "POST",
+            url: saveDataReqUrl, // here your URL address
+            data: { id: chartId,
+                    data: data}
+          }); 
+        }
+    
     chartAdminReqUrl = '<?php print Yii::app()->createUrl('analytics/analytics/admin') ?>';
+    saveDataReqUrl = '<?php print Yii::app()->createUrl('analytics/analytics/saveData') ?>';
 </script>

@@ -120,6 +120,8 @@ class AnalyticsController extends Controller
         
         $id = Yii::app()->user->getId(); 
         
+        $criteria = new CDbCriteria();
+        
         try {
           $user = User::model()->findByPk($id);
         }
@@ -139,6 +141,15 @@ class AnalyticsController extends Controller
         if (!empty($chartId)) {
             try{
                 $model = Chart::model()->findByPk($chartId, array());
+            }
+            catch(EActiveResourceRequestException_ResponseFalse $ex){
+                Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+                Yii::app()->user->setFlash("danger", $ex->getMessage());
+            }
+            
+            try{
+                $criteria->addCondition("chartId = '$chartId'");
+                $datas = Data::model()->findAll($criteria);
             }
             catch(EActiveResourceRequestException_ResponseFalse $ex){
                 Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
@@ -166,9 +177,36 @@ class AnalyticsController extends Controller
 
         $this->render('edit', array(
             'model' => $model,
+            'datas' => $datas,
         ));
     }  
 
+    public function actionSaveData() {
+        
+        $chartId = $_POST['id'];
+        $data = json_decode($_POST['data']);
+        
+        if (Data::model()->deleteAll("chartId ='" . $chartId . "'")) {
+            Yii::trace("Data form sent", "http");
+        }
+        
+        Yii::trace($chartId, "http");
+        foreach ($data as $key => $value) {
+            $model = new Data();
+            $this->performAjaxValidation($model);
+
+            $model->chartId = $chartId;
+            $model->title = $key;
+            $model->number = $value;
+            
+            if ($model->save()) {
+             Yii::trace("Data form sent", "http");
+            }
+            else {
+                Yii::trace("Something went wrong", "http");
+            }
+       }
+    }
 
     /**
      * Performs the AJAX validation.
