@@ -122,6 +122,8 @@ class AnalyticsController extends Controller
         
         $criteria = new CDbCriteria();
         
+        $datas = array();
+        
         try {
           $user = User::model()->findByPk($id);
         }

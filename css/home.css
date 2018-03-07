@@ -56,8 +56,8 @@
     color: #2072f7;
 }
 
-.disabled {
-    pointer-events:none;
+a.btn.disabled {
+    pointer-events: auto;
     opacity:0.6;      
 }
 
@@ -877,4 +877,39 @@ Image Preview CSS
 
 /*
 End of Image Preview CSS
+*/
+
+
+/*
+Tooltip CSS
+*/
+
+.tooltipp {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltipp .tooltipptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltipp:hover .tooltipptext {
+    visibility: visible;
+}
+
+/*
+End of Tooltip CSS
 */

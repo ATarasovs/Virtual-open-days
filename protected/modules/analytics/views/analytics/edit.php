@@ -78,10 +78,10 @@
                        <?php foreach ($datas as $data) { ?>
                             <tr>
                                 <td class="col-xs-6">
-                                    <input type="text" class="form-control" value="<?php echo $data->title; ?>">
+                                    <input type="text" class="form-control" value="<?php echo $data->title; ?>" data-validation="required" data-validation-error-msg="The label must not be empty">
                                 </td>
                                 <td class="col-xs-3">
-                                    <input type="text" class="form-control" value="<?php echo $data->number; ?>">
+                                    <input type="text" class="form-control" value="<?php echo $data->number; ?>" data-validation="required" data-validation-error-msg="The number must not be empty">
                                 </td>
                                 <td class="col-xs-3">
                                     <a class="btn btn-danger btn-sm deleteRowBtn"><i class="fa fa-times bigger-125"></i> Delete</a>
@@ -128,7 +128,14 @@
     
     $(document).ready(function() {
         $(".adminLi").addClass("active");
-
+        
+        if(chartId == "") {
+            $(".addDataBtn").addClass("disabled");
+            $('.addDataBtn').attr('title', 'Data can be only added after the chart is created.');
+            $('.addDataBtn').attr('data-toggle', 'tooltip');
+            $('[data-toggle="tooltip"]').tooltip(); 
+        }
+        
         initButtons();
     });
     
