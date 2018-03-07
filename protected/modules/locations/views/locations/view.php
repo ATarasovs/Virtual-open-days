@@ -31,7 +31,7 @@
 <!--*************************************************************-->
 
 
-<div class="container">    
+<div class="container-fluid">    
     <h2><?php echo $model->locationName; ?></h2>
     <div class="row">
         <div class="col-md-12">

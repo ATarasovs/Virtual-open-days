@@ -26,14 +26,13 @@
 <!--*************************************************************-->
 
 
-<div class="container">  
-    <div class="row">
-        <?php foreach ($charts as $chart) { ?>
-            <div class="col-md-6">
-                <canvas id="<?php echo $chart->id ?>" width="400" height="400"></canvas>
-            </div>
-        <?php } ?>
-    </div>
+<div class="container-fluid">  
+    <h2>Analytics</h2>
+    <?php foreach ($charts as $chart) { ?>
+        <div class="col-md-6">
+            <canvas id="<?php echo $chart->id ?>" width="400" height="400"></canvas>
+        </div>
+    <?php } ?>
 </div>
 
 <script>
