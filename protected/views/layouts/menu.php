@@ -28,6 +28,12 @@
             <script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/chartjs/chart.min.js"></script>
             <script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/chartjs/chart.bundle.min.js"></script>
             
+            <script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/dropzone/dropzone.js"></script>
+            <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/lib/dropzone/dropzone.css">
+            
+            <script src="https://cdn.pannellum.org/2.4/pannellum.js"></script>
+            <link rel="stylesheet" href="https://cdn.pannellum.org/2.4/pannellum.css">
+            
             
             
             <title><?php echo CHtml::encode($this->pageTitle); ?></title>

@@ -158,21 +158,21 @@ class MediaController extends Controller
     
     public function actionUploadPhoto() {
         
-        $id = Yii::app()->user->getId(); 
-        
-        try {
-          $user = User::model()->findByPk($id);
-        }
-        catch (Exception $ex){
-            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
-            Yii::app()->user->setFlash('danger', $ex->getMessage());
-        }
-        
-        if ($user->isAdmin != "true") {
-            Yii::trace("Someone without required permission tried to access admin page", "http");
-            Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
-            $this->redirect(array('/site/home'));
-        }
+//        $id = Yii::app()->user->getId(); 
+//        
+//        try {
+//          $user = User::model()->findByPk($id);
+//        }
+//        catch (Exception $ex){
+//            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+//            Yii::app()->user->setFlash('danger', $ex->getMessage());
+//        }
+//        
+//        if ($user->isAdmin != "true") {
+//            Yii::trace("Someone without required permission tried to access admin page", "http");
+//            Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
+//            $this->redirect(array('/site/home'));
+//        }
         
         $locationId = Yii::app()->request->getParam('id');
         
@@ -186,11 +186,11 @@ class MediaController extends Controller
         
         $model = new Media();
         
-        $this->performAjaxValidation($model);
+//        $this->performAjaxValidation($model);
         
         if(isset($_POST['Media'])){
-            $model->image = CUploadedFile::getInstance($model,'image');
-            $file = CUploadedFile::getInstance($model,'image');
+            $model->image = $_FILES['file']['tmp_name'];
+            $file = $_FILES['file']['tmp_name'];
             $folderName = $locationId;
             $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $charactersLength = strlen($characters);
@@ -238,6 +238,72 @@ class MediaController extends Controller
             'model' => $model,
             'location' => $location,
         ));
+    }
+    
+    public function actionUpload () {
+        
+        $locationId = Yii::app()->request->getParam('id');
+        
+        $model = new Media();
+        
+        $tempFile = $_FILES['file']['tmp_name'];
+        $extension = explode(".", $_FILES['file']['name']);
+        $folderName = $locationId;
+        $targetPath = Yii::app()->basePath . '/../images/media/photos/' . $folderName . '/';
+        
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $fileName = '';
+        
+        for ($i = 0; $i < 10; $i++) {
+            $fileName .= $characters[rand(0, $charactersLength - 1)];
+        
+            
+        }
+        $targetFile =  $targetPath. $fileName . "." . $extension[1];
+        
+        move_uploaded_file($tempFile,$targetFile);
+        
+        $model->mediaPath = $fileName . "." . $extension[1];
+        $model->mediaType = "photo";
+        $model->locationId = $locationId;
+        
+        
+        if ($model->save()) {
+            Yii::trace("Media form sent", "http");
+        }
+
+//        if ($file != null) {
+//            $extension = $model->image->getExtensionName();
+//
+//            if ($extension == "png" || $extension == "jpg") {
+//                if (!file_exists(Yii::app()->basePath . '/../images/media/photos/' . $folderName)) {
+//                    mkdir(Yii::app()->basePath . '/../images/media/photos/' . $folderName, 0777, true);
+//                }
+//
+//                @unlink(Yii::app()->basePath . '/../images/media/photos/' . $folderName . '/' . $fileName . '.png');
+//                @unlink(Yii::app()->basePath . '/../images/media/photos/' . $folderName . '/' . $fileName . '.jpg');
+//
+//                $model->image->saveAs(Yii::app()->basePath . '/../images/media/photos/' . $folderName . '/' . $fileName . '.' . $extension);
+//                $model->mediaPath = $fileName . '.' . $extension;
+//                $model->mediaType = "photo";
+//                $model->locationId = $locationId;
+//
+//                if ($model->save()) {
+//                    Yii::trace("Media form sent", "http");
+//                    Yii::app()->user->setFlash("success", "Photo was successfully added");
+//                    $this->redirect(array('media/photosadmin?id=' . $locationId));
+//                }
+//            }
+//            else {
+//                Yii::app()->user->setFlash("danger", "The uploaded file is not an image");
+//                $this->redirect(array('media/uploadphoto?id=' . $locationId));
+//            }
+//        }
+//        else {
+//            Yii::app()->user->setFlash("danger", "There was no file selected to upload");
+//            $this->redirect(array('media/uploadphoto?id=' . $locationId));
+//        }
     }
     
     public function actionDeletePhoto() {
