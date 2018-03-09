@@ -34,10 +34,14 @@
     'enableClientValidation'=>false,
     'htmlOptions' => array(
         'enctype' => 'multipart/form-data',
-        'class' => 'dropzone'
+        'class' => 'dropzone dz-clickable'
     ),
     'action' => array( '/media/media/upload?id=' . Yii::app()->request->getParam('id') ),
 )); ?>
+
+    <div class="dz-message">Drop images here or click to upload.
+        <br> <span class="note">(Only these extensions of images are allowed: <b>jpg, jpeg, png, bmp</b>)</span>
+    </div>
 
 <!--<div class="row">-->
 <!--    <div class="form-group">
