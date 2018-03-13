@@ -40,8 +40,10 @@
 <div class="top30"></div>
 
 <div class="row">
-    <?php foreach ($photos as $photo) { ?>
-        <div class="col-lg-3 col-sm-4 col-xs-6"><a data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $photo->locationId ?>" href="javascript:;"><img class="thumbnail img-responsive" src="/vod/images/media/photos/<?php echo $photo->locationId ?>/<?php echo $photo->mediaPath ?>"></a></div>
+    <?php 
+        $locationName = preg_replace("/[^a-zA-Z0-9]+/", "", $location->locationName);
+        foreach ($photos as $photo) { ?>
+            <div class="col-lg-3 col-sm-4 col-xs-6"><a data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $photo->locationId ?>" href="javascript:;"><img class="thumbnail img-responsive" src="/vod/images/media/photos/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>"></a></div>
     <?php } ?>
 </div>
 
