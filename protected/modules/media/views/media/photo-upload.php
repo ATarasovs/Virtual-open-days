@@ -40,7 +40,8 @@
 )); ?>
 
     <div class="dz-message">Drop images here or click to upload.
-        <br> <span class="note">(Only these extensions of images are allowed: <b>jpg, jpeg, png, bmp</b>)</span>
+        <br> <span class="note">(Only these extensions of images are allowed: <b>jpg, jpeg, png, bmp</b>)</span><br/>
+        <img src='/vod/images/upload.png'>
     </div>
 
 <!--<div class="row">-->
