@@ -148,6 +148,11 @@ class MediaController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
+        if (empty($photos)) {
+            Yii::app()->user->setFlash("notice", "There are no photos of this location");
+        }
+        
+        
         $this->layout = '//layouts/menu';
         
         $this->render('photo-admin', array(

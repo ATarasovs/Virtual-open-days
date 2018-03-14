@@ -13,6 +13,8 @@
     Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.media.assets').'\photo-admin.js'), CClientScript::POS_HEAD);
 ?>
 
+<div class="top15"></div>
+
 <!--*************************************************************-->
 <div class="row">
     <div class="col-xs-12">
