@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-4">
         <div class="thumbnail" style="height:300px;">
-            <a href="<?php print Yii::app()->createUrl('media/media/panorama'); ?>">
+            <a href="<?php print Yii::app()->createUrl('media/media/panoramacategories'); ?>">
                 <img src="/vod/images/360_photo.jpg" alt="Lights" style="max-height:230px;">
                 <div class="caption center">
                     <h3>360 photos</h3>

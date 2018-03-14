@@ -6,11 +6,11 @@ $(document).ready(function() {
 
 function initButtons() {
     $( ".backBtn" ).click(function() {
-            location.href = mediaPhotoCategoriesReqUrl;
+            location.href = mediaPanoramaCategoriesReqUrl;
         });
     
     $( ".uploadBtn" ).click(function() {
-      location.href = uploadPhotoReqUrl + "?id=" + locationId;
+      location.href = uploadPanoramaReqUrl + "?id=" + locationId;
     });
     
     $('.thumbnail').click(function(){
@@ -34,7 +34,7 @@ function initButtons() {
         var photoTitle = $(this).attr("data-photo-title");
         var photoFolder = $(this).attr("data-photo-folder");
         
-        location.href = deletePhotoReqUrl + "?id=" + photoId + "&title=" + photoTitle + "&folder=" + photoFolder + "&locationid=" + locationId;
+        location.href = deletePanoramaReqUrl + "?id=" + photoId + "&title=" + photoTitle + "&folder=" + photoFolder + "&locationid=" + locationId;
         
     });
 }

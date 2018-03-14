@@ -3,9 +3,9 @@
         'crumbs' => array(
             array('name' => 'Home', 'url' => array('/site/home')),
             array('name' => 'Media', 'url' => array('/media/media/admin')),
-            array('name' => 'Photo categories', 'url' => array('/media/media/photoscategories')),
-            array('name' => 'Photos <small>(' . $location->locationName . ')</small>', 'url' => array('/media/media/photosadmin?id=' . $location->locationId)),
-            array('name' => 'Upload photo'),
+            array('name' => 'Categories', 'url' => array('/media/media/panoramacategories')),
+            array('name' => '360 degree photos <small>(' . $location->locationName . ')</small>', 'url' => array('/media/media/panoramaadmin?id=' . $location->locationId)),
+            array('name' => 'Upload'),
         ),
     )); 
 ?>
@@ -38,10 +38,10 @@
         'enctype' => 'multipart/form-data',
         'class' => 'dropzone dz-clickable'
     ),
-    'action' => array( '/media/media/uploadphototoserver?id=' . Yii::app()->request->getParam('id') ),
+    'action' => array( '/media/media/uploadpanoramatoserver?id=' . Yii::app()->request->getParam('id') ),
 )); ?>
 
-    <div class="dz-message">Drop images here or click to upload.
+    <div class="dz-message">Drop 360 degree photos here or click to upload.
         <br> <span class="note">(Only these extensions of images are allowed: <b>jpg, jpeg, png, bmp</b>)</span><br/>
         <img src='/vod/images/upload.png' style="max-width:20%">
     </div>
@@ -80,7 +80,7 @@
     
     function initButtons() {
         $( ".backBtn" ).click(function() {
-            location.href = mediaPhotosReqUrl + "?id=" + locationId;
+            location.href = mediaPanoramaReqUrl + "?id=" + locationId;
         });
     }
     
@@ -100,5 +100,5 @@
         });
     }
     
-    var mediaPhotosReqUrl = '<?php print Yii::app()->createUrl('media/media/photosadmin') ?>';
+    var mediaPanoramaReqUrl = '<?php print Yii::app()->createUrl('media/media/panoramaadmin') ?>';
 </script>
