@@ -506,6 +506,57 @@ class MediaController extends Controller
         }
     }
     
+    public function actionPanoramaView() {
+        $id = Yii::app()->user->getId(); 
+        
+        try {
+          $user = User::model()->findByPk($id);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if ($user->isAdmin != "true") {
+            Yii::trace("Someone without required permission tried to access admin page", "http");
+            Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
+            $this->redirect(array('/site/home'));
+        }
+        
+        $fileName = Yii::app()->request->getParam('id');
+        $locationId = Yii::app()->request->getParam('location');
+        
+        try {
+            $location = Location::model()->findByPk($locationId);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        Yii::trace("location name " . $location->locationName, "http");
+        
+        $criteria = new CDbCriteria();
+        
+        $criteria->addCondition("mediaType = 'panorama'");
+        $criteria->addCondition("mediaPath = '$fileName'");
+        
+        try {
+            $photos = Media::model()->findAll($criteria);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        $this->layout = '//layouts/menu';
+        
+        $this->render('panorama-view', array(
+            'photos' => $photos,
+            'location' => $location,
+        ));
+    }
+    
     /**
      * Performs the AJAX validation.
      * @param User $model the model to be validated

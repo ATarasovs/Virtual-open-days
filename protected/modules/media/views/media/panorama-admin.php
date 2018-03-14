@@ -48,13 +48,13 @@
     <?php 
         $locationName = preg_replace("/[^a-zA-Z0-9]+/", "", $location->locationName);
         foreach ($photos as $photo) { ?>
-            <div class="col-lg-4 col-sm-6 col-xs-12" style="height:250px;"><a data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $locationName ?>" href="javascript:;"><img class="thumbnail img-responsive galleryphoto" src="/vod/images/media/panorama/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>"></a></div>
+            <div class="col-lg-4 col-sm-6 col-xs-12" style="height:250px;"><a href="<?php print Yii::app()->createUrl('media/media/panoramaview?id=' . $photo->mediaPath . '&location=' . $location->locationId) ?>"><img class="thumbnail img-responsive galleryphoto" src="/vod/images/media/panorama/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>"></a></div>
     <?php } ?>
 </div>
 
 
 
-<div tabindex="-1" class="modal fade" id="myModal" role="dialog">
+<!--<div tabindex="-1" class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-dialog-photo">
         <div class="modal-content">
             <div class="modal-header">
@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 <div class="top30"></div>
 
