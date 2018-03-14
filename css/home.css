@@ -68,7 +68,23 @@ a.btn.disabled {
 .item-listing {
     padding: 20px;
     /*magrin-right: 20px;*/
-    }
+}
+
+.photodiv {
+    height:270px;
+    margin-top:10px;
+}
+
+.photodiv img {
+    width:100%;
+    max-height: 230px;
+}
+
+.photodiv div {
+    width:100%;
+    height: 40px;
+}
+
 
 
 
@@ -759,8 +775,14 @@ End of Tab Panel CSS
 Photos Gallery CSS
 */
 
-.modal-dialog-photo {width:300px;}
+.modal-dialog-photo {width:50%;}
 .thumbnail {margin-bottom:20px;}
+
+.modal-body .thumbnail {
+
+    display:block;
+    margin:auto;
+}
 
 /*
 End of Photos Gallery CSS

@@ -31,29 +31,26 @@
 </div>
 <!--*************************************************************-->
 
+
+<div class="top15"></div>
+
 <div class="row">
     <div class="col-md-12">
-        <button class="uploadBtn btn btn-success btn-block"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
+        <button class="uploadBtn btn btn-success btn-block pull-right"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
     </div>
 </div>
 
-<div class="top30"></div>
+<div class="top15"></div>
 
 <div class="row">
     <?php 
         $locationName = preg_replace("/[^a-zA-Z0-9]+/", "", $location->locationName);
         foreach ($photos as $photo) { ?>
-            <div class="col-lg-3 col-sm-4 col-xs-6"><a data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $locationName ?>" href="javascript:;"><img class="thumbnail img-responsive" src="/vod/images/media/photos/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>"></a></div>
+            <div class="col-lg-4 col-sm-6 col-xs-12 photodiv"><a data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $locationName ?>" href="javascript:;"><img class="photo thumbnail img-responsive" src="/vod/images/media/photos/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>"></a></div>
     <?php } ?>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <a class="btn btn-primary btn-sm backBtn">
-            <i class="fa fa-file-image-o bigger-125"></i> <?php print Yii::t('common', 'Back to photo categories'); ?>
-        </a>
-    </div>
-</div>
+
 
 <div tabindex="-1" class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-dialog-photo">
@@ -69,6 +66,16 @@
                 <button class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="top30"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-primary btn-sm backBtn">
+            <i class="fa fa-file-image-o bigger-125"></i> <?php print Yii::t('common', 'Back to photo categories'); ?>
+        </a>
     </div>
 </div>
 
