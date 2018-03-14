@@ -31,7 +31,7 @@
 <div class="top30"></div>
 
 <?php $form = $this->beginWidget('CActiveForm', array(
-    'id'=>'upload-form',
+    'id'=>'uploadform',
     'enableAjaxValidation'=>false,
     'enableClientValidation'=>false,
     'htmlOptions' => array(
@@ -58,6 +58,17 @@
     </div>
 </div>
 
+<script type="text/javascript">
+   Dropzone.options.uploadform = {
+        accept: function(file, done) {
+            console.log(file);
+            if (file.type != "image/jpeg" && file.type != "image/bmp" && file.type != "image/png" && file.type != "image/giff" && file.type != "image/jpg" && file.type != "image/tiff") {
+                done('Error! Files of this type are not accepted');
+            }
+            else { done(); }
+        }
+    }
+</script>
 
 <script>
     var locationId = '<?php print Yii::app()->request->getParam('id') ?>';
