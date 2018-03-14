@@ -46,55 +46,17 @@
         <img src='/vod/images/upload.png' style="max-width:20%">
     </div>
 
-<!--<div class="row">-->
-<!--    <div class="form-group">
-        <div class="input-group input-file" name="Fichier1">
-            <span class="input-group-btn">
-                <button class="btn btn-default btn-choose" type="button">Choose</button>
-            </span>
-            <?php // echo $form->fileField($model, 'image', array('class'=>'form-control', 'placeholder'=>'Choose a file...')); ?>
-        <input type="text" class="form-control" placeholder='Choose a file...' />
-            <span class="input-group-btn">
-                <button class="btn btn-warning btn-reset" type="button">Reset</button>
-            </span>
-        </div>
-    </div>-->
-<!--    <div class="input-group image-preview">
-            <input type="text" class="form-control image-preview-filename" disabled="disabled">
-            <span class="input-group-btn">
-                <div class="btn btn-default image-preview-input">
-                    <span class="glyphicon glyphicon-folder-open"></span>
-                    <span class="image-preview-input-title">Browse</span>
-                    <?php // echo $form->fileField($model, 'image', array('class'=>'form-control', 'placeholder'=>'Choose a file...')); ?>
-                </div>
-            </span>
-        </div>-->
-    <!--<div class="col-sm-4">-->
-        <!--<span class="left"><?php // echo $form->labelEx($model,'image', array('class'=>'form-signin-heading')); ?></span>-->
-        <?php // echo $form->fileField($model, 'image', array('class'=>'form-control', 'placeholder'=>'Choose a file...')); ?>
-<!--    </div>
-</div>-->
+<?php $this->endWidget(); ?>
 
-<!--<div class="top15"></div>-->
+<div class="top30"></div>
 
-<!--<div class="row">
-    <div class="col-md-12">-->
-        <?php
-//            echo CHtml::htmlButton('<i class="ace-icon fa fa-upload bigger-125"></i> Upload', array(
-//                'class' => 'btn btn-success btn-sm operationBtn',
-//                'encode' => false,
-//                'type' => 'submit',
-//                'id' => 'sendBtn')
-//            );
-        ?>
-
-<!--        <a class="btn btn-primary btn-sm backBtn">
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-primary btn-sm backBtn">
             <i class="fa fa-file-image-o bigger-125"></i> <?php print Yii::t('common', 'Back to photos'); ?>
         </a>
     </div>
-</div>-->
-
-<?php $this->endWidget(); ?>
+</div>
 
 
 <script>
