@@ -31,6 +31,10 @@
             <script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/dropzone/dropzone.js"></script>
             <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/lib/dropzone/dropzone.css">
             
+            <?php     
+                Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.views.layouts.assets').'\menu.js'), CClientScript::POS_HEAD);
+            ?>
+            
             <script src="https://cdn.pannellum.org/2.4/pannellum.js"></script>
             <link rel="stylesheet" href="https://cdn.pannellum.org/2.4/pannellum.css">
             
@@ -47,6 +51,12 @@
                         <a href="<?php print Yii::app()->createUrl('site/home'); ?>">
                             <i class="fa fa-home fa-3x"></i>
                             Home
+                        </a>
+                    </li>
+                    <li class="profileLi">
+                        <a href="<?php print Yii::app()->createUrl('users/users/view?id=' . Yii::app()->user->getId()); ?>"</a>
+                            <i class="fa fa-user fa-3x"></i>
+                            Profile
                         </a>
                     </li>
                     <li class="buildingsLi">
@@ -121,6 +131,12 @@
                             </ul>
                         </li>
                     <?php } ?>
+                    <li class="logoutLi">
+                        <a href="<?php print Yii::app()->createUrl('site/logout'); ?>">
+                            <i class="fa fa-sign-out fa-3x"></i>
+                            Logout
+                        </a>
+                    </li>
                 </ul>
             </nav>
 
@@ -136,7 +152,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="<?php print Yii::app()->createUrl('site/home'); ?>">Home</a></li>
                                 <li><a href="<?php print Yii::app()->createUrl('users/users/view?id=' . Yii::app()->user->getId()); ?>">Profile <small>(<?php echo Yii::app()->user->getName(); ?>)</small></a></li>
-                                <li><?php echo CHtml::link('Logout',array('/site/logout')); ?></li>
+                                <li><a href="<?php print Yii::app()->createUrl('site/logout'); ?>">Logout</a></li>
                             </ul>
                         </div>
                     </div>

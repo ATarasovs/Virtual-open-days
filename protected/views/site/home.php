@@ -1,7 +1,3 @@
-<?php 
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.views.site.assets.js').'\home.js'), CClientScript::POS_HEAD);
-?>
-
 <!--*************************************************************-->
 <div class="row">
     <div class="col-xs-12">
