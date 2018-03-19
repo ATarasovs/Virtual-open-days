@@ -75,12 +75,12 @@
                             <li><a href="<?php print Yii::app()->createUrl('events/events/listallevents'); ?>">All events</a></li>
                         </ul>
                     </li>
-                    <li>
+<!--                    <li>
                         <a href="#">
                             <i class="fa fa-comments"></i>
                             Forum
                         </a>
-                    </li>
+                    </li>-->
                     <li class="analyticsLi">
                         <a href="<?php print Yii::app()->createUrl('analytics/analytics/view'); ?>">
                             <i class="fa fa-pie-chart"></i>
