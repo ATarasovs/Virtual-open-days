@@ -28,14 +28,14 @@
             </a>
         </div>
     </div>
-    <div class="col-md-4">
+<!--    <div class="col-md-4">
         <div class="thumbnail" style="height:300px;">
-            <a href="<?php print Yii::app()->createUrl('media/media/videos'); ?>">
+            <a href="<?php // print Yii::app()->createUrl('media/media/videos'); ?>">
                 <img src="/vod/images/video.jpg" alt="Lights" style="max-height:230px;">
                 <div class="caption center">
                    <h3>Videos</h3>
                 </div>
             </a>
         </div>
-    </div>
+    </div>-->
 </div>
