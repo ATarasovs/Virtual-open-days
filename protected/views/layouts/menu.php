@@ -31,10 +31,6 @@
             <script src="<?php echo Yii::app()->request->baseUrl; ?>/lib/dropzone/dropzone.js"></script>
             <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/lib/dropzone/dropzone.css">
             
-            <?php     
-                Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.views.layouts.assets').'\menu.js'), CClientScript::POS_HEAD);
-            ?>
-            
             <script src="https://cdn.pannellum.org/2.4/pannellum.js"></script>
             <link rel="stylesheet" href="https://cdn.pannellum.org/2.4/pannellum.css">
             
