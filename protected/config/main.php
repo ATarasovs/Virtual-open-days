@@ -54,6 +54,10 @@ return array(
 
 	// application components
 	'components'=>array(
+            
+//                'fixture'=>array(
+//                    'class'=>'system.test.CDbFixtureManager',
+//                ),
 
 		'user'=>array(
 			// enable cookie-based authentication
