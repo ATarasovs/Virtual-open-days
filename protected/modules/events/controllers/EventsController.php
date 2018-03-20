@@ -76,6 +76,10 @@ class EventsController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
+        if ((empty($events))) {
+            Yii::app()->user->setFlash('notice', "There are no any events at the moment. Please return to this page later.");
+        }
+        
         try {
             $participants = Participant::model()->findAll();
         }
@@ -136,6 +140,10 @@ class EventsController extends Controller
         catch (Exception $ex) {
             Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
             Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if ((empty($events))) {
+            Yii::app()->user->setFlash('notice', "You did not sign up to any event. To sign up, go to the all events page.");
         }
         
         $this->layout = '//layouts/menu';
