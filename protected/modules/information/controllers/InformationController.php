@@ -62,7 +62,7 @@ class InformationController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if ($user->isAdmin != "true") {
+        if ($user->isAdmin != "true" || $user->isConfirmed != "true") {
             Yii::trace("Someone without required permission tried to access admin page", "http");
             Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
             $this->redirect(array('/site/home'));
@@ -123,7 +123,7 @@ class InformationController extends Controller
         Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if ($user->isAdmin != "true") {
+        if ($user->isAdmin != "true" || $user->isConfirmed != "true") {
             Yii::trace("Someone without required permission tried to access admin page", "http");
                 Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
                 $this->redirect(array('/site/home'));
@@ -175,7 +175,7 @@ class InformationController extends Controller
         Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
-        if ($user->isAdmin != "true") {
+        if ($user->isAdmin != "true" || $user->isConfirmed != "true") {
             Yii::trace("Someone without required permission tried to access admin page", "http");
                 Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
                 $this->redirect(array('/site/home'));

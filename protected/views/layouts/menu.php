@@ -111,7 +111,14 @@
                         Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
                         Yii::app()->user->setFlash('danger', $ex->getMessage());
                     }
-                    if ($user->isAdmin == "true") {?>
+                    if ($user->isAdmin == "true" && $user->isConfirmed == "true") {?>
+                        <li class="requestsLi">
+                            <a href="<?php print Yii::app()->createUrl('users/users/requestsList'); ?>">
+                                <i class="fa fa-question-circle"></i>
+                                Requests
+                            </a>
+                        </li>
+                    
                         <li class="adminLi">
                             <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false">
                                 <i class="fa fa-wrench"></i>
