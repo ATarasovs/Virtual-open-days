@@ -45,6 +45,15 @@
     <div class="form-group">
         <div class="cols-sm-10">
             <div class="input-group">
+                <span class="input-group-addon">&nbsp;<i class="fa fa-lock" aria-hidden="true">&nbsp;</i></span>
+                <?php echo $form->passwordField($model,'realPassword',array('class'=>'form-control', 'placeholder' => 'Confirm password', 'data-validation' => 'confirmation', 'data-validation-confirm' => 'RegisterForm[password]', 'data-validation-error-msg' => 'Passwords must be same')); ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="cols-sm-10">
+            <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-id-card-o" aria-hidden="true"></i></span>
                 <?php echo $form->textField($model,'firstName',array('class'=>'form-control', 'placeholder' => 'First name', 'data-validation' => 'required', 'data-validation-error-msg' => 'The first name must not be empty')); ?>
             </div>
@@ -64,7 +73,7 @@
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon">&nbsp;<i class="fa fa-birthday-cake" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'birthday',array('id' => 'datepicker', 'class'=>'form-control', 'placeholder' => 'Birthday', 'data-validation' => 'birthdate', 'data-validation-format' => 'dd/mm/yyyy', 'data-validation-error-msg' => 'The birthday should be in the format "dd/mm/yyyy"')); ?>
+                <?php echo $form->textField($model,'birthday',array('id' => 'datepicker', 'class'=>'form-control', 'placeholder' => 'Birthday', 'data-validation' => 'birthdate', 'data-validation-format' => 'dd/mm/yyyy', 'data-validation-error-msg' => 'The birthday should be in the format "dd/mm/yyyy and date should be before today"')); ?>
             </div>
         </div>
     </div>
