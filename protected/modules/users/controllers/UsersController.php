@@ -242,6 +242,98 @@ class UsersController extends Controller
             $this->redirect(array('users/admin'));
         }
     }
+    
+    public function actionRequestsList() {
+        
+        $id = Yii::app()->user->getId(); 
+        
+        try {
+          $user = User::model()->findByPk($id);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if ($user->isAdmin != "true" || $user->isConfirmed != "true") {
+            Yii::trace("Someone without required permission tried to access admin page", "http");
+            Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
+            $this->redirect(array('/site/home'));
+        }
+        
+        $criteria = new CDbCriteria();
+        $criteria->order = "joinDate ASC";
+        $criteria -> addCondition("isAdmin = 'true'");
+        $criteria -> addCondition("isConfirmed = 'false'");
+        
+        
+        try {
+            $count=User::model()->count($criteria);
+            $pages=new CPagination($count);
+            $pages->pageSize=10;
+            $pages->applyLimit($criteria);
+            $users = User::model()->findAll($criteria);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+        }
+            
+        
+        $this->layout = '//layouts/menu';
+        
+        $this->render('requests', array(
+            'users' => $users,
+            'pages' => $pages,
+        ));
+    }
+    
+    public function actionRequestChangeStatus() {
+        
+        $id = Yii::app()->user->getId(); 
+        
+        try {
+          $user = User::model()->findByPk($id);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if ($user->isAdmin != "true" || $user->isConfirmed != "true") {
+            Yii::trace("Someone without required permission tried to access admin page", "http");
+            Yii::app()->user->setFlash("danger", "You do not have permissions to view this page");
+            $this->redirect(array('/site/home'));
+        }
+        
+        $userId = Yii::app()->request->getParam('id');
+        $status = Yii::app()->request->getParam('status');
+        
+        try {
+            $model = User::model()->findByPk($userId);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
+        if ($status == "decline") {
+            $model->isAdmin = "false";
+        }
+        
+        else if ($status == "accept") {
+            $model->isConfirmed = "true";
+        }
+        
+        $model->password = $model->realPassword;
+        
+        if ($model->save()) {
+            Yii::trace("User form sent", "http");
+            Yii::app()->user->setFlash("success", "The changes were confirmed");
+            $this->redirect(array('users/requestslist'));
+        }
+        
+        
+    }
 
     /**
      * Performs the AJAX validation.
