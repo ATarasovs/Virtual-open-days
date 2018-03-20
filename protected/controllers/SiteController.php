@@ -119,7 +119,8 @@ class SiteController extends Controller
                                 $this->redirect('home');
                             }
                             else {
-                                Yii::app()->user->setFlash('notice', "Your account wasn't confirmed yet. <br> Try again later or contact our support team");
+                                Yii::app()->user->setFlash('notice', "Before you will get administrator permisiions, current admin has to confirm your role. <br> If you will have any problems later, please contact our support team.");
+                                $this->redirect('home');   
                             }
                         }
                         else {
@@ -153,8 +154,17 @@ class SiteController extends Controller
 
         // collect user input data
         if(isset($_POST['RegisterForm']))
-        {           
+        {
             $model->attributes=$_POST['RegisterForm'];
+            
+            $users = User::model()->findAll();
+            
+            foreach ($users as $user) {
+                if ($model->username == $user->username) {
+                    Yii::app()->user->setFlash('danger', "The user with such username exists <br> Try to use another username");
+                    $this->redirect('register');
+                }
+            }
             
             if($model->isAdmin == "1") {
                 $isAdmin = "true";
@@ -165,6 +175,7 @@ class SiteController extends Controller
             
             $newUser->username = $model->username;
             $newUser->password = $model->password;
+            $newUser->realPassword = $model->realPassword;
             $newUser->city = $model->city;
             $newUser->firstName = $model->firstName;
             $newUser->lastName = $model->lastName;
@@ -174,14 +185,19 @@ class SiteController extends Controller
             $newUser->position = $model->position;
             $newUser->birthday = $model->birthday;
             $newUser->isAdmin = $isAdmin;
-            $newUser->isConfirmed = "true";
+            $newUser->isConfirmed = "false";
             $newUser->joinDate = date('Y-m-d');
 
             if($newUser->save()) {
                 $identity=new UserIdentity($newUser->username,$model->password);
                 $identity->authenticate();
                 Yii::app()->user->login($identity,0);
-               $this->redirect('home');
+                
+                if ($newUser->isAdmin == "true") {
+                    Yii::app()->user->setFlash('notice', "Before you will get administrator permisiions, current admin has to confirm your role. <br> If you will have any problems later, please contact our support team.");
+                }
+                
+                $this->redirect('home');
             }
 
         }
