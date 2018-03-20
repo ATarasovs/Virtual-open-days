@@ -9,6 +9,7 @@ class RegisterForm extends CFormModel
 {
         public $username;
         public $password;
+        public $realPassword;
         public $firstName;
         public $lastName;
         public $email;
@@ -31,7 +32,7 @@ class RegisterForm extends CFormModel
         public function rules()
         {
                 return array(
-                        array('username, password, firstName, lastName, email, phone, country, city, position, birthday, isAdmin, isConfirmed', 'length', 'max'=>128),
+                        array('username, password, realPassword, firstName, lastName, email, phone, country, city, position, birthday, isAdmin, isConfirmed', 'length', 'max'=>128),
                         // make sure username and email are unique
 //                        array('username, email', 'unique'),
                 );
@@ -45,6 +46,7 @@ class RegisterForm extends CFormModel
                 return array(
                         'username'=>'Username',
                         'password'=>'Password',
+                        'realPassword'=>'Real password',
                         'firstName'=>'First name',
                         'lastName'=>'Last name',
                         'email'=>'Email',

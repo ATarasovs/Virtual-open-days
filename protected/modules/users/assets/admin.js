@@ -25,7 +25,7 @@ function initButtons() {
     });
     
     $( ".removeBtn" ).click(function() {
-        var eventId = $(this).attr("data-user-id");
-        $(".deleteBtn").attr("data-user-id", eventId);
+        var userId = $(this).attr("data-user-id");
+        $(".deleteBtn").attr("data-user-id", userId);
     });
 }

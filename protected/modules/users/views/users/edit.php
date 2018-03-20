@@ -36,7 +36,7 @@
 <div class="row">
     <div class="col-sm-4">
         <span class="left"><?php echo $form->labelEx($model,'username', array('class'=>'form-signin-heading')); ?></span>
-        <?php echo $form->textField($model,'username',array('id' => 'username', 'class'=>'form-control', 'placeholder' => 'Username', 'data-validation' => 'required', 'data-validation-error-msg' => 'The username must not be empty')); ?>
+        <?php echo $form->textField($model,'username',array('id' => 'username', 'class'=>'form-control', 'placeholder' => 'Username', 'data-validation' => 'required', 'data-validation-error-msg' => 'The username must not be empty', 'disabled' => 'disabled')); ?>
     </div>
     
     <div class="col-sm-4">
@@ -148,7 +148,9 @@
     
     $(document).ready(function() {
         $(".adminLi").addClass("active");
-        $("#password").val("");
+        var currentPassword = '<?php print $model->realPassword ?>'
+        $("#password").val(currentPassword);
+        
         
         initButtons();
         imagePreview();

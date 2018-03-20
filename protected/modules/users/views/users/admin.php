@@ -105,7 +105,7 @@
             
             <div class="modal-body">
                 <p>Are you sure that you want to remove this user?</p>
-                <p><b>All messages and forum posts made by this user will be removed.</b></p>
+                <p><b>All messages made by this user will be removed.</b></p>
             </div>
         
             <div class="modal-footer">

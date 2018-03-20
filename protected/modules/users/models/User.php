@@ -7,6 +7,7 @@
  * @property integer $userId
  * @property string $username
  * @property string $password
+ * @property string $realPassword
  * @property string $salt
  * @property string $firstName
  * @property string $lastName
@@ -43,7 +44,7 @@ class User extends CActiveRecord
 		return array(
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('userId, username, password, firstName, lastName, phone, email, country, city, position, birthday, isAdmin, isConfirmed, userImage', 'safe'),
+			array('userId, username, password, realPassword, firstName, lastName, phone, email, country, city, position, birthday, isAdmin, isConfirmed, userImage', 'safe'),
                         array('image', 'file', 'types'=>'jpg, png, jpeg, bmp, tiff, gif', 'safe' => false, 'allowEmpty' => true),
 //                        array('username, email', 'unique'),
                         
@@ -76,6 +77,7 @@ class User extends CActiveRecord
 			'userId' => 'User',
 			'username' => 'Username',
 			'password' => 'Password',
+                        'realPassword' => 'Real password',
 			'salt' => 'Salt',
 			'firstName' => 'First name',
 			'lastName' => 'Last name',
@@ -113,6 +115,7 @@ class User extends CActiveRecord
 		$criteria->compare('userId',$this->userId);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
+                $criteria->compare('realPassword',$this->realPassword,true);
 		$criteria->compare('salt',$this->salt,true);
 		$criteria->compare('firstName',$this->firstName,true);
 		$criteria->compare('lastName',$this->lastName,true);
