@@ -63,9 +63,9 @@
                                 <div class="col-md-offset-1 col-xs-2">
                                     <!--<div class="thumbnail">-->
                                         <?php if ($model->eventImage != "") { ?>  
-                                            <img src="/vod/images/events/<?php echo $model->eventImage ?>" alt="" style="width:100%">
+                                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/events/<?php echo $model->eventImage ?>" alt="" style="width:100%">
                                         <?php } else {?>
-                                            <img src="/vod/images/no-image.png" alt="" style="width:100%">
+                                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/no-image.png" alt="" style="width:100%">
                                     <!--</div>-->
                                     <?php } ?>
                                 </div>

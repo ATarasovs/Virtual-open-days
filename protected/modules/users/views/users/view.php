@@ -27,9 +27,9 @@
                     <div class="row">
                         <div class="col-md-4 col-lg-4 " align="center"> 
                             <?php if ($model->userImage != "") { ?>  
-                                <div class="left"><img class="locationListImage" src="/vod/images/users/<?php echo $model->userImage ?>" alt=""></div>
+                                <div class="left"><img class="locationListImage" src="<?php echo Yii::app()->request->baseUrl; ?>/images/users/<?php echo $model->userImage ?>" alt=""></div>
                             <?php } else {?>
-                                <div class="left"><img class="locationListImage" src="/vod/images/no-image.png" alt=""></div>
+                                <div class="left"><img class="locationListImage" src="<?php echo Yii::app()->request->baseUrl; ?>/images/no-image.png" alt=""></div>
                             <?php } ?>
                         </div>
                         <div class=" col-md-8 col-lg-8 "> 

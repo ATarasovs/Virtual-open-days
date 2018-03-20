@@ -54,9 +54,9 @@
                         <span class="time"><?php echo $hour ?>:<?php echo $minute ?></span>
                     </time>
                     <?php if ($event->eventImage != "") { ?>  
-                        <img src="/vod/images/events/<?php echo $event->eventImage ?>" alt="">
+                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/events/<?php echo $event->eventImage ?>" alt="">
                     <?php } else {?>
-                        <img src="/vod/images/no-image.png" alt="">
+                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/no-image.png" alt="">
                     <?php } ?>
                     <div class="info information">
                         <h2 class="title"><?php echo $event->eventName ?></h2>

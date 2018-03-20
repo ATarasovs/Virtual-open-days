@@ -43,7 +43,7 @@
 
     <div class="dz-message">Drop images here or click to upload.
         <br> <span class="note">(Only these extensions of images are allowed: <b>jpg, jpeg, png, bmp</b>)</span><br/>
-        <img src='/vod/images/upload.png' style="max-width:20%">
+        <img src='<?php echo Yii::app()->request->baseUrl; ?>/images/upload.png' style="max-width:20%">
     </div>
 
 <?php $this->endWidget(); ?>

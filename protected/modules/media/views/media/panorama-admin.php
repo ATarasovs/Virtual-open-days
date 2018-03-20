@@ -48,7 +48,7 @@
     <?php 
         $locationName = preg_replace("/[^a-zA-Z0-9]+/", "", $location->locationName);
         foreach ($photos as $photo) { ?>
-            <div class="col-lg-4 col-sm-6 col-xs-12" style="height:250px;"><a href="<?php print Yii::app()->createUrl('media/media/panoramaview?id=' . $photo->mediaPath . '&location=' . $location->locationId) ?>"><img class="thumbnail img-responsive galleryphoto" src="/vod/images/media/panorama/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>"></a></div>
+            <div class="col-lg-4 col-sm-6 col-xs-12" style="height:250px;"><a href="<?php print Yii::app()->createUrl('media/media/panoramaview?id=' . $photo->mediaPath . '&location=' . $location->locationId) ?>"><img class="thumbnail img-responsive galleryphoto" src="<?php echo Yii::app()->request->baseUrl; ?>/images/media/panorama/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>"></a></div>
     <?php } ?>
 </div>
 

@@ -34,13 +34,13 @@
     foreach ($photos as $photo) {
 ?>      
     <div id="panorama"></div>
-    <!--<img src="/vod/images/media/panorama/<?php // echo $locationName ?>/<?php // echo $photo->mediaPath ?>">-->
+    <!--<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/media/panorama/<?php // echo $locationName ?>/<?php // echo $photo->mediaPath ?>">-->
 <?php } ?>
 
 <script>
     pannellum.viewer('panorama', {
         "type": "equirectangular",
-        "panorama": "/vod/images/media/panorama/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>",
+        "panorama": "<?php echo Yii::app()->request->baseUrl; ?>/images/media/panorama/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>",
         "autoLoad": true
     });
 </script>

@@ -52,9 +52,9 @@
                             <div class="row">
                                 <div class="col-md-offset-1 col-xs-3">
                                         <?php if ($model->locationImage != "") { ?>  
-                                            <img src="/vod/images/buildings/<?php echo $model->locationImage ?>" alt="" style="width:100%">
+                                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/buildings/<?php echo $model->locationImage ?>" alt="" style="width:100%">
                                         <?php } else {?>
-                                            <img src="/vod/images/no-image.png" alt="" style="width:100%">
+                                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/no-image.png" alt="" style="width:100%">
                                     <?php } ?>
                                 </div>
                                 <div class="col-md-offset-1 col-xs-6">
@@ -75,7 +75,7 @@
                                 <?php 
                                     $locationName = preg_replace("/[^a-zA-Z0-9]+/", "", $model->locationName);
                                     foreach ($photos as $photo) { ?>
-                                        <div class="col-lg-4 col-sm-6 col-xs-12" style="height:250px;"><a data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $locationName ?>" href="javascript:;"><img class="thumbnail img-responsive galleryphoto" src="/vod/images/media/photos/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>"></a></div>
+                                        <div class="col-lg-4 col-sm-6 col-xs-12" style="height:250px;"><a data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $locationName ?>" href="javascript:;"><img class="thumbnail img-responsive galleryphoto" src="<?php echo Yii::app()->request->baseUrl; ?>/images/media/photos/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>"></a></div>
                                 <?php } ?>
                             </div>
                         </div>

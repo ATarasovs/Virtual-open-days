@@ -91,9 +91,9 @@
     <div class="col-sm-4">
         <span class="left"><label class="form-signin-heading">Current image (Ratio 1:1)</label></span>
         <?php if ($model->eventImage != "") { ?>  
-            <div class="left"><img class="uploadImg" src="/vod/images/events/<?php echo $model->eventImage ?>" alt="" width="200" height="200"></div>
+            <div class="left"><img class="uploadImg" src="<?php echo Yii::app()->request->baseUrl; ?>/images/events/<?php echo $model->eventImage ?>" alt="" width="200" height="200"></div>
         <?php } else {?>
-            <div class="left"><img class="uploadImg" src="/vod/images/no-image.png" alt="" height="200" width="200"></div>
+            <div class="left"><img class="uploadImg" src="<?php echo Yii::app()->request->baseUrl; ?>/images/no-image.png" alt="" height="200" width="200"></div>
         <?php } ?>
 
         <div class="top15"></div>

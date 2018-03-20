@@ -33,7 +33,7 @@ and open the template in the editor.
 }
 
 body {
-    background: url("/vod/images/index.jpg") no-repeat center center fixed; 
+    background: url("http://pagepark.co.uk/assets/uploads/projects/xlarge/QMRC_5_20120728111410.jpg") no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

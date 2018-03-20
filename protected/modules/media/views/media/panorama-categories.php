@@ -16,9 +16,9 @@
             <div class="thumbnail" style="height:300px;">
                 <a href="<?php print Yii::app()->createUrl('media/media/panoramaadmin?id=' . $location->locationId); ?>">
                     <?php if ($location->locationImage != "") { ?>  
-                        <img src="/vod/images/buildings/<?php echo $location->locationImage ?>" alt="" style="max-height:230px;" >
+                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/buildings/<?php echo $location->locationImage ?>" alt="" style="max-height:230px;" >
                     <?php } else {?>
-                        <img src="/vod/images/no-image.png" alt="" style="max-height:230px;">
+                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/no-image.png" alt="" style="max-height:230px;">
                     <?php } ?>
                     <div class="caption center">
                         <h3><?php echo $location->locationName ?></h3>

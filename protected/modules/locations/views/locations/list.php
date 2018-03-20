@@ -34,9 +34,9 @@
                 <div class="top30"></div>
                 <div class="row">
                     <?php if ($location->locationImage != "") { ?>  
-                    <div class="col-md-3"><a href="<?php print Yii::app()->createUrl('locations/locations/view?id=' . $location->locationId); ?>"><img class="locationListImage" src="/vod/images/buildings/<?php echo $location->locationImage ?>" alt=""></a></div>
+                    <div class="col-md-3"><a href="<?php print Yii::app()->createUrl('locations/locations/view?id=' . $location->locationId); ?>"><img class="locationListImage" src="<?php echo Yii::app()->request->baseUrl; ?>/images/buildings/<?php echo $location->locationImage ?>" alt=""></a></div>
                     <?php } else {?>
-                    <div class="col-md-3"><a href="<?php print Yii::app()->createUrl('locations/locations/view?id=' . $location->locationId); ?>"><img class="locationListImage" src="/vod/images/no-image.png" alt=""></a></div>
+                    <div class="col-md-3"><a href="<?php print Yii::app()->createUrl('locations/locations/view?id=' . $location->locationId); ?>"><img class="locationListImage" src="<?php echo Yii::app()->request->baseUrl; ?>/images/no-image.png" alt=""></a></div>
                     <?php } ?>
                     <div class="col-md-9 home-list-pop-desc inn-list-pop-desc"><h3><?php echo $location->locationName ?></h3>
                         <h4>Department: <?php echo $location->locationDepartment ?></h4>
