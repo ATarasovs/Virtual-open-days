@@ -119,7 +119,7 @@ class SiteController extends Controller
                                 $this->redirect('home');
                             }
                             else {
-                                Yii::app()->user->setFlash('notice', "Before you will get administrator permisiions, current admin has to confirm your role. <br> If you will have any problems later, please contact our support team.");
+                                Yii::app()->user->setFlash('notice', "Before you will get administrator permissions, current admin has to confirm your role. If you will have any problems later, please contact our support team.");
                                 $this->redirect('home');   
                             }
                         }
@@ -194,7 +194,7 @@ class SiteController extends Controller
                 Yii::app()->user->login($identity,0);
                 
                 if ($newUser->isAdmin == "true") {
-                    Yii::app()->user->setFlash('notice', "Before you will get administrator permisiions, current admin has to confirm your role. <br> If you will have any problems later, please contact our support team.");
+                    Yii::app()->user->setFlash('notice', "Before you will get administrator permissions, current admin has to confirm your role. If you will have any problems later, please contact our support team.");
                 }
                 
                 $this->redirect('home');
