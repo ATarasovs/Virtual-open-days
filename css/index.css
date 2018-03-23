@@ -33,7 +33,7 @@ and open the template in the editor.
 }
 
 body {
-    background: url("http://pagepark.co.uk/assets/uploads/projects/xlarge/QMRC_5_20120728111410.jpg") no-repeat center center fixed; 
+    background: url("https://lh3.googleusercontent.com/4e1LotWOODH6K2PnBQmvinSgEbm-hS72vA2cMMgah_5t8DOAWfV1eO3xLzwrXQMbE28jOwa0at37_n3BMi18Z5h_9XdRMoDMAQMFm8HYhz24TqalGp4H7-ukx68vqFflUe0-w-JX-r2hGrOvQOn2fcgBkQeonMcYwKjwLD_dn9CWPuWN4loudd8-EPQ5Z-3Xyek56hg3rsren438qyKsdPzD2HNtfCT596POMfwJ_dZOMPl52Sv0Ry59nMUbUDAzcgNA7MwMqE20FtlTf-vtSyROLk6-vbL6f7ChaJINHJflZ5JDgjSAQE1aUKcar7DItDHqHNcui5h8srDCjnittdTNAfzTTzvOBpEy6W6TsDBlaMAc7NBCggwQUmTnPyozlnj6_bD2Rm2rXv88nU-RXK_6BU9XBn-9uUx9JKdDeAwE5OL7ZnxoQiaeHmbke1rDyrmuFiUR4zxc4YeXVGiAft9zJ7OY59ox5jqFqGjtQqeoMSkT19Pn6G9SHB3jd3PHZQV3_fWo6L7Qc12D1YTz1OWx_QLtx7nRuXBoysQKlvQEwMC7BxsDw_6pg186kafcdET7UTFlBP-WQPz6kPCx2QolKaC3r-mKzs_qkSA=w2400-h1600-no") no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -44,8 +44,9 @@ h1 {
     text-align:center;
     color: black;
     font-size: 80px;
-    margin-top: 14vw;
+    margin-top: 15vw;
     font-weight: bold;
+    font-family: 'Berkshire Swash', cursive;
 }
 
 .btnGroup {
@@ -60,8 +61,8 @@ h1 {
 @media only screen and (max-width: 1004px) {
     h1 {
         text-align:center;
-        color: white;
-        font-size: 35px;
+        /*color: white;*/
+        font-size: 45px;
         margin-top: 10vw;
     }
 }
@@ -69,7 +70,7 @@ h1 {
 @media only screen and (max-width: 768px) {
     h1 {
         text-align:center;
-        color: white;
+        /*color: white;*/
         font-size: 35px;
         margin-top: 10vw;
     }
@@ -87,7 +88,7 @@ h1 {
 @media only screen and (max-width: 512px) {
     h1 {
         text-align:center;
-        color: white;
+        /*color: white;*/
         font-size: 25px;
         margin-top: 10vw;
     }
