@@ -54,7 +54,7 @@
                    <tbody>
                        <?php foreach($users as $user) { ?>
                        <tr class="table-info">
-                           <td class="userName col-xs-3"><?php echo $user->firstName; ?> <?php echo $user->lastName; ?></td>
+                           <td class="userName col-xs-3"><a href="<?php print Yii::app()->createUrl('users/users/view?id=' . $user->userId); ?>"><?php echo $user->firstName; ?> <?php echo $user->lastName; ?></a></td>
                            <td class="userLogin col-xs-2"><?php echo $user->username; ?></td>
                            <td class="userEmail col-xs-2"><?php echo $user->email; ?></td>
                            <td class="userPosition col-xs-2"><?php echo $user->position; ?></td>
