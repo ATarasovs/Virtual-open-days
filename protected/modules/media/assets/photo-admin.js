@@ -6,9 +6,9 @@ $(document).ready(function() {
 
 function initButtons() {
     $( ".backBtn" ).click(function() {
-            location.href = mediaPhotoCategoriesReqUrl;
-        });
-    
+        location.href = mediaPhotoCategoriesReqUrl;
+    });
+
     $( ".uploadBtn" ).click(function() {
       location.href = uploadPhotoReqUrl + "?id=" + locationId;
     });
@@ -28,13 +28,11 @@ function initButtons() {
         $('#myModal').modal({show:true});
     });
     
-    $( ".deleteBtn" ).click(function() {
-        
+    $( ".deleteBtn" ).click(function() { 
         var photoId = $(this).attr("data-photo-id");
         var photoTitle = $(this).attr("data-photo-title");
         var photoFolder = $(this).attr("data-photo-folder");
         
         location.href = deletePhotoReqUrl + "?id=" + photoId + "&title=" + photoTitle + "&folder=" + photoFolder + "&locationid=" + locationId;
-        
     });
 }

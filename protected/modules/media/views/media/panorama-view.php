@@ -34,13 +34,48 @@
     foreach ($photos as $photo) {
 ?>      
     <div id="panorama"></div>
-    <!--<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/media/panorama/<?php // echo $locationName ?>/<?php // echo $photo->mediaPath ?>">-->
+    
+    <div class="top10"></div>   
+
+        <div class="row">
+            <div class="col-md-12">
+                <button class="deleteBtn btn btn-sm btn-danger" data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $locationName ?>">Delete</button>
+                <a class="btn btn-primary btn-sm backBtn">
+                    <i class="fa fa-file-image-o bigger-125"></i> Back to photos
+                </a>
+            </div>
+        </div>
 <?php } ?>
 
 <script>
-    pannellum.viewer('panorama', {
-        "type": "equirectangular",
-        "panorama": "<?php echo Yii::app()->request->baseUrl; ?>/images/media/panorama/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>",
-        "autoLoad": true
+    var locationId = '<?php print Yii::app()->request->getParam('location') ?>';
+    
+    var deletePhotoReqUrl = '<?php print Yii::app()->createUrl('media/media/deletepanorama') ?>';
+    var mediaPhotoCategoriesReqUrl = '<?php print Yii::app()->createUrl('media/media/panoramaadmin') ?>';
+    
+    $(document).ready(function() {
+        $(".adminLi").addClass("active");
+        
+        pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": "<?php echo Yii::app()->request->baseUrl; ?>/images/media/panorama/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>",
+            "autoLoad": true
+        });
+    
+        initButtons();
     });
+    
+    function initButtons() {
+        $( ".deleteBtn" ).click(function() { 
+            var photoId = $(this).attr("data-photo-id");
+            var photoTitle = $(this).attr("data-photo-title");
+            var photoFolder = $(this).attr("data-photo-folder");
+            
+            location.href = deletePhotoReqUrl + "?id=" + photoId + "&title=" + photoTitle + "&folder=" + photoFolder + "&locationid=" + locationId;
+        });
+        
+        $( ".backBtn" ).click(function() {
+        location.href = mediaPhotoCategoriesReqUrl + "?id=" + locationId;
+    });
+    }
 </script>
