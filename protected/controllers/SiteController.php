@@ -27,6 +27,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if(!Yii::app()->user->isGuest) {
+            $this->redirect(array('/site/home'));
+        }
+        
         // choose layout login
         $this->layout = '//layouts/index';
 
