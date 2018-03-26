@@ -48,28 +48,34 @@
     <?php 
         $locationName = preg_replace("/[^a-zA-Z0-9]+/", "", $location->locationName);
         foreach ($photos as $photo) { ?>
-            <div class="col-lg-4 col-sm-6 col-xs-12" style="height:250px;"><a href="<?php print Yii::app()->createUrl('media/media/panoramaview?id=' . $photo->mediaPath . '&location=' . $location->locationId) ?>"><img class="thumbnail img-responsive galleryphoto" src="<?php echo Yii::app()->request->baseUrl; ?>/images/media/panorama/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>"></a></div>
+    <div class="col-lg-4 col-sm-6 col-xs-12" style="height:250px;">
+        <a data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $locationName ?>" href="javascript:;">
+            <img class="thumbnail img-responsive galleryphoto" location-name="<?php echo $locationName ?>" media-path="<?php echo $photo->mediaPath ?>" src="<?php echo Yii::app()->request->baseUrl; ?>/images/media/panorama/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>">
+        </a>
+    </div>
     <?php } ?>
 </div>
 
 
 
-<!--<div tabindex="-1" class="modal fade" id="myModal" role="dialog">
+<div tabindex="-1" class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-dialog-photo">
         <div class="modal-content">
             <div class="modal-header">
 		<button class="close" type="button" data-dismiss="modal">×</button>
             </div>
-            <div class="modal-body">
-		
+            
+            <div class="panorama-body">
+                <div id="panorama"></div>
             </div>
+            
             <div class="modal-footer">
                 <button class="deleteBtn btn btn-danger">Delete</button>
                 <button class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-</div>-->
+</div>
 
 <div class="top30"></div>
 
@@ -83,7 +89,8 @@
 
 <script>
     var locationId = '<?php print Yii::app()->request->getParam('id') ?>';
-
+    var folder = "<?php echo Yii::app()->request->baseUrl; ?>/images/media/panorama/";
+    
     var mediaPanoramaCategoriesReqUrl = '<?php print Yii::app()->createUrl('media/media/panoramacategories') ?>';
     var uploadPanoramaReqUrl = '<?php print Yii::app()->createUrl('media/media/uploadpanorama') ?>';
     var deletePanoramaReqUrl = '<?php print Yii::app()->createUrl('media/media/deletepanorama') ?>';

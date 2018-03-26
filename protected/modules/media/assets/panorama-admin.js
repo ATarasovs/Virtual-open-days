@@ -14,7 +14,7 @@ function initButtons() {
     });
     
     $('.thumbnail').click(function(){
-        $('.modal-body').empty();
+        $('#panorama').empty();
         
         var photoId = $(this).parent('a').attr("data-photo-id");
         var photoTitle = $(this).parent('a').attr("data-photo-title");
@@ -26,6 +26,12 @@ function initButtons() {
         
         $($(this).parents('div').html()).appendTo('.modal-body');
         $('#myModal').modal({show:true});
+        
+        pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": folder + $(this).attr("location-name") + "/" + $(this).attr("media-path"),
+            "autoLoad": true
+        });
     });
     
     $( ".deleteBtn" ).click(function() {
@@ -36,5 +42,5 @@ function initButtons() {
         
         location.href = deletePanoramaReqUrl + "?id=" + photoId + "&title=" + photoTitle + "&folder=" + photoFolder + "&locationid=" + locationId;
         
-    });
+    });    
 }
