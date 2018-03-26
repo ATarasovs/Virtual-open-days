@@ -75,13 +75,27 @@
                                 <?php 
                                     $locationName = preg_replace("/[^a-zA-Z0-9]+/", "", $model->locationName);
                                     foreach ($photos as $photo) { ?>
-                                        <div class="col-lg-4 col-sm-6 col-xs-12" style="height:250px;"><a data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $locationName ?>" href="javascript:;"><img class="thumbnail img-responsive galleryphoto" src="<?php echo Yii::app()->request->baseUrl; ?>/images/media/photos/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>"></a></div>
+                                        <div class="col-lg-4 col-sm-6 col-xs-12" style="height:250px;">
+                                            <a data-photo-id="<?php echo $photo->mediaId ?>" data-photo-title="<?php echo $photo->mediaPath ?>" data-photo-folder="<?php echo $locationName ?>" href="javascript:;">
+                                                <img class="photo thumbnail img-responsive galleryphoto" src="<?php echo Yii::app()->request->baseUrl; ?>/images/media/photos/<?php echo $locationName ?>/<?php echo $photo->mediaPath ?>">
+                                            </a>
+                                        </div>
                                 <?php } ?>
                             </div>
                         </div>
                         
                         <div class="tab-pane fade" id="tab3">
                             <div class="row">
+                                <div class="row">
+                                <?php 
+                                    foreach ($panoramas as $panorama) { ?>
+                                        <div class="col-lg-4 col-sm-6 col-xs-12" style="height:250px;">
+                                            <a data-photo-id="<?php echo $panorama->mediaId ?>" data-photo-title="<?php echo $panorama->mediaPath ?>" data-photo-folder="<?php echo $locationName ?>" href="javascript:;">
+                                                <img class="panorama thumbnail img-responsive galleryphoto" location-name="<?php echo $locationName ?>" media-path="<?php echo $panorama->mediaPath ?>" src="<?php echo Yii::app()->request->baseUrl; ?>/images/media/panorama/<?php echo $locationName ?>/<?php echo $panorama->mediaPath ?>">
+                                            </a>
+                                        </div>
+                                <?php } ?>
+                            </div>
                             </div>
                         </div>
                         
@@ -113,6 +127,24 @@
     </div>
 </div>
 
+<div tabindex="-1" class="modal fade" id="panoramaModal" role="dialog">
+    <div class="modal-dialog modal-dialog-photo">
+        <div class="modal-content">
+            <div class="modal-header">
+		<button class="close" type="button" data-dismiss="modal">×</button>
+            </div>
+            
+            <div class="panorama-body">
+                <div id="panorama"></div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
         $(".buildingsLi").addClass("active");
@@ -121,7 +153,7 @@
     });
     
     function initButtons() {
-        $('.thumbnail').click(function(){
+        $('.photo').click(function(){
             $('.modal-body').empty();
 
             var photoId = $(this).parent('a').attr("data-photo-id");
@@ -135,5 +167,28 @@
             $($(this).parents('div').html()).appendTo('.modal-body');
             $('#myModal').modal({show:true});
         });
+
+        $('.thumbnail').click(function(){
+            $('#panorama').empty();
+            
+            var folder = "<?php echo Yii::app()->request->baseUrl; ?>/images/media/panorama/";
+            var photoId = $(this).parent('a').attr("data-photo-id");
+            var photoTitle = $(this).parent('a').attr("data-photo-title");
+            var photoFolder = $(this).parent('a').attr("data-photo-folder");
+
+            $(".deleteBtn").attr("data-photo-id", photoId);
+            $(".deleteBtn").attr("data-photo-title", photoTitle);
+            $(".deleteBtn").attr("data-photo-folder", photoFolder);
+
+            $($(this).parents('div').html()).appendTo('.modal-body');
+            $('#panoramaModal').modal({show:true});
+
+            pannellum.viewer('panorama', {
+                "type": "equirectangular",
+                "panorama": folder + $(this).attr("location-name") + "/" + $(this).attr("media-path"),
+                "autoLoad": true
+            });
+        });
     }
+    
 </script>

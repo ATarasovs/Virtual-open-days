@@ -193,6 +193,7 @@ class LocationsController extends Controller
         $locationId = Yii::app()->request->getParam('id');
         
         $photosCriteria = new CDbCriteria();
+        $panoramasCriteria = new CDbCriteria();
         
         if (!empty($locationId)) {
             try{
@@ -215,11 +216,23 @@ class LocationsController extends Controller
             Yii::app()->user->setFlash('danger', $ex->getMessage());
         }
         
+        $panoramasCriteria->addCondition("mediaType = 'panorama'");
+        $panoramasCriteria->addCondition("locationId = '$locationId'");
+        
+        try {
+            $panoramas = Media::model()->findAll($panoramasCriteria);
+        }
+        catch (Exception $ex){
+            Yii::log("Exception \n".$ex->getMessage(), 'error', 'http.threads');
+            Yii::app()->user->setFlash('danger', $ex->getMessage());
+        }
+        
         $this->layout = '//layouts/menu';
 
         $this->render('view', array(
             'model' => $model,
             'photos' => $photos,
+            'panoramas' => $panoramas,
         ));
     }
     
