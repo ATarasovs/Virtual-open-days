@@ -6,12 +6,9 @@ $(document).ready(function() {
     var selectedLocationFromParam = getParameterByName('selectedlocation');
     $( ".location" ).each(function() {
         if (this.id == selectedLocationFromParam) {
-            console.log(selectedLocationFromParam);
             $(this).addClass("active");
         }
     });
-    console.log(selectedLocationFromParam);
-    
 });
 
 function initButtons() {
@@ -20,10 +17,6 @@ function initButtons() {
         $(".events").load(loadEventsReqUrl + "?id=" + encodeURIComponent(selectedLocation));
 
     });
-//    $( ".event" ).click(function() {
-//        var eventId = this.id;
-//        location.href = eventViewReqUrl + "?id=" + eventId;
-//    });
 }
     
 

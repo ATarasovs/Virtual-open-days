@@ -1,4 +1,8 @@
 <?php 
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.media.assets').'\panorama-admin.js'), CClientScript::POS_HEAD);
+?>
+
+<?php 
     $this->widget('application.components.BreadCrumb', array(
         'crumbs' => array(
             array('name' => 'Home', 'url' => array('/site/home')),
@@ -7,10 +11,6 @@
             array('name' => '360 degree photos <small>(' . $location->locationName . ')</small>'),
         ),
     )); 
-?>
-
-<?php 
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.media.assets').'\panorama-admin.js'), CClientScript::POS_HEAD);
 ?>
 
 <div class="top15"></div>

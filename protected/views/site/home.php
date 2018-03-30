@@ -1,3 +1,7 @@
+<?php 
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.views.site.assets.js').'\home.js'), CClientScript::POS_HEAD);
+?>
+
 <!--*************************************************************-->
 <div class="row">
     <div class="col-xs-12">
@@ -20,7 +24,7 @@
     <div class="col-md-8 col-sm-12">
         <div id="map"></div>    
     </div>
-    <div class="col-md-4 col-md-12">
+    <div class="col-md-4 col-sm-12">
         <h3>&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i> List of locations</h3>
         <ul class="list-group locations">
             <?php foreach($locations as $location) { 
