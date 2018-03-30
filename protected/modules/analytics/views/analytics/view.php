@@ -29,7 +29,7 @@
 <div class="container-fluid">  
     <h2>Analytics</h2>
     <?php foreach ($charts as $chart) { ?>
-        <div class="col-md-6">
+        <div class="col-md-4 canvas">
             <canvas id="<?php echo $chart->id ?>" width="400" height="400"></canvas>
         </div>
     <?php } ?>
