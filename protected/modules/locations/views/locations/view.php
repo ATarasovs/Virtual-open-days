@@ -168,7 +168,7 @@
             $('#myModal').modal({show:true});
         });
 
-        $('.thumbnail').click(function(){
+        $('.panorama').click(function(){
             $('#panorama').empty();
             
             var folder = "<?php echo Yii::app()->request->baseUrl; ?>/images/media/panorama/";
