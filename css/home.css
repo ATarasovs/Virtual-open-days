@@ -783,6 +783,9 @@ Photos Gallery CSS
 */
 
 .modal-dialog-photo {width:50%;}
+
+.modal-dialog-panorama {width:70%;}
+
 .thumbnail {margin-bottom:20px;}
 
 .panorama-body .thumbnail {
