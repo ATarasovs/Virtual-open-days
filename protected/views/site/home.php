@@ -84,7 +84,7 @@
         var count = 1;
         
         <?php foreach ($locations as $location) { ?>
-            locations.push(['<?php echo CJSON::encode($location->locationName); ?>', <?php echo CJSON::encode($location->locationLatitude); ?>, <?php echo CJSON::encode($location->locationLongitude); ?>, count, <?php echo CJSON::encode($location->locationShortDescription); ?>]);
+            locations.push([<?php echo CJSON::encode($location->locationName); ?>, <?php echo CJSON::encode($location->locationLatitude); ?>, <?php echo CJSON::encode($location->locationLongitude); ?>, count, <?php echo CJSON::encode($location->locationShortDescription); ?>, <?php echo CJSON::encode($location->locationId); ?>]);
             count++;
         <?php } ?>
       
@@ -110,7 +110,7 @@
 
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
-                    infowindow.setContent(locations[i][4]);
+                    infowindow.setContent("<h5 align='center'>" + locations[i][0] + "</h4>" + locations[i][4] + "<p align='right'><a href='<?php print Yii::app()->createUrl('locations/locations/view'); ?>?id=" + locations[i][5] + "'>Read more</a></p>");
                     infowindow.open(map, marker);
                 }
             })(marker, i));
