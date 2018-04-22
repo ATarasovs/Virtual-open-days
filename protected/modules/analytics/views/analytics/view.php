@@ -36,6 +36,11 @@
 </div>
 
 <script>
+
+$(document).ready(function() {
+    $(".analyticsLi").addClass("active");
+});
+    
     
 <?php foreach ($charts as $chart) { ?>
     var dataArray = [];

@@ -114,7 +114,12 @@
                     <?php } else {?>
                         <span class="image-preview-input-title">Change</span>
                     <?php } ?>
-                    <?php echo $form->fileField($model, 'image',array('id' => 'fileImage', 'data-validation' => 'mime', 'data-validation-allowing' => 'jpg, png, gif, jpeg, bmp, tiff', 'data-validation-error-msg' => 'Only files of type jpg, png, gif, jpeg, bmp, tiff are allowed')); ?>
+                    <?php echo $form->fileField($model, 'image',array(
+                        'id' => 'fileImage', 
+                        'data-validation' => 'mime', 
+                        'data-validation-allowing' => 'jpg, png, gif, jpeg, bmp, tiff', 
+                        'data-validation-error-msg' => 'Only files of type jpg, png, gif, jpeg, bmp, tiff are allowed'
+                    )); ?>
                 </div>
             </span>
         </div>

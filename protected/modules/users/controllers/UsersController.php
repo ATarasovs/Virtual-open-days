@@ -145,7 +145,9 @@ class UsersController extends Controller
                 @unlink(Yii::app()->basePath . '/../images/users/' . $userImageName . '.tiff');
                 @unlink(Yii::app()->basePath . '/../images/users/' . $userImageName . '.gif');
 
-                $model->image->saveAs(Yii::app()->basePath . '/../images/users/' . $userImageName . '.' . $extension);
+                $model->image->saveAs(
+                    Yii::app()->basePath . '/../images/users/' . $userImageName . '.' . $extension
+                );
                 $model->userImage = $userImageName . '.' . $extension;
             }
             

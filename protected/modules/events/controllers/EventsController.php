@@ -321,7 +321,7 @@ class EventsController extends Controller
             
             if (empty($eventId)) {
                 $model->isStarted = "false";
-                $model->isFalse = "false";
+                $model->isFinished = "false";
             }
             
             $model->image = CUploadedFile::getInstance($model,'image');
