@@ -69,14 +69,14 @@
         </div>
     </div>
     
-    <div class="form-group">
+<!--    <div class="form-group">
         <div class="cols-sm-10">
             <div class="input-group">
                 <span class="input-group-addon">&nbsp;<i class="fa fa-birthday-cake" aria-hidden="true"></i></span>
-                <?php echo $form->textField($model,'birthday',array('id' => 'datepicker', 'class'=>'form-control', 'placeholder' => 'Birthday', 'data-validation' => 'birthdate', 'data-validation-format' => 'dd/mm/yyyy', 'data-validation-error-msg' => 'The birthday should be in the format "dd/mm/yyyy and date should be before today"')); ?>
+                <?php // echo $form->textField($model,'birthday',array('id' => 'datepicker', 'class'=>'form-control', 'placeholder' => 'Birthday', 'data-validation' => 'birthdate', 'data-validation-format' => 'dd/mm/yyyy', 'data-validation-error-msg' => 'The birthday should be in the format "dd/mm/yyyy and date should be before today"')); ?>
             </div>
         </div>
-    </div>
+    </div>-->
     
     <div class="form-group">
         <div class="cols-sm-10">

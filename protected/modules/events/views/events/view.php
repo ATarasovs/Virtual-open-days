@@ -63,13 +63,14 @@
                                 <div class="col-md-offset-1 col-xs-2">
                                     <!--<div class="thumbnail">-->
                                         <?php if ($model->eventImage != "") { ?>  
-                                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/events/<?php echo $model->eventImage ?>" alt="" style="width:100%">
+                                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/events/<?php echo $model->eventImage ?>" alt="" style="width:80%">
                                         <?php } else {?>
-                                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/no-image.png" alt="" style="width:100%">
+                                            <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/no-image.png" alt="" style="width:80%">
                                     <!--</div>-->
                                     <?php } ?>
                                 </div>
                                 <div class="col-md-offset-1 col-xs-7">
+									<div class="top30"></div>
                                     <?php echo $model->eventShortDescription ?>
                                 </div>
                             </div>

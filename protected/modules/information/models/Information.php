@@ -54,7 +54,7 @@ class Information extends CActiveRecord
 	{
 		return array(
 			'informationId' => 'Information ID',
-			'informationTitle' => 'Page Title',
+			'informationTitle' => 'Resource Title',
                         'informationDescription' => 'Content',
 		);
 	}

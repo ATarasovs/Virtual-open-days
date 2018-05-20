@@ -65,7 +65,17 @@
                                 $locationName = $location->locationName;
                             }
                         } ?>
-                        <div class="top10"></div><p class="desc"><small><strong>Location:&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $locationName ?><br>Event starts:&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $day ?>&nbsp;<?php echo $monthName ?>&nbsp;&nbsp;<?php echo $hour ?>:<?php echo $minute ?></strong><br>Click on the event to read more</small></p>
+						<?php if ($event->isStarted == "true" && $event->isFinished == "false") {
+								$status = "In progress";
+							}
+							else if ($event->isStarted == "true" && $event->isFinished == "true") {
+								$status = "Finished";
+							}
+							else {
+								$status = "Not started";
+							}
+						?>
+                        <div class="top10"></div><p class="desc"><small><strong>Location:&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $locationName ?><br>Event starts:&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $day ?>&nbsp;<?php echo $monthName ?>&nbsp;&nbsp;<?php echo $hour ?>:<?php echo $minute ?><br/>Status:&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $status ?></strong></small></p>
                     </div>
 
                     <div class="social">    

@@ -43,14 +43,14 @@
                                         <td>Last name</td>
                                         <td><?php echo $model->lastName ?></td>
                                     </tr>
-                                    <tr>
+<!--                                    <tr>
                                         <td>Login</td>
-                                        <td><?php echo $model->username ?></td>
-                                    </tr>
-                                    <tr>
+                                        <td><?php // echo $model->username ?></td>
+                                    </tr>-->
+<!--                                    <tr>
                                         <td>Date of birth</td>
-                                        <td><?php echo $model->birthday ?></td>
-                                    </tr>
+                                        <td><?php // echo $model->birthday ?></td>
+                                    </tr>-->
                                     <tr>
                                         <td>Email</td>
                                         <td><a href="mailto:<?php echo $model->email ?>"><?php echo $model->email ?></a></td>
@@ -73,7 +73,7 @@
                                     </tr>
                                     <tr>
                                         <td>Join date</td>
-                                        <td><?php echo $model->joinDate ?></td>
+                                        <td><?php echo substr($model->joinDate,0,10);?></td>
                                     </tr>
                                 </tbody>
                             </table> 
@@ -84,13 +84,7 @@
                     $currentUserId = Yii::app()->user->getId(); 
                     $userId = Yii::app()->request->getParam('id');
                 ?>
-                
-                <?php if ($users->isAdmin == "true" ) { ?>
-                        <div class="panel-footer">
-                            <button class="viewBtn btn btn-primary btn-block" data-user-id="<?php echo $model->userId; ?>"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
-                        </div>
-                <?php } 
-                    else if ($currentUserId == $userId ) { ?>
+                    <?php if ($currentUserId == $userId ) { ?>
                         <div class="panel-footer">
                             <button class="viewBtn btn btn-primary btn-block" data-user-id="<?php echo $model->userId; ?>"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                         </div>

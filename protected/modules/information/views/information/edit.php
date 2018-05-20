@@ -2,8 +2,8 @@
     $this->widget('application.components.BreadCrumb', array(
         'crumbs' => array(
             array('name' => 'Home', 'url' => array('/site/home')),
-            array('name' => 'Pages', 'url' => array('/information/information/admin')),
-            array('name' => 'Page edit <small>(' . $model->informationTitle . ')</small>'),
+            array('name' => 'Resources', 'url' => array('/information/information/admin')),
+            array('name' => 'Resource edit <small>(' . $model->informationTitle . ')</small>'),
         ),
     )); 
 ?>
@@ -25,6 +25,8 @@
     </div>
 </div>
 <!--*************************************************************-->
+
+<div class="top17"></div>
 
 <?php $form = $this->beginWidget('CActiveForm', array(
     'id'=>'edit-form',

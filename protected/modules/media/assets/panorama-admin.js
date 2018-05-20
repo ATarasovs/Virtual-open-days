@@ -30,7 +30,8 @@ function initButtons() {
         pannellum.viewer('panorama', {
             "type": "equirectangular",
             "panorama": folder + $(this).attr("location-name") + "/" + $(this).attr("media-path"),
-            "autoLoad": true
+            "autoLoad": false,
+            "preview": folder + $(this).attr("location-name") + "/" + $(this).attr("media-path"),
         });
     });
     

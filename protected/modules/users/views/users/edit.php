@@ -50,6 +50,8 @@
     </div>
 </div>
 
+<div class="top10"></div>
+
 <div class="row">
     <div class="col-sm-4">
         <span class="left"><?php echo $form->labelEx($model,'email', array('class'=>'form-signin-heading')); ?></span>
@@ -67,6 +69,8 @@
     </div>
 </div>
 
+<div class="top10"></div>
+
 <div class="row">
     <div class="col-sm-4">
         <span class="left"><?php echo $form->labelEx($model,'city', array('class'=>'form-signin-heading')); ?></span>
@@ -79,15 +83,21 @@
     </div>
     
     <div class="col-sm-4">
-        <span class="left"><?php echo $form->labelEx($model,'birthday', array('class'=>'form-signin-heading')); ?></span>
-        <?php echo $form->textField($model,'birthday',array('id' => 'birthday', 'class'=>'form-control', 'placeholder' => 'Birthday', 'data-validation' => 'birthdate', 'data-validation-format' => 'dd/mm/yyyy', 'data-validation-error-msg' => 'The birthday should be in the format "dd/mm/yyyy"')); ?>
+        <span class="left"><?php echo $form->labelEx($model,'password', array('class'=>'form-signin-heading')); ?></span>
+        <?php echo $form->passwordField($model,'password',array('id' => 'password', 'class'=>'form-control', 'placeholder' => 'Password', 'data-validation' => 'length', 'data-validation-length' => '7-20', 'data-validation-error-msg' => 'The password must be  between 7-20 characters')); ?>
     </div>
+    <!-- <div class="col-sm-4">
+        <span class="left"><?php // echo $form->labelEx($model,'birthday', array('class'=>'form-signin-heading')); ?></span>
+        <?php // echo $form->textField($model,'birthday',array('id' => 'birthday', 'class'=>'form-control', 'placeholder' => 'Birthday', 'data-validation' => 'birthdate', 'data-validation-format' => 'dd/mm/yyyy', 'data-validation-error-msg' => 'The birthday should be in the format "dd/mm/yyyy"')); ?>
+    </div>-->
 </div>
+
+<div class="top10"></div>
 
 <div class="row">
     <div class="col-sm-4">
-        <span class="left"><?php echo $form->labelEx($model,'password', array('class'=>'form-signin-heading')); ?></span>
-        <?php echo $form->passwordField($model,'password',array('id' => 'password', 'class'=>'form-control', 'placeholder' => 'Password', 'data-validation' => 'length', 'data-validation-length' => '7-20', 'data-validation-error-msg' => 'The password must be  between 7-20 characters')); ?>
+        <span class="left"><label class="form-signin-heading">Confirm password</label></span>
+        <?php echo $form->passwordField($model,'realPassword',array('class'=>'form-control', 'placeholder' => 'Confirm password', 'data-validation' => 'confirmation', 'data-validation-confirm' => 'User[password]', 'data-validation-error-msg' => 'Passwords must be same')); ?>
     </div>
 </div>
 

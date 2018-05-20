@@ -86,7 +86,7 @@
                     <li class="pagesLi">
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
                             <i class="glyphicon glyphicon-duplicate"></i>
-                            Pages
+                            Resources
                         </a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
                             <?php 
@@ -130,7 +130,7 @@
                                 <li><a href="<?php print Yii::app()->createUrl('events/events/admin'); ?>">Events</a></li>
                                 <li><a href="<?php print Yii::app()->createUrl('media/media/admin'); ?>">Media</a></li>
                                 <li><a href="<?php print Yii::app()->createUrl('analytics/analytics/admin'); ?>">Analytics</a></li>
-                                <li><a href="<?php print Yii::app()->createUrl('/information/information/admin'); ?>">Pages</a></li>
+                                <li><a href="<?php print Yii::app()->createUrl('/information/information/admin'); ?>">Resources</a></li>
                             </ul>
                         </li>
                     <?php } ?>

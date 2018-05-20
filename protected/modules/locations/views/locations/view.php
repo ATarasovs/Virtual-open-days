@@ -42,7 +42,7 @@
                         <li class="active"><a href="#tab1" class="informationTabLi" data-toggle="tab">Information</a></li>
                         <li><a href="#tab2" class="photosTabLi" data-toggle="tab">Photos</a></li>
                         <li><a href="#tab3" class="panoramasTabLi" data-toggle="tab">360 photos</a></li>
-                        <li><a href="#tab4" class="videosTabLi" data-toggle="tab">Videos</a></li>
+<!--                        <li><a href="#tab4" class="videosTabLi" data-toggle="tab">Videos</a></li>-->
                     </ul>
                 </div>
                 <div class="panel-body">
@@ -58,6 +58,7 @@
                                     <?php } ?>
                                 </div>
                                 <div class="col-md-offset-1 col-xs-6">
+								<div class="top30"></div>
                                     <?php echo $model->locationShortDescription ?>
                                 </div>
                             </div>
@@ -98,11 +99,10 @@
                             </div>
                             </div>
                         </div>
-                        
-                        <div class="tab-pane fade" id="tab4">
+<!--                        <div class="tab-pane fade" id="tab4">
                             <div class="row">
                             </div>
-                        </div>
+                        </div>-->
                         
                     </div>
                 </div>
@@ -186,7 +186,8 @@
             pannellum.viewer('panorama', {
                 "type": "equirectangular",
                 "panorama": folder + $(this).attr("location-name") + "/" + $(this).attr("media-path"),
-                "autoLoad": true
+                "autoLoad": false,
+                "preview": folder + $(this).attr("location-name") + "/" + $(this).attr("media-path")
             });
         });
     }

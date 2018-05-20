@@ -396,6 +396,10 @@ class EventsController extends Controller
         if (Participant::model()->deleteAll("eventId ='" . $eventId . "'")) {
             Yii::trace("Participant form sent", "http");
         }
+		
+		if (Message::model()->deleteAll("eventId ='" . $eventId . "'")) {
+            Yii::trace("Message form sent", "http");
+        }
         
         if (Event::model()->deleteAll("eventId ='" . $eventId . "'")) {
             Yii::trace("Event form sent", "http");
